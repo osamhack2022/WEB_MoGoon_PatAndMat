@@ -1,5 +1,4 @@
-# 모군 : 군 입대 
-![Logo](https://logosbynick.com/wp-content/uploads/2018/03/final-logo-example.png)
+# 모군 : 군 입대 지원의 모든 것
 
 프로젝트명 또는 프로젝트 로고 이미지 **(택1)**
 
