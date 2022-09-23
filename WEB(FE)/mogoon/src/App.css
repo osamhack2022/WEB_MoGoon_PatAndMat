@@ -3,87 +3,12 @@ div {
   padding: 0;
 }
 
+ul,li{
+  list-style:none;
+  padding: 0px;
+}
+
 .App {
   overflow: hidden;
   font-family: "맑은 고딕";
-}
-
-.main-wrap {
-  width: 100vw;
-  height: 100vh;
-}
-
-.banner {
-  display: inline-block;
-  position: relative;
-  height: 100%;
-  width: 25%;
-  text-align: center;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  vertical-align: top;
-
-}
-
-.banner:hover{
-  scale: 1.1;
-}
-
-.banner:hover::before{
-  opacity: 0;
-}
-
-.banner:hover div{
-  /* display: none; */
-  opacity: 0;
-}
-
-.banner::before {
-  content: "";
-  background-color: black;
-  opacity: 0.5;
-
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-
-  transition: 0.5s;
-}
-
-.banner:nth-child(1) {
-  background-image: url("../public/img/main/banner1.png");
-}
-
-.banner:nth-child(2) {
-  background-image: url("../public/img/main/banner2.jpg");
-}
-
-.banner:nth-child(3) {
-  background-image: url("../public/img/main/banner3.jpg");
-}
-
-.banner:nth-child(4) {
-  background-image: url("../public/img/main/banner4.jpg");
-}
-
-.banner>div {
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-
-  left: 50%;
-  top: 85%;
-  transform: translateX(-50%);
-
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 50px;
-
-  border: 2.5px solid none;
-
-  transition: 0.3s;  
 }

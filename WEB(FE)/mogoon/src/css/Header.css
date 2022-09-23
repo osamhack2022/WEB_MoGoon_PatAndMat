@@ -1,0 +1,16 @@
+.headerWapper{
+    width: 10%;
+    height: 100vh;
+
+    background-color: #00004F;
+
+    color: white;
+    padding: 20px;
+
+    font-size: 1.5em;
+}
+
+li{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
