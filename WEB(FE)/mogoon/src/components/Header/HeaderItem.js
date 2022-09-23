@@ -2,7 +2,7 @@ import React from 'react';
 
 let HeaderItem =(props)=>{
     return(
-        <li>{props.title}</li>
+        <li style={{color:props.color}}>{props.title}</li>
     );
 };
 
