@@ -1,3 +1,8 @@
+/* html,body{
+  width: 100%;
+  height: 100%;
+} */
+
 div {
   margin: 0;
   padding: 0;
@@ -8,7 +13,19 @@ ul,li{
   padding: 0px;
 }
 
+#root{
+  /* height: 100%; */
+}
+
 .App {
-  overflow: hidden;
   font-family: "맑은 고딕";
+  /* width: 100%; */
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.container{
+  height: 100%;
+  padding: 20px;
+  background-color: #f7f7f8;
 }
