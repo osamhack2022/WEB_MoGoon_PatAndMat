@@ -1,0 +1,19 @@
+.specialty{
+    width: 100%;
+    height: 100%;
+
+    background-color: grey;    
+}
+
+.specialty > div{
+    display: inline-block;
+}
+
+.specialtyitem{
+    width: 20%;
+    height: 300px;
+    border-radius: 30px;
+    background-color: aquamarine;
+
+    margin: 30px;
+}
