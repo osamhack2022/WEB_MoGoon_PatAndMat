@@ -15,6 +15,9 @@ let Specialty = (props) => {
             <SpecialtyItem/>
             <SpecialtyItem/>
             <SpecialtyItem/>
+            <SpecialtyItem/>
+            <SpecialtyItem/>
+            <SpecialtyItem/>
         </div>
     );
 };
