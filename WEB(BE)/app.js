@@ -27,7 +27,7 @@ app.get('/speciality/list', async (req, res) => {
     const snapshot = await getDocs(test_col);
     const doc_list = snapshot.docs.map(doc => doc.data());
     
-    await setDoc(doc(db, 'speciality', `test${doc_list.length}`), doc_list[0]);
+    //await setDoc(doc(db, 'speciality', `test${doc_list.length}`), doc_list[0]);
     return res.json(doc_list);
 });
 
