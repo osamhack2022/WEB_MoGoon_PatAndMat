@@ -1,22 +1,9 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, doc, setDoc } from 'firebase/firestore/lite';
+import { collection, getDocs, doc, setDoc } from 'firebase/firestore/lite';
 import express from 'express';
+import { db } from './db.js';
 
 const app = express();
 const port = 5000;
-
-const firebaseConfig = {
-    apiKey: "AIzaSyCCH8iBQRrh9RIk3BSSdmr9akG6znyrb8k",
-    authDomain: "osam--mogoon.firebaseapp.com",
-    projectId: "osam--mogoon",
-    storageBucket: "osam--mogoon.appspot.com",
-    messagingSenderId: "39262750716",
-    appId: "1:39262750716:web:2ba69ad64a14b138f39479",
-    measurementId: "G-79CB1TP6W3"
-};
-
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseApp);
 
 app.get('/', async (req, res) => {
     return res.send('hi');
