@@ -50,11 +50,11 @@ app.get('/speciality/list', (req, res) => {
             like: 3654,
         },
     ];
-    
-    console.log('server sent ${test_data}');
+
+    console.log(`server sent ${test_data}`);
     res.json(test_data);
 });
 
 app.listen(port, () => {
-    console.log('server is listening at ${port}');
+    console.log(`server is listening at ${port}`);
 });
