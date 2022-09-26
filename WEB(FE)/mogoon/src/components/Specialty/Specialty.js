@@ -4,6 +4,7 @@ import SpecialtyItem from "./SpecialtyItem";
 let Specialty = (props) => {
     return (
         <div className='specialty'>
+            <SpecialtyItem name="asdsad"/>
             <SpecialtyItem/>
             <SpecialtyItem/>
             <SpecialtyItem/>
@@ -17,7 +18,7 @@ let Specialty = (props) => {
             <SpecialtyItem/>
             <SpecialtyItem/>
             <SpecialtyItem/>
-            <SpecialtyItem/>
+            
         </div>
     );
 };
