@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import SpecialtyItem from "./SpecialtyItem";
 
+import axios from 'axios';
+
+let Data = axios.get('/speciality/list'); 
+
+console.log(Data);
+
 const Specialty = (props) => {
     return (
         <>

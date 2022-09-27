@@ -12,7 +12,6 @@ const app = express();
 const port = 5000;
 
 app.use(express.json());
-// var cors = require('cors');
 app.use(cors());
 
 app.use(express.static(path.join(__dirname,"../WEB(FE)/mogoon/build")));

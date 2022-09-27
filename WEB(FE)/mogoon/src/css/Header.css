@@ -59,6 +59,7 @@ li {
 
 li:hover{
     background-color: #f7f7f8;
+    cursor: pointer;
 }
 
 
