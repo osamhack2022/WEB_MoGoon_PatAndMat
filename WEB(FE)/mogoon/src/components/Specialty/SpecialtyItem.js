@@ -27,9 +27,19 @@ let SpecialtyItem = (props) => {
 };
 
 let SpTypeItem = (props) => {
+    let color="";
+    if(props.type=="육군"){
+        color = "green";
+    }else if(props.type=="해군"){
+        color="#000080";
+    }else if(props.type=="공군"){
+        color="silver";
+    }else{
+        color="red";
+    }
+
     return (
-        //type 기본값을 이용해서 type별로 css 적용
-        <div>{props.type}</div>
+        <div style={{color:color}}>{props.type}</div>
     );
 };
 

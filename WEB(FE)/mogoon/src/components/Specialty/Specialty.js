@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
 import SpecialtyItem from "./SpecialtyItem";
 
-let Specialty = (props) => {
+const Specialty = (props) => {
     return (
-        <div className='specialty'>
-            <SpecialtyItem name="asdsad"/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            <SpecialtyItem/>
-            
-        </div>
+        <>
+            <div className='spsearch'>
+                <input type={'text'} value={"특기명을 입력해주세요."}></input>
+            </div>
+            <div className='specialty'>
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+                <SpecialtyItem name="화생방병" />
+            </div>
+        </>
     );
 };
 
