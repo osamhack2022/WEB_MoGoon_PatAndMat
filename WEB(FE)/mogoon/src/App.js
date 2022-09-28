@@ -11,8 +11,6 @@ import './App.css';
 import './css/Header.css';
 import './css/Specialty.css';
 
-// const axios = require('axios');
-
 function App() {
   return (
     <div className="App">
