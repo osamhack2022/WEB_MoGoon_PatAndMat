@@ -27,6 +27,10 @@ hr{
   border-color: #e9e9e9;
 }
 
+body{
+  background-color: #f7f7f8;
+}
+
 .App {
   font-family: "맑은 고딕";
   height: 100%;
@@ -37,4 +41,5 @@ hr{
   height: 100%;
   padding: 20px;
   background-color: #f7f7f8;
+  /* min-height: 100vh; */
 }
