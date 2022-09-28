@@ -3,7 +3,7 @@ import SpecialtyItem from "./SpecialtyItem";
 
 import axios from 'axios';
 
-let Data = axios.get('/speciality/list'); 
+let Data = axios.get('http://localhost:5000/api/speciality/list'); 
 
 console.log(Data);
 
