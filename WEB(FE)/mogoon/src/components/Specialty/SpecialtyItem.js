@@ -21,8 +21,7 @@ let SpecialtyItem = (props) => {
                     <SpTagItem tag={props.tags[2]} />
                     {/* <img src="img/etc/saveOff.svg"/> */}
 
-                    <Checkbox icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />}
-                    />
+                    <Checkbox sx={{marginRight:"0",marginLeft:"auto",padding:"0"}} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />}/>
                 </div>
             </div>
         </div>
@@ -30,19 +29,27 @@ let SpecialtyItem = (props) => {
 };
 
 let SpTypeItem = (props) => {
-    let color = "";
-    if (props.type == "육군") {
-        color = "green";
-    } else if (props.type == "해군") {
-        color = "#000080";
-    } else if (props.type == "공군") {
-        color = "#5d5d5d";
-    } else {
-        color = "red";
+    const type = props.type;
+    let typeColor = [];
+
+    for (let i = 0; i < type.length; i++) {
+        if (type[i] == "육군") {
+            typeColor[i] = "green";
+        } else if (type[i] == "해군") {
+            typeColor[i] = "#000080";
+        } else if (type[i] == "공군") {
+            typeColor[i] = "#5d5d5d";
+        } else {
+            typeColor[i] = "red";
+        }
+
     }
 
     return (
-        <div style={{ color: color }}>{props.type}</div>
+        type.map((data,index) => (
+            <div style={{ color: typeColor[index] }}>{data}</div>
+        ))
+
     );
 };
 

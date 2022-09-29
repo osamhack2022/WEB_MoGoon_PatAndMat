@@ -40,7 +40,7 @@ const Specialty = (props) => {
             </SpFilter>
             <div className='specialty'>
                 {SpData.map(data => (
-                    <SpecialtyItem key={data.speciality_code} name={data.speciality_name} class={data.class}
+                    <SpecialtyItem key={data.speciality_name} code={data.speciality_code} name={data.speciality_name} class={data.class}
                         desc={data.desc} military_kind={data.military_kind} tags={data.tags}
                         imageSrc={data.imageSrc} kind={data.kind} like={data.like}
                     />
