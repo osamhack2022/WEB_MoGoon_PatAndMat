@@ -47,7 +47,7 @@ let SpTypeItem = (props) => {
 
     return (
         type.map((data,index) => (
-            <div style={{ color: typeColor[index] }}>{data}</div>
+            <div key={index} style={{ color: typeColor[index] }}>{data}</div>
         ))
 
     );
@@ -55,7 +55,6 @@ let SpTypeItem = (props) => {
 
 let SpTagItem = (props) => {
     return (
-
         //type 기본값을 이용해서 tag별로 css 적용
         <div>#{props.tag}</div>
     );

@@ -82,4 +82,4 @@ const SpFilter = (props) => {
     );
 };
 
-export default Specialty;
+export default React.memo(Specialty);
