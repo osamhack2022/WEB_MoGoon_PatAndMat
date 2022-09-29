@@ -24,6 +24,6 @@ nodemon 이 실행됩니다.\
 |imageSrc|string|대표 이미지 파일 경로|res/image/화생방.jpg|
 |like|number|특기를 찜한 사람 수|3564|
 |military_kind|array|해당 특기가 있는 군종|["육군", "해군", "공군"]|
-|speciality_code|string|특기코드|16|
+|speciality_code|map|각 군종별 특기코드|{"army":"", "airforce":"16", "navy":"", "marine":"" }|
 |speciality_name|string|특기이름|화생방, 정보체계관리, ...|
 |tags|array|특기 태그|["교대근무", "휴가많음", "실내근무"]|
