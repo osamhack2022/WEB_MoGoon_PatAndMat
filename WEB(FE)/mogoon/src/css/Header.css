@@ -39,6 +39,14 @@ li {
     background-size: contain;
 }
 
+nav{
+    display: inline-flex;
+    justify-content: stretch;
+    align-items: center;
+
+    width: 100%;
+}
+
 ul{
     display: inline-flex;
     position: relative;
@@ -62,4 +70,13 @@ li:hover{
     cursor: pointer;
 }
 
+nav > div{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+}
 
+.account{
+    cursor: pointer;
+}

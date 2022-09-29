@@ -125,10 +125,12 @@
 }
 
 .spname {
-    width: 100%;
+    display: inline;
+    /* width: 100%; */
     font-size: 1.3em;
     font-weight: 700;
     letter-spacing: 1px;
+    cursor: pointer;
 }
 
 .spexplan{
@@ -172,5 +174,6 @@
     width: 23px;
     margin-left: auto;
     margin-right: 0;
+    cursor: pointer;
 }
 
