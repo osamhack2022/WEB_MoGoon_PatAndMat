@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 let SpecialtyItem = (props) => {
+
     return (
         <div className='specialtyitem'>
             <div className='spimg' style={{ content: `URL(${props.imageSrc})` }} />
@@ -13,7 +15,7 @@ let SpecialtyItem = (props) => {
                     <SpTypeItem type={props.military_kind} />
                     <div>{props.class}</div>
                 </div>
-                <div className='spname'>{props.name}</div>
+                <div className='spname'><Link to={`/Specialty/SpDetail/${props.name}`}>{props.name}</Link></div>
                 <p className='spexplan'>{props.desc}</p>
                 <div className='sptag'>
                     <SpTagItem tag={props.tags[0]} />
@@ -42,7 +44,6 @@ let SpTypeItem = (props) => {
         } else {
             typeColor[i] = "red";
         }
-
     }
 
     return (
@@ -60,4 +61,4 @@ let SpTagItem = (props) => {
     );
 };
 
-export default SpecialtyItem;
+export default React.memo(SpecialtyItem);

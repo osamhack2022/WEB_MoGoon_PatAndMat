@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 //components
 import Header from "./components/Header/Header"
 import Specialty from "./components/Specialty/Specialty"
+import Banner from './components/Banner';
+import SpDetail from './components/Specialty/SpDetail';
 
 //css
 import './App.css';
@@ -14,10 +17,16 @@ import './css/Specialty.css';
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <div className='container'>
-        <Specialty/>
-      </div>
+      <BrowserRouter>
+        <Header />
+        <div className='container'>
+          <Routes>
+            <Route path="/" element={<Specialty />}></Route>
+            <Route path="/Specialty/" element={<Specialty />}></Route>
+            <Route path="/Specialty/SpDetail/:SpName" element={<SpDetail />}></Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
