@@ -46,6 +46,7 @@ const Specialty = (props) => {
                     />
                 ))}
 
+                {/* <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
                 <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
                 <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
                 <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
@@ -55,30 +56,27 @@ const Specialty = (props) => {
                 <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
                 <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
                 <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} /> */}
             </div>
         </>
     );
 };
 
-const useStyles = makeStyles((theme) => ({
-    label: {
-        fontSize: theme.Typography.pxToRem(19),
-    }
-}));
-
 const SpFilter = (props) => {
-    const classes = useStyles();
-
     return (
         <fieldset className="SpFilter">
             <legend style={{ fontSize: "1em", fontWeight: 600 }}>Filter</legend>
-            <FormGroup classes="FormGroup">
-                <FormControlLabel control={<Checkbox defaultChecked size="small" />} label="육군" classes={classes} />
-                <FormControlLabel control={<Checkbox defaultChecked size="small" />} label="해군" />
-                <FormControlLabel control={<Checkbox defaultChecked size="small" />} label="공군" />
-                <FormControlLabel control={<Checkbox defaultChecked size="small" />} label="해병대" />
+            <FormGroup row={true}>
+                <FormControlLabel control={<Checkbox defaultChecked size="small" color="success" />} label={<span style={{ fontSize: '16px' }}>육군</span>} sx={{ width: "auto", display: "flex" }} />
+                <FormControlLabel control={<Checkbox defaultChecked size="small" />} label={<span style={{ fontSize: '16px' }}>해군</span>} sx={{ width: "auto", display: "flex" }} />
+                <FormControlLabel control={<Checkbox defaultChecked size="small" color="default" />} label={<span style={{ fontSize: '16px' }}>공군</span>} sx={{ width: "auto", display: "flex" }} />
+                <FormControlLabel control={<Checkbox defaultChecked size="small" sx={{
+                    color: "red",
+                    '&.Mui-checked': {
+                        color: "red",
+                    },
+                }} />} label={<span style={{ fontSize: '16px' }}>해병대</span>} sx={{ width: "auto", display: "flex" }} />
+
             </FormGroup>
         </fieldset>
     );
