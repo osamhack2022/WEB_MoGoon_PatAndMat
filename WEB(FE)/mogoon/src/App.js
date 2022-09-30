@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 //components
+import ScrollTop from './ScrollTop';
 import Header from "./components/Header/Header"
 import Specialty from "./components/Specialty/Specialty"
 import Banner from './components/Banner';
@@ -18,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollTop/>
         <Header />
         <div className='container'>
           <Routes>

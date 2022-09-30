@@ -46,17 +46,19 @@ const Specialty = (props) => {
                     />
                 ))}
 
-                {/* <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} />
-                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind="해군" tags={["휴가많음", "아닌가?", "몰라용"]} /> */}
+                {/* <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} />
+                <SpecialtyItem name="화생방병" class="전문" desc="이것은 소개입니다 이것은 소개입니다 이것은 소개입니다" military_kind={["해군","육군","공군","해병대"]} tags={["휴가많음", "아닌가?", "몰라용"]} /> */}
+                
             </div>
         </>
     );
