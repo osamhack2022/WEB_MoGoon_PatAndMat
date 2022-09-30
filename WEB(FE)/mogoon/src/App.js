@@ -9,6 +9,7 @@ import Header from "./components/Header/Header"
 import Specialty from "./components/Specialty/Specialty"
 import Banner from './components/Banner';
 import SpDetail from './components/Specialty/SpDetail';
+import Login from './components/Login/Login';
 
 //css
 import './App.css';
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Specialty />}></Route>
             <Route path="/Specialty/" element={<Specialty />}></Route>
             <Route path="/Specialty/SpDetail/:SpName" element={<SpDetail />}></Route>
+            <Route path="/Login" element={<Login />}></Route>
           </Routes>
         </div>
       </BrowserRouter>

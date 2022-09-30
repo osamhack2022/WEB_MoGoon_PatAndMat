@@ -20,7 +20,7 @@ let Header = (props) => {
                     <HeaderItem title="마이페이지" />
                 </ul>
                 <div>
-                    <Button variant="contained" className='btnLogin' style={{ margin: "10px" }}>로그인</Button>
+                    <Button variant="contained" className='btnLogin' style={{ margin: "10px" }}><Link to={`/Login`}>로그인</Link></Button>
                     <Button variant="outlined" className='btnJoin' style={{ margin: "10px" }}>회원가입</Button>
                     <AccountCircleIcon className='account' fontSize='large' />
                 </div>
