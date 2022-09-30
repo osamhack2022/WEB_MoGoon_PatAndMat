@@ -1,36 +1,43 @@
-.SpDetail-content{
+.SpDetail-content {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    min-height: 100vh;
-    width: 80%;
-    height: 100%;
+    /* min-height: 100vh; */
+    width: 60%;
+    /* height: 100%; */
     background-color: white;
 }
 
-.section-header{
+.SpDetail-content>div {
+    border-radius: 5px;
+}
+
+.section-header {
     width: 100%;
-    height: 50vh;
+    /* height: 50vh; */
     /* background-color: aquamarine; */
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
-.section-header > div{
-    flex-grow: 1;
-    flex-basis: 50%;
-    height: 100%;
+.section-header>div {
+    /* flex-grow: 1; */
+    flex-basis: 100%;
+    height: 450px;
     box-sizing: border-box;
     padding: 20px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 1px 5px gray;
+    /* margin: 20px; */
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px gray;
+    margin-bottom: 10px;
 }
 
-.header-img{
+.header-img {
+    /* flex-basis: 70%; */
     height: 300px;
     background-color: bisque;
 
@@ -40,16 +47,76 @@
     background-size: cover;
 }
 
-.header-content{
-    
+.header-content {
+    /* flex-basis: 30%; */
 }
 
-.header-content-name{
+.header-content-name {
     font-size: 2em;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
-.header-content-miltray_kind{
-    /* width: auto; */
+.header-content-miltray_kind {
+    display: inline-block;
+
+    border-right: 1px solid gray;
+    margin-right: 10px;
+    padding-right: 10px;
+
+    margin-bottom: 20px;
 }
 
+.header-content-miltray_kind {}
+
+.desc {
+    width: 100%;
+    height: 300px;
+    border: 2px solid black;
+
+    /* 나중에수정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-body {
+    background-color: white;
+    width: 100%;
+
+    /* 나중에수정 */
+    height: 100vh;
+    box-shadow: 0px 1px 3px gray;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.section-body>span {
+    /* display: block;
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 10px; */
+}
+
+.body-title{
+    display: block;
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.section-body  div{
+    background-color: rgb(250, 250, 250);
+    /* border: 1px solid rgb(160, 160, 160); */
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    line-height: 1.6;
+}
+
+.section-body ~ p{
+    word-wrap: break-word;
+
+}

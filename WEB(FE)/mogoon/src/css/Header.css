@@ -59,6 +59,7 @@ ul{
 }   
 
 li {
+    font-size: 1.1em;
     display: inline-block;
     letter-spacing :0.5px;
     padding: 5px 20px 5px 20px;
