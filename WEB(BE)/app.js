@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 5000;
 
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded()); // postman x-www-form-urlencoded test
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname,"../WEB(FE)/mogoon/build")));
