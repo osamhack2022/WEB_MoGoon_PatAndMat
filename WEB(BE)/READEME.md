@@ -10,7 +10,9 @@ nodemon 이 실행됩니다.\
 # API 리스트
 |메소드|요청 주소|간단 설명|
 |:---:|:---:|:---:|
-|GET|/api/speciality/list|전체 특기를 객체 리스트로 반환합니다
+|GET|/api/speciality/list|전체 특기를 객체 리스트로 반환합니다|
+|POST|/api/auth/register|이메일/비밀번호 계정 생성을 요청합니다|
+|POST|/api/auth/login|이메일/비밀번호 계정 로그인을 요청합니다|
 
 # API 응답 객체 설명
 ## GET /api/speciality/list
@@ -24,6 +26,24 @@ nodemon 이 실행됩니다.\
 |imageSrc|string|대표 이미지 파일 경로|res/image/화생방.jpg|
 |like|number|특기를 찜한 사람 수|3564|
 |military_kind|array|해당 특기가 있는 군종|["육군", "해군", "공군"]|
-|speciality_code|map|각 군종별 특기코드|{"army":"", "airforce":"16", "navy":"", "marine":"" }|
+|speciality_code|string|특기코드|16|
 |speciality_name|string|특기이름|화생방, 정보체계관리, ...|
 |tags|array|특기 태그|["교대근무", "휴가많음", "실내근무"]|
+
+## POST /api/auth/login
+## POST /api/auth/register
+
+두 요청 모두 요청과 응답 형식이 같습니다.   
+요청의 경우 body로 아래의 값을 전달합니다.
+|속성명|데이터타입|간단 설명|예시 값|
+|:---:|:---:|:---:|:---:|
+|email|string|이메일|kckc0608@naver.com|
+|password|string|비밀번호|123412|
+
+응답은 아래와 같은 형태로 주어집니다.
+|속성명|데이터타입|간단 설명|예시 값|
+|:---:|:---:|:---:|:---:|
+|success|bool|성공여부|true / false|
+|user|object|유저객체|.|
+|error_code|string|에러코드|auth/email-already-in-use|
+|error_msg|string|에러 메세지|Firebase: Error (auth/email-already-in-use).|
