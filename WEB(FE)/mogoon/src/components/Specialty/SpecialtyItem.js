@@ -5,13 +5,11 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 let SpecialtyItem = (props) => {
-
     return (
         <div className='specialtyitem'>
             <div className='spimg' style={{ content: `URL(${props.imageSrc})` }} />
             <div className='spcontent'>
                 <div className='sptype'>
-                    {/* 군종이 여러 종류일때 생각해야함 */}
                     <SpTypeItem type={props.military_kind} />
                     <div>{props.class}</div>
                 </div>
@@ -59,6 +57,10 @@ let SpTagItem = (props) => {
         //type 기본값을 이용해서 tag별로 css 적용
         <div>#{props.tag}</div>
     );
+};
+
+const onSearchChange=(e)=>{
+    console.log(e);
 };
 
 export default React.memo(SpecialtyItem);
