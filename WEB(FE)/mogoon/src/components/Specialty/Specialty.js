@@ -92,16 +92,16 @@ const Specialty = (props) => {
             </div>
         </>
     );
-
-
 };
 
 
 const SpFilter = (props) => {
+    let chkGroup = ["육군","해군","공군","해병대"];
+
     return (
         <fieldset className="SpFilter">
             <legend style={{ fontSize: "1em", fontWeight: 600 }}>Filter</legend>
-            <FormGroup row={true}>
+            <FormGroup onChange={(e)=>{console.log(e)}} row={true}>
                 <FormControlLabel control={<Checkbox defaultChecked size="small" color="success" />} label={<span style={{ fontSize: '16px' }}>육군</span>} sx={{ width: "auto", display: "flex" }} />
                 <FormControlLabel control={<Checkbox defaultChecked size="small" />} label={<span style={{ fontSize: '16px' }}>해군</span>} sx={{ width: "auto", display: "flex" }} />
                 <FormControlLabel control={<Checkbox defaultChecked size="small" color="default" />} label={<span style={{ fontSize: '16px' }}>공군</span>} sx={{ width: "auto", display: "flex" }} />
