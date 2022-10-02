@@ -50,11 +50,19 @@
     border: 1.5px solid rgb(184, 184, 184);
     border-radius: 10px;
     
-    /* 바꿀수도 있음 */
     border-color: #9c9c9c;
     position: fixed;
     margin-top: 10px;
     left: 50px;
+}
+
+
+.chklabel{
+    width: auto;
+}
+
+.chklabel span{
+    font-size: 15px;
 }
 
 /* 그리드버전 */
@@ -191,4 +199,9 @@
     margin-right: 0;
     cursor: pointer;
 }
+
+.like{
+
+}
+
 

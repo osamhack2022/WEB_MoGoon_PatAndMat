@@ -5,6 +5,19 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 let SpecialtyItem = (props) => {
+    // 나중에 체크 유뮤 받아오기
+    let [chkBool, setChkBool] = useState(false);
+
+    let chkClick = (e) => {
+        if (chkBool == false) {
+            setChkBool(true);
+        } else {
+            setChkBool(false);
+        }
+
+        e.preventDefault();
+    }
+
     return (
         <Link to={`/Specialty/SpDetail/${props.name}`}>
             <div className='specialtyitem'>
@@ -15,14 +28,14 @@ let SpecialtyItem = (props) => {
                         <div>{props.class}</div>
                     </div>
                     <div className='spname'>{props.name}</div>
-                    <p className='spexplan'>{props.desc}</p>
+                    <p className='spexplan'>{props.desc=="" ? "" : `"${props.desc}"`}</p>
                     <div className='sptag'>
                         {
                             props.tags.map(tag => (
                                 <SpTagItem tag={tag} />
                             ))
                         }
-                        <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />} />
+                        <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
                     </div>
                 </div>
             </div>
