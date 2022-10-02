@@ -14,7 +14,6 @@ router_speciality.get('/list', async (req, res) => {
 
 
 
-
 let dataList = [
     {
         "class" : "일반",
