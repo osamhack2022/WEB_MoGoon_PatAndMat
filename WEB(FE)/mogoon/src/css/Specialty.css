@@ -81,6 +81,8 @@
     box-shadow: 0px 0.5px 7px #999999;
     margin: 20px;
     overflow: hidden;
+
+    cursor: pointer;
 }
 
 .spimg {
@@ -143,7 +145,7 @@
     font-size: 1.3em;
     font-weight: 700;
     letter-spacing: 1px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .spexplan{
