@@ -11,12 +11,26 @@ nodemon 이 실행됩니다.\
 |메소드|요청 주소|간단 설명|
 |:---:|:---:|:---:|
 |GET|/api/speciality/list|전체 특기를 객체 리스트로 반환합니다|
+|GET|/api/speciality/list/특기이름|해당 특기의 상세 정보 객체를 반환합니다|
 |POST|/api/auth/register|이메일/비밀번호 계정 생성을 요청합니다|
 |POST|/api/auth/login|이메일/비밀번호 계정 로그인을 요청합니다|
 
 # API 응답 객체 설명
+
+모든 요청에 대한 응답은 result 객체에 담겨서 반환됩니다.   
+아래는 result 객체의 구조입니다.
+
+|속성명|데이터타입|간단 설명|예시 값|
+|:---:|:---:|:---:|:---:|
+|success|bool|성공여부|true / false|
+|data|object, array|반환 데이터|데이터 형식은 아래 상세 정보를 확인해주세요.|
+|error_code|string|에러코드|auth/email-already-in-use|
+|error_msg|string|에러 메세지|Firebase: Error (auth/email-already-in-use).|
+
+아래 설명하는 API의 반환 데이터 형식은 모두 result 객체의 data 프로퍼티를 통해 반환됩니다.
+
 ## GET /api/speciality/list
-각 특기 객체 리스트가 반환되며 각 객체의 속성은 아래 표를 참고해주세요.
+전체 특기의 객체 **리스트**가 반환되며 리스트 안의 각 객체의 속성은 아래 표와 같습니다.
 
 |속성명|데이터타입|간단 설명|예시 값|
 |:---:|:---:|:---:|:---:|
@@ -40,10 +54,4 @@ nodemon 이 실행됩니다.\
 |email|string|이메일|kckc0608@naver.com|
 |password|string|비밀번호|123412|
 
-응답은 아래와 같은 형태로 주어집니다.
-|속성명|데이터타입|간단 설명|예시 값|
-|:---:|:---:|:---:|:---:|
-|success|bool|성공여부|true / false|
-|user|object|유저객체|.|
-|error_code|string|에러코드|auth/email-already-in-use|
-|error_msg|string|에러 메세지|Firebase: Error (auth/email-already-in-use).|
+응답은 파이어베이스의 user 객체를 반환합니다.
