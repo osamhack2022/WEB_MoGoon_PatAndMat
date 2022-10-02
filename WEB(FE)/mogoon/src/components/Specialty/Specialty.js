@@ -137,7 +137,6 @@ const Specialty = (props) => {
     const [SpData, setSpData] = useState(dataList);
     const [search, setSearch] = useState("");
 
-    let searchWord = null;
     let searchData = null;
 
     // async function getData() {
@@ -163,7 +162,7 @@ const Specialty = (props) => {
     };
 
     const handelSearch = (e) => {
-        searchFunction(searchWord);
+        searchFunction(e.target.value);
     }
 
     const handelSearchEnter = (e) => {
