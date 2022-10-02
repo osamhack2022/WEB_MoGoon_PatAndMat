@@ -1,15 +1,64 @@
 import express from 'express';
 import { db } from '../firebase/db.js';
-import { collection, getDocs, doc, setDoc,addDoc } from 'firebase/firestore/lite';
+import { collection, getDocs, doc, setDoc, query, where } from 'firebase/firestore/lite';
 
 export const router_speciality = express.Router();
 
 router_speciality.get('/list', async (req, res) => {
-    const test_col = collection(db, 'speciality');
-    const snapshot = await getDocs(test_col);
-    const doc_list = snapshot.docs.map(doc => doc.data());
-    
-    return res.json(doc_list);
+    const result = {
+        success: false,
+        data: null,
+        err_code: null,
+        err_msg: null
+    };
+
+    try {
+        const speciality_collection = collection(db, 'speciality');
+        const snapshot = await getDocs(speciality_collection);
+        const doc_list = snapshot.docs.map(doc => doc.data());
+
+        result.success = true;
+        result.data = doc_list;
+    } catch (error) {
+        result.success = false;
+        result.err_code = error.code;
+        result.err_msg = error.message;
+    }
+
+    return res.json(result);
 });
 
-router_speciality.get('/list')
+router_speciality.get('/list/:speciality_name', async (req, res) => {
+
+    const result = {
+        success: false,
+        data: null,
+        err_code: null,
+        err_msg: null
+    };
+
+    try {
+        const speciality_name = req.params.speciality_name;
+        const speciality_collection = collection(db, 'speciality');
+        const q = query(speciality_collection, where("speciality_name", "==", speciality_name));
+        const snapshot = await getDocs(q);
+        const doc_list = snapshot.docs.map(doc => doc.data());
+
+        if (doc_list.length == 0) {
+            result.success = false;
+            result.err_code = "-1";
+            result.err_msg = "no speciality, check speciality name";
+        }
+        else {
+            const document = doc_list[0];
+            result.success = true;
+            result.data = document;
+        }   
+    } catch (error) {
+        result.success = false;
+        result.err_code = error.code;
+        result.err_msg = error.message;
+    }
+
+    return res.json(result);
+});
