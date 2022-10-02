@@ -5,23 +5,60 @@ import { collection, getDocs, doc, setDoc, query, where } from 'firebase/firesto
 export const router_speciality = express.Router();
 
 router_speciality.get('/list', async (req, res) => {
-    const speciality_collection = collection(db, 'speciality');
-    const snapshot = await getDocs(speciality_collection);
-    const doc_list = snapshot.docs.map(doc => doc.data());
-    
-    //await setDoc(doc(db, 'speciality', `test${doc_list.length}`), doc_list[0]);
-    return res.json(doc_list);
+    const result = {
+        success: false,
+        data: null,
+        err_code: null,
+        err_msg: null
+    };
+
+    try {
+        const speciality_collection = collection(db, 'speciality');
+        const snapshot = await getDocs(speciality_collection);
+        const doc_list = snapshot.docs.map(doc => doc.data());
+
+        result.success = true;
+        result.data = doc_list;
+    } catch (error) {
+        result.success = false;
+        result.err_code = error.code;
+        result.err_msg = error.message;
+    }
+
+    return res.json(result);
 });
 
 router_speciality.get('/list/:speciality_name', async (req, res) => {
-    const speciality_name = req.params.speciality_name;
-    const speciality_collection = collection(db, 'speciality');
-    const q = query(speciality_collection, where("speciality_name", "==", speciality_name));
-    const snapshot = await getDocs(q);
-    const doc_list = snapshot.docs.map(doc => doc.data());
 
-    if (doc_list.length == 0) {
+    const result = {
+        success: false,
+        data: null,
+        err_code: null,
+        err_msg: null
+    };
+
+    try {
+        const speciality_name = req.params.speciality_name;
+        const speciality_collection = collection(db, 'speciality');
+        const q = query(speciality_collection, where("speciality_name", "==", speciality_name));
+        const snapshot = await getDocs(q);
+        const doc_list = snapshot.docs.map(doc => doc.data());
+
+        if (doc_list.length == 0) {
+            result.success = false;
+            result.err_code = "-1";
+            result.err_msg = "no speciality, check speciality name";
+        }
+        else {
+            const document = doc_list[0];
+            result.success = true;
+            result.data = document;
+        }   
+    } catch (error) {
+        result.success = false;
+        result.err_code = error.code;
+        result.err_msg = error.message;
     }
 
-    return res.json(doc_list);
+    return res.json(result);
 });
