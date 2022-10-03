@@ -51,20 +51,16 @@
 .header-content-name {
     font-size: 2em;
     font-weight: 600;
-    margin-bottom: 10px;
 }
 
 .header-content-miltray_kind {
     display: inline-block;
-
-    border-right: 1px solid gray;
-    margin-right: 10px;
-    padding-right: 10px;
-
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
-.header-content-miltray_kind {}
+.header-content-kind{
+    margin-bottom: 10px;
+}
 
 .desc {
     color: #141414;

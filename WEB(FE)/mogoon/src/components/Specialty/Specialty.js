@@ -13,13 +13,13 @@ const Specialty = (props) => {
     let dataList = [
         {
             "class": "일반",
-            "desc": "장갑차를 조종 할 수 있습니다",
+            "desc": "장갑차를 조종할 수 있습니다.",
             "imageSrc": "",
             "kind": "",
             "like": 0,
             "military_kind": ["육군"],
             "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "장갑차조종",
+            "speciality_name": "장갑차병",
             "tags": ["교대근무", "휴가많음", "실내근무"]
         },
         {
@@ -133,6 +133,7 @@ const Specialty = (props) => {
             "tags": ["교대근무", "휴가많음", "실내근무"]
         },
     ]
+    
     const [MASTER_DATA, setMASTER_DATA] = useState(dataList);
     const [SpData, setSpData] = useState(dataList);
     const [search, setSearch] = useState("");
@@ -189,7 +190,6 @@ const Specialty = (props) => {
             ))
         );
     }
-
     
     const chkFunction = (value) => {
         //군종이 여러개일 경우
