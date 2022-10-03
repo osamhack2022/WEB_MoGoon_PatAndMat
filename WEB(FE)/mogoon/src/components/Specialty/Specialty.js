@@ -157,13 +157,13 @@ const Specialty = (props) => {
 
     // console.log(SpData);
 
+    const handelSearch = (e) => {
+        searchFunction(search);
+    }
+
     const handelSearchChange = (e) => {
         setSearch(e.target.value)
     };
-
-    const handelSearch = (e) => {
-        searchFunction(e.target.value);
-    }
 
     const handelSearchEnter = (e) => {
         if (e.key === 'Enter') {
