@@ -44,6 +44,16 @@ nodemon 이 실행됩니다.\
 |speciality_name|string|특기이름|화생방, 정보체계관리, ...|
 |tags|array|특기 태그|["교대근무", "휴가많음", "실내근무"]|
 
+## GET /api/speciality/특기명(한글)
+단일 특기의 상세 정보를 가져옵니다.
+|속성명|데이터타입|간단 설명|예시 값|
+|:---:|:---:|:---:|:---:|
+|speciality_summary|string|특기 요약|.|
+|speciality_education|string|특기 교육|.|
+|speciality_work|string|주요 업무|.|
+|speciality_eligibility|map|군별 지원 자격|{"army": null, "navy": '', ...}|
+|score|map|각 군별 지원 배점|{"army": null, "navy": '', ...}|
+
 ## POST /api/auth/login
 ## POST /api/auth/register
 
