@@ -21,8 +21,9 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <ScrollTop/>
+        <ScrollTop />
         <Header />
+
         <div className='container'>
           <Routes>
             <Route path="/" element={<Specialty />}></Route>

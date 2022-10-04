@@ -1,34 +1,77 @@
 .login-wrap{
     width: 100%;
-    height: 89vh;
+    height: 97.4vh;
     display: flex;
     /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     background-color: white;
+
+    display: inline-block;
 }
 
-.login-wrap > div{
-    /* margin-bottom: 20px; */
-}
+.login-img{
+    width: 30%;
+    height: 100%;
 
-.login-logo{
-    width: 100%;
-    height: 200px;
-    background-image: url("../../public/img/logo/logo.png");
+    background-image: url("../../public/img/logo/banner2.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    /* background-color: aqua; */
-}
 
-.login-name{
-    font-size: 50px;
-    font-weight: 500;
+    background-color: #183C8C;
+    display: inline-block;
 }
 
 .login-content{
-    width: 40%;
-    height: 500px;
-    border: 2px solid gray;
+    width: 70%;
+    height: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    vertical-align: top;
+}
+
+.login-form{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form-logo{
+    width: 100%;
+    height: 100px;
+    background-image: url("../../public/img/logo/Slogan1.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-size: cover;
+}
+
+.login-form > span{
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.login-form * {
+    margin-bottom: 10px;
+}
+
+.btnlogin{
+    margin-top: 20px;
+    height: 50px;
+    border: none;
+    background-color: #183C8C;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 500;
+    transition: 0.2s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.join{
+    margin-top: auto;
+    margin-bottom: 0px;
 }
