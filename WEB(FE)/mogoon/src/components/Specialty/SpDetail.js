@@ -25,7 +25,7 @@ let SpDetail = () => {
     const tabContArr_kind = [
         {
             tabTitle: (
-                <div className={activeIndexKind === 0 ? "is-active" : ""} onClick={() => { tabClickHandlerKind(0) }}>육군</div>
+                <div className={activeIndexKind === 0 ? "is-activekind" : ""} onClick={() => { tabClickHandlerKind(0) }}>육군</div>
             ),
             tabCont: (
                 <>
@@ -68,7 +68,7 @@ let SpDetail = () => {
         },
         {
             tabTitle: (
-                <div className={activeIndexKind === 1 ? "is-active" : ""} onClick={() => { tabClickHandlerKind(1) }}>해군</div>
+                <div className={activeIndexKind === 1 ? "is-activekind" : ""} onClick={() => { tabClickHandlerKind(1) }}>해군</div>
             ),
             tabCont: (
                 <>
@@ -111,7 +111,7 @@ let SpDetail = () => {
         },
         {
             tabTitle: (
-                <div className={activeIndexKind === 2 ? "is-active" : ""} onClick={() => { tabClickHandlerKind(2) }}>공군</div>
+                <div className={activeIndexKind === 2 ? "is-activekind" : ""} onClick={() => { tabClickHandlerKind(2) }}>공군</div>
             ),
             tabCont: (
                 <>
@@ -154,7 +154,7 @@ let SpDetail = () => {
         },
         {
             tabTitle: (
-                <div className={activeIndexKind === 3 ? "is-active" : ""} onClick={() => { tabClickHandlerKind(3) }}>해병대</div>
+                <div className={activeIndexKind === 3 ? "is-activekind" : ""} onClick={() => { tabClickHandlerKind(3) }}>해병대</div>
             ),
             tabCont: (
                 <>
@@ -274,7 +274,7 @@ let SpDetail = () => {
                 <div className='header-img' />
                 <div className='header-content'>
                     <div className='header-content-name' style={{ display: "inline-block" }}>{name}</div>
-                    <span className='header-content-miltray_kind'>
+                    <span className='header-content-miltray_kind' style={{color:"gray"}}>
                         (AIR30010)
                     </span>
                     <div className='header-content-kind'>

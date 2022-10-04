@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import Badge from '@mui/material/Badge';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 let SpecialtyItem = (props) => {
@@ -35,7 +36,9 @@ let SpecialtyItem = (props) => {
                                 <SpTagItem tag={tag} />
                             ))
                         }
-                        <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
+                        <Badge color="secondary" badgeContent={props.like} sx={{marginRight: "0", marginLeft: "auto", padding: "0" }}>
+                            <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
+                        </Badge>
                     </div>
                 </div>
             </div>

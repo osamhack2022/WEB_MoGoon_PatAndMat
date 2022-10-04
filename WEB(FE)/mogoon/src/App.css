@@ -29,6 +29,8 @@ hr{
 
 body{
   background-color: #f7f7f8;
+  margin: 0;
+  padding: 0;
 }
 
 .App {
@@ -42,7 +44,6 @@ body{
   padding: 20px;
   padding-top: 10px;
   background-color: #f7f7f8;
-  /* min-height: 100vh; */
 }
 
 a{
