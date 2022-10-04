@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
+import { useLocation } from "react-router-dom";
 import HeaderItem from "./HeaderItem";
 import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
 
 let Header = (props) => {
+    const locationNow = useLocation();
+    if (locationNow.pathname === "/Login/") return null;
+
     return (
         <div className='headerWapper'>
             <nav>
                 <ul>
                     <Link to="/">
-                        <div className="logo"></div>
+                        <div className='logo'></div>
                     </Link>
                     <Link to="/Specialty/">
                         <HeaderItem title="특기소개" />
