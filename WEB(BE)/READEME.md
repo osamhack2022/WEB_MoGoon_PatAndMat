@@ -44,6 +44,25 @@ nodemon 이 실행됩니다.\
 |speciality_name|string|특기이름|화생방, 정보체계관리, ...|
 |tags|array|특기 태그|["교대근무", "휴가많음", "실내근무"]|
 
+## GET /api/speciality/특기명(한글)
+단일 특기의 상세 정보를 가져옵니다.
+|속성명|데이터타입|간단 설명|예시 값|
+|:---:|:---:|:---:|:---:|
+|speciality_summary|string|특기 요약|.|
+|speciality_education|string|특기 교육|.|
+|speciality_work|string|주요 업무|.|
+|speciality_eligibility|map|군별 지원 자격|{"army": null, "navy": '', ...}|
+|score|map|각 군별 지원 배점|{"army": null, "navy": '', ...}|
+|class|string|특기가 속한 분류|일반, 전문기술, 전문특기, ...|
+|kind|string|특기 분류|일반, 수송, 전자계산, 화생방, ...|
+|desc|string|한줄 설명|화학전에서 활약하는 특기|
+|imageSrc|string|대표 이미지 파일 경로|res/image/화생방.jpg|
+|like|number|특기를 찜한 사람 수|3564|
+|military_kind|array|해당 특기가 있는 군종|["육군", "해군", "공군"]|
+|speciality_code|string|특기코드|16|
+|speciality_name|string|특기이름|화생방, 정보체계관리, ...|
+|tags|array|특기 태그|["교대근무", "휴가많음", "실내근무"]|
+
 ## POST /api/auth/login
 ## POST /api/auth/register
 
