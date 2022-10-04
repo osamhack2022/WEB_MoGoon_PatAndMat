@@ -1,45 +1,72 @@
 import React, { useState } from 'react';
+import Checkbox from '@mui/material/Checkbox';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import Badge from '@mui/material/Badge';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 let SpecialtyItem = (props) => {
+    // 나중에 체크 유뮤 받아오기
+    let [chkBool, setChkBool] = useState(false);
+
+    let chkClick = (e) => {
+        if (chkBool == false) {
+            setChkBool(true);
+        } else {
+            setChkBool(false);
+        }
+
+        e.preventDefault();
+    }
+
     return (
-        <div className='specialtyitem'>
-            <div className='spimg' />
-            <div className='spcontent'>
-                <div className='sptype'>
-                    <SpTypeItem type="육군" />
-                    <SpTypeItem type="해군" />
-                    <SpTypeItem type="공군" />
-                    <SpTypeItem type="해병대" />
-                    {/* 일반인지 전문특기병인지 */}
-                    <div>일반</div>
-                </div>
-                <div className='spname'>{props.name}</div>
-                <p className='spexplan'>Lorem ipsum dolor, sit amet consectetur</p>
-                <div className='sptag'>
-                    <SpTagItem tag="휴가많음"/>
-                    <SpTagItem tag="실내근무"/>
-                    <SpTagItem tag="교대근무"/>
-                    <img src="img/etc/saveOff.svg"/>
+        <Link to={`/Specialty/SpDetail/${props.name}`}>
+            <div className='specialtyitem'>
+                <div className='spimg' style={{ content: `URL(${props.imageSrc})` }} />
+                <div className='spcontent'>
+                    <div className='sptype'>
+                        <SpTypeItem type={props.military_kind} />
+                        <div>{props.class}</div>
+                    </div>
+                    <div className='spname'>{props.name}</div>
+                    <p className='spexplan'>{props.desc=="" ? "" : `"${props.desc}"`}</p>
+                    <div className='sptag'>
+                        {
+                            props.tags.map(tag => (
+                                <SpTagItem tag={tag} />
+                            ))
+                        }
+                        <Badge color="secondary" badgeContent={props.like} sx={{marginRight: "0", marginLeft: "auto", padding: "0" }}>
+                            <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
+                        </Badge>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
 let SpTypeItem = (props) => {
-    let color="";
-    if(props.type=="육군"){
-        color = "green";
-    }else if(props.type=="해군"){
-        color="#000080";
-    }else if(props.type=="공군"){
-        color="silver";
-    }else{
-        color="red";
+    const type = props.type;
+
+    let typeColor = [];
+    for (let i = 0; i < type.length; i++) {
+        if (type[i] == "육군") {
+            typeColor[i] = "green";
+        } else if (type[i] == "해군") {
+            typeColor[i] = "#000080";
+        } else if (type[i] == "공군") {
+            typeColor[i] = "#5d5d5d";
+        } else {
+            typeColor[i] = "red";
+        }
     }
 
     return (
-        <div style={{color:color}}>{props.type}</div>
+        type.map((data, index) => (
+            <div key={index} style={{ color: typeColor[index] }}>{data}</div>
+        ))
+
     );
 };
 
@@ -50,4 +77,8 @@ let SpTagItem = (props) => {
     );
 };
 
-export default SpecialtyItem;
+const onSearchChange = (e) => {
+    console.log(e);
+};
+
+export default React.memo(SpecialtyItem);

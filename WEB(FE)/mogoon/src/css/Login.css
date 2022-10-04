@@ -1,0 +1,34 @@
+.login-wrap{
+    width: 100%;
+    height: 89vh;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+}
+
+.login-wrap > div{
+    /* margin-bottom: 20px; */
+}
+
+.login-logo{
+    width: 100%;
+    height: 200px;
+    background-image: url("../../public/img/logo/logo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* background-color: aqua; */
+}
+
+.login-name{
+    font-size: 50px;
+    font-weight: 500;
+}
+
+.login-content{
+    width: 40%;
+    height: 500px;
+    border: 2px solid gray;
+}
