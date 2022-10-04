@@ -16,7 +16,6 @@ const Login = () => {
             <div className="login-content">
                 <div className="login-form">
                     <div className="login-form-logo"></div>
-
                     <span>아이디</span>
                     <TextField id="outlined-basic" label="ID" variant="outlined" sx={{ width: "100%" }} />
                     <span>비밀번호</span>
@@ -26,15 +25,14 @@ const Login = () => {
                         type="password"
                         autoComplete="current-password"
                     />
-                    <span style={{margin:"0",fontWeight:"400",fontSize:"14px",color:"gray",cursor:"pointer"}}>
+                    <span style={{margin: "0", fontWeight: "400", fontSize: "14px", color: "gray", cursor: "pointer" }}>
                         ID/PW 찾기
                     </span>
                     <button className="btnlogin">로그인</button>
                 </div>
-
-                {/* <div className="join">
-                    아직 "모군"의 회원이 아니신가요? <span>회원가입</span> 하시고 더나은 서비스를 즐겨보세요.
-                </div> */}
+                <div className="join" style={{letterSpacing:"0.1px"}}>
+                    아직 <strong>"모군"</strong>의 회원이 아니신가요? <strong><span style={{cursor:"pointer",textDecoration:"underline", color:"#183C8C"}}>회원가입</span></strong> 하시고 더나은 서비스를 즐겨보세요.
+                </div>
             </div>
         </div>
     );

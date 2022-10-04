@@ -36,14 +36,14 @@ let SpecialtyItem = (props) => {
                                 <SpTagItem tag={tag} />
                             ))
                         }
-                        <Badge color="success" badgeContent={props.like} sx={{
+                        {/* <Badge color="success" badgeContent={props.like} sx={{
                             marginRight: "0", marginLeft: "auto", padding: "0", "& .MuiBadge-badge": {
                                 color: "white",
                                 backgroundColor: "#1976d2"
                             }
-                        }}>
+                        }}> */}
                             <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
-                        </Badge>
+                        {/* </Badge> */}
                     </div>
                 </div>
             </div>

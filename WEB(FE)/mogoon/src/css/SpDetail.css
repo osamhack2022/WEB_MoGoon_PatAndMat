@@ -1,5 +1,6 @@
 .SpDetail-content {
     position: relative;
+    margin-top: 10px;
     left: 50%;
     transform: translateX(-50%);
     /* min-height: 100vh; */
