@@ -1,13 +1,10 @@
 .login-wrap{
     width: 100%;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     background-color: white;
-    
-    display: inline-block;
-    height: 99.5vh;
+    height: 100%;
 }
 
 .login-img{

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 
+import "../../css/Login.css"
+
 const Login = () => {
     return (
         <div className="login-wrap">
@@ -25,7 +27,7 @@ const Login = () => {
                         type="password"
                         autoComplete="current-password"
                     />
-                    <span style={{margin: "0", fontWeight: "400", fontSize: "14px", color: "gray", cursor: "pointer" }}>
+                    <span style={{margin: "0", fontWeight: "400", fontSize: "14px", color: "gray", cursor: "pointer",width:"80px" }}>
                         ID/PW 찾기
                     </span>
                     <button className="btnlogin">로그인</button>
