@@ -62,9 +62,24 @@ const speciality_desc = async (req, res) => {
     return res.json(result);
 }
 
+const add = async (req, res) => {
+    const result = new Result();
+
+    console.log(req.body);
+    try {
+        const docRef = await setDoc(doc(db, 'speciality', req.body['spc_name']), req.body);
+        result.success = true;
+    } catch (error) {
+        result.error = error;
+    }
+
+    res.json(result);
+}
+
 export const ctrl_speciality = {
     get: {
         speciality_list,
         speciality_desc,
     },
+    add,
 };
