@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 let Header = (props) => {
     const locationNow = useLocation();
+    //주소 Account로 바꾸기
     if (locationNow.pathname === "/Login/") return null;
 
     return (
@@ -29,7 +30,9 @@ let Header = (props) => {
                             로그인
                         </Link>
                     </Button>
-                    <Button variant="outlined" className='btnJoin' style={{ margin: "5px" }}>회원가입</Button>
+                    <Button variant="outlined" className='btnJoin' style={{ margin: "5px" }}>
+                        회원가입
+                    </Button>
                     <AccountCircleIcon className='account' fontSize='large' />
                 </div>
             </nav>
