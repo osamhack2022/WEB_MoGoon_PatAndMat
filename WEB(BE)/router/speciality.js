@@ -15,3 +15,5 @@ router_speciality.get('/list/:speciality_name', ctrl_speciality.get.speciality_d
 router_speciality.get('/add', (req, res) => {
     res.sendFile(path.join(__dirname,'../view/add_speciality.html'));
 });
+
+router_speciality.post('/add', ctrl_speciality.add);
