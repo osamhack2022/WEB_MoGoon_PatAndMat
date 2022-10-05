@@ -10,6 +10,7 @@ import Specialty from "./components/Specialty/Specialty"
 import Banner from './components/Banner';
 import SpDetail from './components/Specialty/SpDetail';
 import Login from './components/Account/Login';
+import Join from './components/Account/Join';
 
 //css
 import './App.css';
@@ -27,9 +28,10 @@ function App() {
         <div className='container'>
           <Routes>
             <Route path="/" element={<Specialty />}></Route>
-            <Route path="/Specialty/" element={<Specialty />}></Route>
+            <Route path="/Account/Login" element={<Login />}></Route>
+            <Route path="/Account/Join" element={<Join />}></Route>
+            <Route path="/Specialty" element={<Specialty />}></Route>
             <Route path="/Specialty/SpDetail/:SpName" element={<SpDetail />}></Route>
-            <Route path="/Login/" element={<Login />}></Route>
           </Routes>
         </div>
       </BrowserRouter>

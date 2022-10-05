@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 let Header = (props) => {
     const locationNow = useLocation();
     //주소 Account로 바꾸기
-    if (locationNow.pathname === "/Login/") return null;
+    if (locationNow.pathname === "/Account/Login" || locationNow.pathname === "/Account/Join") return null;
 
     return (
         <div className='headerWapper'>
@@ -17,7 +17,7 @@ let Header = (props) => {
                     <Link to="/">
                         <div className='logo'></div>
                     </Link>
-                    <Link to="/Specialty/">
+                    <Link to="/Specialty">
                         <HeaderItem title="특기소개" />
                     </Link>
                     <HeaderItem title="군지원" />
@@ -26,12 +26,14 @@ let Header = (props) => {
                 </ul>
                 <div>
                     <Button variant="contained" className='btnLogin' style={{ margin: "5px" }}>
-                        <Link to="/Login/">
+                        <Link to="/Account/Login">
                             로그인
                         </Link>
                     </Button>
                     <Button variant="outlined" className='btnJoin' style={{ margin: "5px" }}>
-                        회원가입
+                        <Link to="/Account/Join">
+                            회원가입
+                        </Link>
                     </Button>
                     <AccountCircleIcon className='account' fontSize='large' />
                 </div>
