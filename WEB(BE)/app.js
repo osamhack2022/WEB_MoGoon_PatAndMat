@@ -17,15 +17,15 @@ app.use(bodyParser.urlencoded());
 app.use(express.json());
 app.use(cors());
 
-// 프론트 연동
-app.use(express.static(path.join(__dirname,"../WEB(FE)/mogoon/build")));
-app.get('/', (req, res) => {
-    return res.sendFile(path.join(__dirname,"../WEB(FE)/mogoon/build/index.html"));
-});
-
 // API 라우팅
 app.use('/api/speciality', router_speciality);
 app.use('/api/auth', router_auth);
+
+// 프론트 연동
+app.use(express.static(path.join(__dirname,"../WEB(FE)/mogoon/build")));
+app.get('*', (req, res) => {
+    return res.sendFile(path.join(__dirname,"../WEB(FE)/mogoon/build/index.html"));
+});
 
 app.listen(port, () => {
     console.log(`server is listening at ${port}`);
