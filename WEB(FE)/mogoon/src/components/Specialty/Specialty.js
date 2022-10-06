@@ -9,154 +9,30 @@ import axios from 'axios';
 //임시 필터 체크박스 데이터
 let chkGroup = ["육군", "해군", "공군", "해병대"];
 
-const Specialty = (props) => {
-    let dataList = [
-        {
-            "class": "일반",
-            "desc": "장갑차를 조종할 수 있습니다.",
-            "imageSrc": "",
-            "kind": "",
-            "like": 5,
-            "military_kind": ["육군"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "장갑차병",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "일반",
-            "desc": "",
-            "imageSrc": "",
-            "kind": "",
-            "like": 10,
-            "military_kind": ["육군"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "155mm자주포병",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "전문특기",
-            "desc": "",
-            "imageSrc": "",
-            "kind": "",
-            "like": 200,
-            "military_kind": ["육군"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "의장병",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "일반",
-            "desc": "",
-            "imageSrc": "",
-            "kind": "",
-            "like": 50,
-            "military_kind": ["해군"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "조타",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "일반",
-            "desc": "",
-            "imageSrc": "",
-            "kind": "",
-            "like": 999,
-            "military_kind": ["해군"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "병기",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "특기",
-            "desc": "전산, 컴퓨터와 관련된 임무를 할 수 있습니다",
-            "imageSrc": "",
-            "kind": "",
-            "like": 2,
-            "military_kind": ["해군"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "전산",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "전문특기",
-            "desc": "프로그램 개발을 할 수 있습니다",
-            "imageSrc": "",
-            "kind": "",
-            "like": 24,
-            "military_kind": ["해군"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "SW개발병",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "일반",
-            "desc": "",
-            "imageSrc": "",
-            "kind": "",
-            "like": 16,
-            "military_kind": ["해병대"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "대전차화기",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "특기",
-            "desc": "",
-            "imageSrc": "",
-            "kind": "",
-            "like": 0,
-            "military_kind": ["해병대"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "통기",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "일반",
-            "desc": "",
-            "imageSrc": "",
-            "kind": "",
-            "like": 0,
-            "military_kind": ["공군"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "장비물자보급",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-        {
-            "class": "전문특기",
-            "desc": "",
-            "imageSrc": "",
-            "kind": "",
-            "like": 8,
-            "military_kind": ["공군"],
-            "speciality_code": { "marin": "", "army": "", "airforce": "", "navy": "" },
-            "speciality_name": "우주기상분석병",
-            "tags": ["교대근무", "휴가많음", "실내근무"]
-        },
-    ]
-    
-    const [MASTER_DATA, setMASTER_DATA] = useState(dataList);
-    const [SpData, setSpData] = useState(dataList);
+const Specialty = (props) => {    
+    const [MASTER_DATA, setMASTER_DATA] = useState();
+    const [SpData, setSpData] = useState();
     const [search, setSearch] = useState("");
 
     let searchData = null;
 
-    // async function getData() {
-    //     await axios.get("http://localhost:5000/api/speciality/list")
-    //         .then((response) => {
-    //             setSpData(response.data);
-    //             setMASTER_DATA(response.data);
-    //         });
-    // }
+    async function getData() {
+        await axios.get("http://localhost:5000/api/speciality/list")
+            .then((response) => {
+                setSpData(response.data.data);
+                setMASTER_DATA(response.data.data);
+            });
+    }
 
-    // useEffect(() => {
-    //     getData();
-    // }, []);
+    useEffect(() => {
+        getData();
+    }, []);
 
-    // if (!SpData) {
-    //     return null;
-    // }
+    if (!SpData) {
+        return null;
+    }
 
-    // console.log(SpData);
+    console.log(SpData);
 
     const handelSearch = (e) => {
         searchFunction(search);

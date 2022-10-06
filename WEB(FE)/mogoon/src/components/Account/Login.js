@@ -38,7 +38,7 @@ const Login = () => {
             }
         )
             .then(function (response) {
-                // console.log(response);
+                console.log(response);
                 console.log(JSON.stringify(values, null, 2));
                 alert("로그인 성공!");
             })

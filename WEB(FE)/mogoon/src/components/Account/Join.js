@@ -43,6 +43,7 @@ const Join = () => {
             }
         )
             .then(function (response) {
+                console.log(response);
                 console.log(JSON.stringify(values, null, 2));
                 alert("회원가입 성공!");
             })
