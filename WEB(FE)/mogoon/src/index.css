@@ -1,21 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+@font-face {
+  font-family: Noto Sans KR;
+  src: url("../public/fonts/NotoSansKR-Thin.woff") format("woff");
+  src: url("../public/fonts/NotoSansKR-Regular.woff") format("woff");
+  src: url("../public/fonts/NotoSansKR-Medium.woff") format("woff");
+  src: url("../public/fonts/NotoSansKR-Light.woff") format("woff");
+  src: url("../public/fonts/NotoSansKR-Bold.woff") format("woff");
+  src: url("../public/fonts/NotoSansKR-Black.woff") format("woff");
+}
+
+*{
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 html,body{
-  /* width: 100%; */
   height: 100%;
-  /* overflow: hidden; */
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root{
+  height: 100%;
 }
 
 ul,li{

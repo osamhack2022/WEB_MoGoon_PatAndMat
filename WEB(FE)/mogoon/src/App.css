@@ -3,6 +3,12 @@
   height: 100%;
 } */
 
+*{
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 div {
   margin: 0;
   padding: 0;
@@ -29,6 +35,8 @@ hr{
 
 body{
   background-color: #f7f7f8;
+  margin: 0;
+  padding: 0;
 }
 
 .App {
@@ -38,11 +46,8 @@ body{
 }
 
 .container{
-  height: 100%;
-  padding: 20px;
-  padding-top: 10px;
+  height: calc(100% - 69px);
   background-color: #f7f7f8;
-  /* min-height: 100vh; */
 }
 
 a{

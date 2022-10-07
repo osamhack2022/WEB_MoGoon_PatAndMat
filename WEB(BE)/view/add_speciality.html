@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Speciality</title>
+</head>
+<body>
+    <form id="form">
+        military_kind<br>
+        <input type="radio" name="military_kind" id="육군" value="육군" checked>
+        <label for="army">army</label>
+        <input type="radio" name="military_kind" id="해군" value="해군">
+        <label for="navy">navy</label>
+        <input type="radio" name="military_kind" id="공군" value="공군">
+        <label for="airforce">airforce</label>
+        <input type="radio" name="military_kind" id="해병대" value="해병대">
+        <label for="marine">marine</label>
+        <br>
+        <input type="text" name="spc_name" placeholder="특기 이름" required><br>
+        <input type="text" name="class" placeholder="특기 분류 (일반, 전문특기, 전문기술)"><br>
+        <input type="text" name="kind" placeholder="특기 직종(일반, 전자계산, ..)"><br>
+        <input type="text" name="desc" placeholder="한줄설명"><br>
+        <input type="text" name="like" placeholder="좋아요 수"><br>
+        <input type="text" name="code" placeholder="특기코드"><br>
+        <input type="text" name="img" placeholder="이미지경로"><br>
+        <button id="submit">add</button>
+    </form>
+    <h2>speciality list</h2>
+    <div id="content">
+        content
+    </div>
+    <script>
+        document.getElementById('content').innerHTML = '';
+        const form = document.getElementById('form');
+        const add_button = document.querySelector('#submit');
+        add_button.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const o = {
+                military_kind: '',
+                speciality_name: '',
+                class: form.class.value,
+                kind: form.kind.value,
+                desc: form.desc.value,
+                like: 0,
+                imageSrc: '',
+                tags: [],
+                speciality_code: '',
+            }
+
+            o.military_kind = form.military_kind.value;
+
+            o.speciality_name = form.spc_name.value;
+
+            if (!!form.like.value) {
+                const like_value = form.like.value;
+                o.like = parseInt(like_value);
+            }
+
+            if (!!form.code.value) {
+                o.speciality_code = form.code.value;
+            }
+
+            if (!!form.img.value) {
+                o.imageSrc = form.img.value;
+            }
+
+            console.log(o);
+
+            const data = await fetch('http://127.0.0.1:5000/api/speciality/add', {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: 'POST',
+                body: JSON.stringify(o),
+            })
+            .then((response) => response.text());
+
+            document.getElementById('content').innerHTML = data;
+
+            return false;
+        });
+    </script>
+</body>
+</html>
