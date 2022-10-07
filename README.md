@@ -1,5 +1,3 @@
-# 모군 : 군 입대 지원의 모든 것
-
 ![banner](WEB(FE)/mogoon/public/img/logo/banner2.png)
 
 ## 프로잭트 소개
