@@ -8,11 +8,20 @@
 </head>
 <body>
     <form id="form">
+        military_kind<br>
+        <input type="radio" name="military_kind" id="육군" value="육군" checked>
+        <label for="army">army</label>
+        <input type="radio" name="military_kind" id="해군" value="해군">
+        <label for="navy">navy</label>
+        <input type="radio" name="military_kind" id="공군" value="공군">
+        <label for="airforce">airforce</label>
+        <input type="radio" name="military_kind" id="해병대" value="해병대">
+        <label for="marine">marine</label>
+        <br>
         <input type="text" name="spc_name" placeholder="특기 이름" required><br>
         <textarea name="summary" placeholder="특기 설명 요약"></textarea><br>
         <textarea name="education" placeholder="특기 교육"></textarea><br>
         <textarea name="work" placeholder="주요 업무"></textarea><br>
-        <textarea name="" placeholder=""></textarea><br>
         <button id="submit">add</button>
     </form>
     <h2>speciality list</h2>
@@ -25,7 +34,8 @@
         add_button.addEventListener('click', async (e) => {
             e.preventDefault();
             const o = {
-                spc_name: form['spc_name'].value,
+                speciality_name: form.spc_name.value,
+                military_kind: form.military_kind.value,
                 speciality_education: form.education.value,
                 speciality_work: form.work.value,
                 speciality_summary: form.summary.value,

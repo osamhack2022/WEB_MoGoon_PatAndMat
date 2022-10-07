@@ -81,7 +81,7 @@ const add_desc = async (req, res) => {
 
     console.log(req.body);
     try {
-        const docRef = await setDoc(doc(db, 'speciality_desc', req.body['spc_name']), req.body);
+        const docRef = await addDoc(collection(db, 'speciality_desc'), req.body);
         result.success = true;
     } catch (error) {
         result.error = error;
