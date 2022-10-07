@@ -1,7 +1,7 @@
 'use strict';
 import { Result } from './ctrl.common.js';
 import { db } from '../firebase/db.js';
-import { collection, getDocs, doc, setDoc, query, where, getDoc } from 'firebase/firestore/lite';
+import { collection, getDocs, doc, setDoc, query, where, getDoc, addDoc } from 'firebase/firestore/lite';
 
 const speciality_list = async (req, res) => {
     const result = new Result();
@@ -67,7 +67,21 @@ const add = async (req, res) => {
 
     console.log(req.body);
     try {
-        const docRef = await setDoc(doc(db, 'speciality', req.body['spc_name']), req.body);
+        const docRef = await addDoc(collection(db, 'speciality'), req.body);
+        result.success = true;
+    } catch (error) {
+        result.error = error;
+    }
+
+    res.json(result);
+}
+
+const add_desc = async (req, res) => {
+    const result = new Result();
+
+    console.log(req.body);
+    try {
+        const docRef = await setDoc(doc(db, 'speciality_desc', req.body['spc_name']), req.body);
         result.success = true;
     } catch (error) {
         result.error = error;
@@ -82,4 +96,5 @@ export const ctrl_speciality = {
         speciality_desc,
     },
     add,
+    add_desc,
 };
