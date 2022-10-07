@@ -32,7 +32,7 @@ function App() {
             <Route path="/Account/Login" element={<Login />}></Route>
             <Route path="/Account/Join" element={<Join />}></Route>
             <Route path="/Specialty" element={<Specialty />}></Route>
-            <Route path="/Specialty/SpDetail/:SpName" element={<SpDetail />}></Route>
+            <Route path="/Specialty/list/:SpName/:Spkind" element={<SpDetail />}></Route>
             <Route path="/Enlist" element={<Enlist />}></Route>
           </Routes>
         </div>

@@ -8,6 +8,7 @@ import '../../css/SpDetailTap.css';
 let SpDetail = () => {
     //name을 기준으로 DB에서 값 가져오기
     const name = useParams().SpName;
+    const type = useParams().Spkind;
     const [SpDetailData, setSpDetailData] = useState();
 
     const [title, SetTitle] = useState(["특기 학교", "주요 업무", "지원자격", "배점 기준"]);
@@ -24,7 +25,7 @@ let SpDetail = () => {
     }
 
     async function getData() {
-        await axios.get(`http://localhost:5000/api/speciality/${name}`)
+        await axios.get(`http://localhost:5000/api/speciality/list/${name}/${type}`)
             .then((response) => {
                 console.log(response);
                 console.log(response.data.data);
@@ -53,14 +54,14 @@ let SpDetail = () => {
                     <BodyTitle title={`${title[2]}(${titleKind[0]})`}>
                         <div>
                             <p>
-                                {SpDetailData.speciality_eligibility.army}
+                                {/* {SpDetailData.speciality_eligibility.army} */}
                             </p>
                         </div>
                     </BodyTitle>
                     <BodyTitle title={`${title[3]}(${titleKind[0]})`}>
                         <div>
                             <p>
-                                {SpDetailData.score.army}
+                                {/* {SpDetailData.score.army} */}
                             </p>
                         </div>
                     </BodyTitle>
@@ -76,14 +77,14 @@ let SpDetail = () => {
                     <BodyTitle title={`${title[2]}(${titleKind[1]})`}>
                         <div>
                             <p>
-                            {SpDetailData.speciality_eligibility.navy}
+                            {/* {SpDetailData.speciality_eligibility.navy} */}
                             </p>
                         </div>
                     </BodyTitle>
                     <BodyTitle title={`${title[3]}(${titleKind[1]})`}>
                         <div>
                             <p>
-                                {SpDetailData.score.navy}
+                                {/* {SpDetailData.score.navy} */}
                             </p>
                         </div>
                     </BodyTitle>
@@ -99,14 +100,14 @@ let SpDetail = () => {
                     <BodyTitle title={`${title[2]}(${titleKind[2]})`}>
                         <div>
                             <p>
-                            {SpDetailData.speciality_eligibility.airforce}
+                            {/* {SpDetailData.speciality_eligibility.airforce} */}
                             </p>
                         </div>
                     </BodyTitle>
                     <BodyTitle title={`${title[3]}(${titleKind[2]})`}>
                         <div>
                             <p>
-                                {SpDetailData.score.airforce}
+                                {/* {SpDetailData.score.airforce} */}
                             </p>
                         </div>
                     </BodyTitle>
@@ -122,14 +123,14 @@ let SpDetail = () => {
                     <BodyTitle title={`${title[2]}(${titleKind[3]})`}>
                         <div>
                             <p>
-                            {SpDetailData.speciality_eligibility.marine}
+                            {/* {SpDetailData.speciality_eligibility.marine} */}
                             </p>
                         </div>
                     </BodyTitle>
                     <BodyTitle title={`${title[3]}(${titleKind[3]})`}>
                         <div>
                             <p>
-                                {SpDetailData.score.marine}
+                                {/* {SpDetailData.score.marine} */}
                             </p>
                         </div>
                     </BodyTitle>
@@ -204,10 +205,10 @@ let SpDetail = () => {
                 <div className='header-content'>
                     <div className='header-content-name' style={{ display: "inline-block" }}>{name}</div>
                     <span className='header-content-miltray_kind' style={{color:"gray"}}>
-                        ({SpDetailData.speciality_code[SpDetailData.military_kind[0]]})
+                        ({SpDetailData.speciality_code})
                     </span>
                     <div className='header-content-kind'>
-                        {SpDetailData.military_kind[0]} > {SpDetailData.class} > {SpDetailData.kind} > {SpDetailData.speciality_name}
+                        {SpDetailData.military_kind} > {SpDetailData.class} > {SpDetailData.kind} > {SpDetailData.speciality_name}
                     </div>
                     <div className='desc'>
                         {SpDetailData.speciality_summary}
