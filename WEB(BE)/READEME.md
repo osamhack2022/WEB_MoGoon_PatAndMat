@@ -44,15 +44,13 @@ nodemon 이 실행됩니다.\
 |speciality_name|string|특기이름|화생방, 정보체계관리, ...|
 |tags|array|특기 태그|["교대근무", "휴가많음", "실내근무"]|
 
-## GET /api/speciality/특기명(한글)
-단일 특기의 상세 정보를 가져옵니다.
+## GET /api/speciality/특기명(한글)/군종(한글)
+해당 군종에서의 특기 상세 정보를 가져옵니다.
 |속성명|데이터타입|간단 설명|예시 값|
 |:---:|:---:|:---:|:---:|
 |speciality_summary|string|특기 요약|.|
 |speciality_education|string|특기 교육|.|
 |speciality_work|string|주요 업무|.|
-|speciality_eligibility|string|지원 자격|.|
-|score|string|지원 배점|.|
 |class|string|특기가 속한 분류|일반, 전문기술, 전문특기, ...|
 |kind|string|특기 분류|일반, 수송, 전자계산, 화생방, ...|
 |desc|string|한줄 설명|화학전에서 활약하는 특기|
