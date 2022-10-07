@@ -16,4 +16,9 @@ router_speciality.get('/add', (req, res) => {
     res.sendFile(path.join(__dirname,'../view/add_speciality.html'));
 });
 
+router_speciality.get('/add-desc', (req, res) => {
+    res.sendFile(path.join(__dirname,'../view/add_speciality_desc.html'));
+});
+
 router_speciality.post('/add', ctrl_speciality.add);
+router_speciality.post('/add-desc', ctrl_speciality.add_desc);

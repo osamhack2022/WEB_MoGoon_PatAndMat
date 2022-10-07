@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Speciality</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" name="spc_name" placeholder="특기 이름" required><br>
+        <textarea name="summary" placeholder="특기 설명 요약"></textarea><br>
+        <textarea name="education" placeholder="특기 교육"></textarea><br>
+        <textarea name="work" placeholder="주요 업무"></textarea><br>
+        <textarea name="" placeholder=""></textarea><br>
+        <button id="submit">add</button>
+    </form>
+    <h2>speciality list</h2>
+    <div id="content">
+        content
+    </div>
+    <script>
+        const form = document.getElementById('form');
+        const add_button = document.querySelector('#submit');
+        add_button.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const o = {
+                spc_name: form['spc_name'].value,
+                speciality_education: form.education.value,
+                speciality_work: form.work.value,
+                speciality_summary: form.summary.value,
+            }
+
+            const data = await fetch('http://127.0.0.1:5000/api/speciality/add-desc', {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: 'POST',
+                body: JSON.stringify(o),
+            })
+            .then((response) => response.text());
+
+            document.getElementById('content').innerHTML = data;
+
+            return false;
+        });
+    </script>
+</body>
+</html>
