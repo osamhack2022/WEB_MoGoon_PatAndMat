@@ -26,12 +26,10 @@ const speciality_desc = async (req, res) => {
 
     try {
         const speciality_name = req.params.speciality_name;
+        const military_kind = req.params.military_kind;
         const q = query(collection(db, 'speciality'), where("speciality_name", "==", speciality_name));
         const snapshot = await getDocs(q);
         const doc_list = snapshot.docs.map(doc => doc.data());
-        
-        const speciality_doc = doc(db, 'speciality_desc', speciality_name);
-        const doc_snap = await getDoc(speciality_doc);
 
         if (doc_list.length == 0) {
             result.success = false;
@@ -39,16 +37,35 @@ const speciality_desc = async (req, res) => {
             result.err_msg = "no speciality, check speciality name";
         }
         else {
-            const document = doc_list[0];
-            if (doc_snap.exists()) {
-                Object.assign(document, doc_snap.data());
-                result.success = true;
-                result.data = document;
-            }
-            else {
+            let document = undefined;
+            doc_list.forEach(doc => {
+                if (doc.military_kind == military_kind)
+                    document = doc;
+            });
+
+            if (document === undefined) {
                 result.success = false;
                 result.err_code = "-1";
-                result.err_msg = "no speciality_desc, check speciality name";
+                result.err_msg = "found speciality but not for that military_kind, check military_kind";
+            }
+            else {
+                const q = query(collection(db, 'speciality_desc'), 
+                                where("speciality_name", "==", speciality_name),
+                                where("military_kind", "==", military_kind));
+                const snapshot = await getDocs(q);
+                const docs = snapshot.docs.map(doc => doc.data());
+                console.log(docs);
+
+                if (docs.length == 1) {
+                    Object.assign(document, docs[0]);
+                    result.success = true;
+                    result.data = document;
+                }
+                else {
+                    result.success = false;
+                    result.err_code = "-1";
+                    result.err_msg = "no speciality_desc, check speciality name or military_kind";
+                }
             }
         }
    
