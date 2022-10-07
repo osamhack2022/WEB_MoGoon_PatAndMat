@@ -42,7 +42,7 @@ let SpecialtyItem = (props) => {
                                 backgroundColor: "#1976d2"
                             }
                         }}> */}
-                            <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
+                        <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
                         {/* </Badge> */}
                     </div>
                 </div>
@@ -54,24 +54,20 @@ let SpecialtyItem = (props) => {
 let SpTypeItem = (props) => {
     const type = props.type;
 
-    let typeColor = [];
-    for (let i = 0; i < type.length; i++) {
-        if (type[i] == "육군") {
-            typeColor[i] = "green";
-        } else if (type[i] == "해군") {
-            typeColor[i] = "#000080";
-        } else if (type[i] == "공군") {
-            typeColor[i] = "#5d5d5d";
-        } else {
-            typeColor[i] = "red";
-        }
+    let typeColor = "";
+    if (type == "육군") {
+        typeColor = "green";
+    } else if (type == "해군") {
+        typeColor = "#000080";
+    } else if (type == "공군") {
+        typeColor = "#5d5d5d";
+    } else {
+        typeColor = "red";
     }
 
-    return (
-        type.map((data, index) => (
-            <div key={index} style={{ color: typeColor[index] }}>{data}</div>
-        ))
 
+    return (
+        <div style={{ color: typeColor }}>{type}</div>
     );
 };
 

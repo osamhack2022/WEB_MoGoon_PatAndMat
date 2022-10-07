@@ -24,8 +24,9 @@ let SpDetail = () => {
     }
 
     async function getData() {
-        await axios.get(`http://localhost:5000/api/speciality/list/${name}`)
+        await axios.get(`http://localhost:5000/api/speciality/${name}`)
             .then((response) => {
+                console.log(response);
                 console.log(response.data.data);
                 setSpDetailData(response.data.data);
             });
@@ -35,8 +36,10 @@ let SpDetail = () => {
         getData();
     }, []);
 
-    if (!SpDetailData) {
-        return null;
+    if (SpDetailData==null) {
+        return (
+            <div>해당하는 특기가 존재하지 않습니다.</div>
+        );
     }
 
     //군종 탭

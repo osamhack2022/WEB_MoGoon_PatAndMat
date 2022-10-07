@@ -1,0 +1,30 @@
+.Enlist-wrap{
+    width: 100%;
+    background-color: white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.stepper-wrap{
+    width: 80%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: blanchedalmond; */
+}
+
+.stepper-wrap > div{
+    width: auto;
+    display: inline-block;
+
+    display: flex;
+    justify-content: center;
+}
+
+.

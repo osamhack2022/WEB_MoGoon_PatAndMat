@@ -20,7 +20,9 @@ let Header = (props) => {
                     <Link to="/Specialty">
                         <HeaderItem title="특기소개" />
                     </Link>
-                    <HeaderItem title="군지원" />
+                    <Link to="/Enlist">
+                        <HeaderItem title="군지원" />
+                    </Link>
                     <HeaderItem title="커뮤니티" />
                     <HeaderItem title="마이페이지" />
                 </ul>
