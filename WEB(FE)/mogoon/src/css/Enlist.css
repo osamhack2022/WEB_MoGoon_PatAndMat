@@ -19,6 +19,7 @@
 }
 
 .btnpre, .btnnext{
+    display: block;
     position: absolute;
     border: none;
     width: 80px;
@@ -45,6 +46,10 @@
     right: 60px;
 }
 
+.btnblock{
+    display: none;
+}
+
 .stepper-wrap>div {
     width: auto;
     display: inline-block;
@@ -53,18 +58,25 @@
     justify-content: center;
 }
 
-.steps-index {
+.steps-index-active, .steps-index {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     border-radius: 15px;
     margin-right: 10px;
-    background-color: gray;
     color: white;
     width: 30px;
     height: 30px;
     font-weight: 500;
+}
+
+.steps-index{
+    background-color: gray;
+}
+
+.steps-index-active{
+    background-color: #183C8C;
 }
 
 hr{
@@ -80,32 +92,31 @@ hr{
 }
 
 .stepper-content{
-    width: 100%;
+    position: relative;
+    left: -30px;
+    margin-right: 0px;
+    margin-left: auto;
+    width: 500%;
     height: 88%;
     overflow: scroll;
     transition: 1s;
     overflow: visible;
-    display: inline-block;
-    /* transform: translateX(1000px); */
-    /* display: inline-block; */
 }
 
 .stepper-content-inner{
-    width: 100%;
+    width: 25%;
     height: 100%;
     display: inline-block;
+    vertical-align: top;
+    padding: 0 30px 0 0px;
+    box-sizing: border-box;
+    background-color: white;
 }
 
-.stepper-content-inner:nth-child(1){
-    background-color: black;
-}
-.stepper-content-inner:nth-child(2){
-    background-color: rgb(77, 77, 77);
-}
-.stepper-content-inner:nth-child(3){
-    background-color: rgb(134, 134, 134);
-}
-.stepper-content-inner:nth-child(4){
-    background-color: rgb(231, 231, 231);
-}
+.content1-wrap{
+    width: 84%;
+    height: 100%;
+    background-color: blanchedalmond;
 
+    text-align: right;
+}
