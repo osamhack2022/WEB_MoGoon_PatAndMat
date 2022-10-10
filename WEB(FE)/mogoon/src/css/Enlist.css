@@ -1,6 +1,6 @@
-.Enlist-wrap{
+.Enlist-wrap {
     width: 100%;
-    background-color: white;
+    /* background-color: white; */
     height: 100%;
     display: flex;
     align-items: center;
@@ -9,20 +9,114 @@
     box-sizing: border-box;
 }
 
-.stepper-wrap{
-    width: 80%;
+.stepper-wrap {
+    width: 85%;
     height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    /* background-color: blanchedalmond; */
 }
 
-.stepper-wrap > div{
+.btnpre, .btnnext{
+    display: block;
+    position: absolute;
+    border: none;
+    width: 80px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 7px;
+    box-shadow: 0px 2px 5px gray;
+    bottom: 40px;
+    cursor: pointer;
+}
+
+.btnpre:active,.btnnext:active{
+    transform: translate(2px,3px);
+}
+
+.btnpre{   
+    left: 60px;
+    background-color: white;
+}
+
+.btnnext{
+    background-color: #183C8C;
+    color: white;
+    right: 60px;
+}
+
+.btnblock{
+    display: none;
+}
+
+.stepper-wrap>div {
     width: auto;
     display: inline-block;
 
     display: flex;
     justify-content: center;
+}
+
+.steps-index-active, .steps-index {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    margin-right: 10px;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font-weight: 500;
+}
+
+.steps-index{
+    background-color: gray;
+}
+
+.steps-index-active{
+    background-color: #183C8C;
+}
+
+hr{
+    position: relative;
+    width: 235px;
+    height: 1px;
+    top: 12px;
+    background-color: rgb(126, 126, 126);
+}
+
+.steps-hr3{
+    display: none;
+}
+
+.stepper-content{
+    position: relative;
+    left: -30px;
+    margin-right: 0px;
+    margin-left: auto;
+    width: 500%;
+    height: 88%;
+    overflow: scroll;
+    transition: 1s;
+    overflow: visible;
+}
+
+.stepper-content-inner{
+    width: 25%;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 30px 0 0px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.content1-wrap{
+    width: 84%;
+    height: 100%;
+    background-color: blanchedalmond;
+
+    text-align: right;
 }

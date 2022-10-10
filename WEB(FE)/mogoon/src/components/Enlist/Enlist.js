@@ -1,35 +1,72 @@
-import { margin } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import "../../css/Enlist.css"
 
-
-
 let Enlist = (props) => {
+    const slideRef = useRef();
+    const [slideindex, setSlideindex] = useState(1);
+    const [btnstyle, setbtnstyle] = useState();
+
+    const handelpre = () => {
+        let t1 = slideindex - 1
+        setSlideindex(t1);
+        slideRef.current.style.transform = `translateX(-${slideRef.current.offsetWidth / 4 * (t1 - 1)}px)`;
+    }
+
+    const handelnext = () => {
+        let t2 = slideindex + 1;
+        setSlideindex(t2);
+        slideRef.current.style.transform = `translateX(-${slideRef.current.offsetWidth / 4 * slideindex}px)`;
+    }
+
+    let stSteps = ["군종을 선택해주세요.", "특기를 선택해주세요.", "개인정보를 입력해주세요.", "서류 점수 확인"];
+
+    let StepItem = () => {
+
+        return (
+            stSteps.map((item, index) => (
+                <div>
+                    <div className={slideindex === (index + 1) ? "steps-index-active" : "steps-index"}>{index + 1}</div>
+                    <span style={{ marginRight: "20px" }}>{item}</span>
+                    <hr className={`steps-hr${index}`} />
+                </div>
+            ))
+        );
+    }
 
     return (
         <div className='Enlist-wrap'>
+            <button className={slideindex === 1 ? "btnblock" : "btnpre"} onClick={handelpre}>이전</button>
+            <button className={slideindex === 4 ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button>
             <div className='stepper-wrap'>
-                <StepItem>{stSteps}</StepItem>
+                <StepItem />
+            </div>
+            <div className='stepper-content' ref={slideRef}>
+                <div className='stepper-content-inner'>
+                    <Content1/>
+                </div>
+                <div className='stepper-content-inner'>
+                    {/* <Content1/> */}
+                </div>
+                <div className='stepper-content-inner'>
+                    안녕하세요2
+                </div>
+                <div className='stepper-content-inner'>
+                    안녕하세요3
+                </div>
             </div>
         </div>
     );
 };
 
-let stSteps = ["군종을 선택해주세요.", "특기를 선택해주세요.", "개인정보를 입력해주세요.", "서류 점수 확인"];
+const Content1 = () => {
 
-let StepItem = () => {
+    return(
+        <div className='content1-wrap'>
+            <div>   
 
-    return (
-        stSteps.map((item,index) => (
-            <div>
-                <div style={{display:"inline-flex",justifyContent:"center",alignItems:"center",textAlign:"center",borderRadius:"15px",
-                    marginRight:"10px",backgroundColor:"gray",color:"white",width:"30px",height:"30px",
-                    fontWeight:500
-                    }}>{index+1}</div>
-                <span style={{verticalAlign:"middle"}}>{item}</span>
-            </div> 
-        ))
+            </div>
+        </div>
     );
 }
 

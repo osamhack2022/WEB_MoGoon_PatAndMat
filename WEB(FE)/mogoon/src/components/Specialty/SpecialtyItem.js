@@ -20,7 +20,7 @@ let SpecialtyItem = (props) => {
     }
 
     return (
-        <Link to={`/Specialty/SpDetail/${props.name}`}>
+        <Link to={`/Specialty/list/${props.name}/${props.military_kind}`}>
             <div className='specialtyitem'>
                 <div className='spimg' style={{ content: `URL(${props.imageSrc})` }} />
                 <div className='spcontent'>
@@ -64,7 +64,6 @@ let SpTypeItem = (props) => {
     } else {
         typeColor = "red";
     }
-
 
     return (
         <div style={{ color: typeColor }}>{type}</div>
