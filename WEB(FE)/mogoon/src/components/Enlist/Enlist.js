@@ -5,7 +5,7 @@ import "../../css/Enlist.css"
 let Enlist = (props) => {
     const slideRef = useRef();
     const [slideindex, setSlideindex] = useState(1);
-    const [bannerstyle,setbannerstyle] = useState();
+    const [bannerstyle, setbannerstyle] = useState(null);
 
     const handelpre = () => {
         let t1 = slideindex - 1
@@ -33,49 +33,60 @@ let Enlist = (props) => {
         );
     }
 
-    const handelbtn=(e)=>{
+    const handelbtn = (e) => {
         setbannerstyle(e.target.innerText);
         console.log(bannerstyle);
     }
 
     const Content1 = () => {
         return (
-            <div className='content1-wrap'>
-                <div>
-                    <div className="content1-article" >
-                        <div className={bannerstyle=="육군" ? "banner-active":'content1-banner'} ></div>
-                        <div className='banner-btn' onClick={handelbtn}>육군</div>
-                    </div>
-                    <div className="content1-article" >
-                        <div className={bannerstyle=="해군" ? "banner-active":'content1-banner'}></div>
-                        <div className='banner-btn' onClick={handelbtn}>해군</div>
-                    </div>
-                    <div className="content1-article" >
-                        <div className={bannerstyle=="공군" ? "banner-active":'content1-banner'}></div>
-                        <div className='banner-btn' onClick={handelbtn}>공군</div>
-                    </div>
-                    <div className="content1-article" >
-                        <div className={bannerstyle=="해병대" ? "banner-active":'content1-banner'}></div>
-                        <div className='banner-btn' onClick={handelbtn}>해병대</div>
+            <>
+                <div className='content1-wrap'>
+                    <div>
+                        <div className="content1-article" >
+                            <div className={bannerstyle == "육군" ? "content1-banner banner-active" : 'content1-banner'} ></div>
+                            <div className='banner-btn' onClick={handelbtn}>육군</div>
+                        </div>
+                        <div className="content1-article" >
+                            <div className={bannerstyle == "해군" ? "content1-banner banner-active" : 'content1-banner'}></div>
+                            <div className='banner-btn' onClick={handelbtn}>해군</div>
+                        </div>
+                        <div className="content1-article" >
+                            <div className={bannerstyle == "공군" ? "content1-banner banner-active" : 'content1-banner'}></div>
+                            <div className='banner-btn' onClick={handelbtn}>공군</div>
+                        </div>
+                        <div className="content1-article" >
+                            <div className={bannerstyle == "해병대" ? "content1-banner banner-active" : 'content1-banner'}></div>
+                            <div className='banner-btn' onClick={handelbtn}>해병대</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                
+            </>
         );
     }
 
     return (
         <div className='Enlist-wrap'>
-            <button className={slideindex === 1 ? "btnblock" : "btnpre"} onClick={handelpre}>이전</button>
-            <button className={slideindex === 4 ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button>
+            <button className={slideindex === 1 ? "btnblock" : "btnpre"}  onClick={handelpre}>이전</button>
+            <button className={slideindex === 4 ? "btnblock" : "btnnext"} disabled={bannerstyle==null ? true:false} onClick={handelnext}>다음</button>
             <div className='stepper-wrap'>
                 <StepItem />
             </div>
             <div className='stepper-content' ref={slideRef}>
                 <div className='stepper-content-inner'>
                     <Content1 />
+                    <span className='content1-selector'>
+                        <span className='selector-box' style={{fontSize:"20px",fontWeight:500}}>
+                            {bannerstyle}
+                        </span>
+                        <span>
+                            {bannerstyle==null ? "":"을(를) 선택하셨습니다."}
+                        </span>
+                    </span>
                 </div>
                 <div className='stepper-content-inner'>
-                    <Content1 />
+                    안녕하세요1
                 </div>
                 <div className='stepper-content-inner'>
                     안녕하세요2

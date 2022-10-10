@@ -115,10 +115,11 @@ hr{
 
 .content1-wrap{
     width: 100%;
-    height: 100%;
+    height: 95%;
     /* background-color: blanchedalmond; */
     padding: 0 40px 0 40px;
     box-sizing: border-box;
+    text-align: center;
 }
 
 .content1-wrap > div{
@@ -150,9 +151,10 @@ hr{
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
+    box-shadow: 0px 1px 5px rgb(102, 102, 102);
 }
 
-.content1-banner::before {
+.content1-banner::before{
     content: "";
     background-color: black;
     opacity: 0.5;
@@ -204,7 +206,11 @@ hr{
 }
 
 .banner-btn:hover{
-    width: 95px;
+    width: 100px;
+}
+
+.banner-btn:active ~ .content1-banner::before{
+    opacity: 0;
 }
 
 .content1-article:nth-child(1) > .banner-btn{
@@ -223,6 +229,14 @@ hr{
     background-color: #D00000;
 }
 
-.banner-active{
+.banner-active + .banner-btn{
+    width: 100px;
+}
 
+.content1-selector{
+    display: inherit;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    /* text-align: center; */
 }
