@@ -1,7 +1,7 @@
 'use strict';
 import { Result } from './ctrl.common.js';
 import { db } from '../firebase/db.js';
-import { collection, getDocs, doc, setDoc, query, where, getDoc, addDoc } from 'firebase/firestore/lite';
+import { collection, getDocs, doc, setDoc, query, where, getDoc, addDoc, DocumentReference } from 'firebase/firestore/lite';
 
 const speciality_list = async (req, res) => {
     const result = new Result();
@@ -27,7 +27,9 @@ const speciality_desc = async (req, res) => {
     try {
         const speciality_name = req.params.speciality_name;
         const military_kind = req.params.military_kind;
-        const q = query(collection(db, 'speciality'), where("speciality_name", "==", speciality_name));
+        const q = query(collection(db, 'speciality'), 
+                        where("speciality_name", "==", speciality_name),
+                        where("military_kind", "==", military_kind));
         const snapshot = await getDocs(q);
         const doc_list = snapshot.docs.map(doc => doc.data());
 
@@ -37,36 +39,39 @@ const speciality_desc = async (req, res) => {
             result.err_msg = "no speciality, check speciality name";
         }
         else {
-            let document = undefined;
-            doc_list.forEach(doc => {
-                if (doc.military_kind == military_kind)
-                    document = doc;
-            });
+            let document = doc_list[0];
 
-            if (document === undefined) {
-                result.success = false;
-                result.err_code = "-1";
-                result.err_msg = "found speciality but not for that military_kind, check military_kind";
+            const q = query(collection(db, 'speciality_desc'), 
+                            where("speciality_name", "==", speciality_name),
+                            where("military_kind", "==", military_kind));
+
+            const snapshot = await getDocs(q);
+            const docs = snapshot.docs.map(doc => doc.data());
+            const desc_data = docs[0];
+            
+            for (let i = 0; i < desc_data.contents.length; i++) {
+                const now_content = desc_data.contents[i];
+                for (let j = 0; j < now_content.content.length; j ++) {
+                    const now_data = now_content.content[j];
+                    if (now_data instanceof DocumentReference) {
+                        const snapshot = await getDoc(now_data);
+                        const data = await snapshot.data();
+                        desc_data.contents[i].content[j] = data;
+                    }
+                }
+            }
+
+            if (docs.length == 1) {
+                Object.assign(document, desc_data);
+                result.success = true;
+                result.data = document;
             }
             else {
-                const q = query(collection(db, 'speciality_desc'), 
-                                where("speciality_name", "==", speciality_name),
-                                where("military_kind", "==", military_kind));
-                const snapshot = await getDocs(q);
-                const docs = snapshot.docs.map(doc => doc.data());
-                console.log(docs);
-
-                if (docs.length == 1) {
-                    Object.assign(document, docs[0]);
-                    result.success = true;
-                    result.data = document;
-                }
-                else {
-                    result.success = false;
-                    result.err_code = "-1";
-                    result.err_msg = "no speciality_desc, check speciality name or military_kind";
-                }
+                result.success = false;
+                result.err_code = "-1";
+                result.err_msg = "no speciality_desc, check speciality name or military_kind";
             }
+            
         }
    
     } catch (error) {
