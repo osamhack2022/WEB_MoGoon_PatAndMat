@@ -18,9 +18,9 @@ app.use(bodyParser.urlencoded( { extended: true } ));
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: '*',
+    origin: 'http://127.0.0.1:5000',
     credentials: true,
-    exposedHeaders: ["set-cookie"]
+    //exposedHeaders: ["set-cookie"]
 }));
 
 // API 라우팅

@@ -16,6 +16,7 @@ const Specialty = (props) => {
 
     let searchData = null;
 
+    axios.defaults.withCredentials = true;
     async function getData() {
         await axios.get("http://localhost:5000/api/speciality/list")
             .then((response) => {
