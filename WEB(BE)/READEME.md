@@ -11,7 +11,7 @@ nodemon 이 실행됩니다.\
 |메소드|요청 주소|간단 설명|
 |:---:|:---:|:---:|
 |GET|/api/speciality/list|전체 특기를 객체 리스트로 반환합니다|
-|GET|/api/speciality/list/특기이름|해당 특기의 상세 정보 객체를 반환합니다|
+|GET|/api/speciality/특기명(한글)/군종(한글)|해당 특기의 상세 정보 객체를 반환합니다|
 |POST|/api/auth/register|이메일/비밀번호 계정 생성을 요청합니다|
 |POST|/api/auth/login|이메일/비밀번호 계정 로그인을 요청합니다|
 
