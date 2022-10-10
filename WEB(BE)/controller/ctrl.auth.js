@@ -41,7 +41,8 @@ const login = async (req, res) => {
         res.cookie('email', credential.user.email, {
             httpOnly: true,
             maxAge: 100000,
-            domain: '127.0.0.1',
+            sameSite: 'none',
+            secure: true
         });
         
     } catch (error) {
