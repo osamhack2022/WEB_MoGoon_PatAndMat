@@ -5,7 +5,7 @@ import "../../css/Enlist.css"
 let Enlist = (props) => {
     const slideRef = useRef();
     const [slideindex, setSlideindex] = useState(1);
-    const [btnstyle, setbtnstyle] = useState();
+    const [bannerstyle,setbannerstyle] = useState();
 
     const handelpre = () => {
         let t1 = slideindex - 1
@@ -22,7 +22,6 @@ let Enlist = (props) => {
     let stSteps = ["군종을 선택해주세요.", "특기를 선택해주세요.", "개인정보를 입력해주세요.", "서류 점수 확인"];
 
     let StepItem = () => {
-
         return (
             stSteps.map((item, index) => (
                 <div>
@@ -31,6 +30,36 @@ let Enlist = (props) => {
                     <hr className={`steps-hr${index}`} />
                 </div>
             ))
+        );
+    }
+
+    const handelbtn=(e)=>{
+        setbannerstyle(e.target.innerText);
+        console.log(bannerstyle);
+    }
+
+    const Content1 = () => {
+        return (
+            <div className='content1-wrap'>
+                <div>
+                    <div className="content1-article" >
+                        <div className={bannerstyle=="육군" ? "banner-active":'content1-banner'} ></div>
+                        <div className='banner-btn' onClick={handelbtn}>육군</div>
+                    </div>
+                    <div className="content1-article" >
+                        <div className={bannerstyle=="해군" ? "banner-active":'content1-banner'}></div>
+                        <div className='banner-btn' onClick={handelbtn}>해군</div>
+                    </div>
+                    <div className="content1-article" >
+                        <div className={bannerstyle=="공군" ? "banner-active":'content1-banner'}></div>
+                        <div className='banner-btn' onClick={handelbtn}>공군</div>
+                    </div>
+                    <div className="content1-article" >
+                        <div className={bannerstyle=="해병대" ? "banner-active":'content1-banner'}></div>
+                        <div className='banner-btn' onClick={handelbtn}>해병대</div>
+                    </div>
+                </div>
+            </div>
         );
     }
 
@@ -43,10 +72,10 @@ let Enlist = (props) => {
             </div>
             <div className='stepper-content' ref={slideRef}>
                 <div className='stepper-content-inner'>
-                    <Content1/>
+                    <Content1 />
                 </div>
                 <div className='stepper-content-inner'>
-                    {/* <Content1/> */}
+                    <Content1 />
                 </div>
                 <div className='stepper-content-inner'>
                     안녕하세요2
@@ -58,17 +87,6 @@ let Enlist = (props) => {
         </div>
     );
 };
-
-const Content1 = () => {
-
-    return(
-        <div className='content1-wrap'>
-            <div>   
-
-            </div>
-        </div>
-    );
-}
 
 
 export default Enlist;

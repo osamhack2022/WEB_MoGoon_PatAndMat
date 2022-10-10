@@ -4,6 +4,7 @@ import { createStore } from 'redux'
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
+import Alert from '@mui/material/Alert';
 
 import "../../css/Login.css"
 
@@ -22,7 +23,7 @@ const Login = () => {
 
     const handelSubmit = (e) => {
         e.preventDefault();
-        if(values.email=="" || values.password==""){
+        if (values.email == "" || values.password == "") {
             alert("아이디 또는 비밀번호를 입력해주세요.");
             return null;
         }
