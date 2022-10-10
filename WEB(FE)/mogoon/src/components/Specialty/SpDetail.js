@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import Box from '@mui/material/Box';
+import { DataGrid } from '@mui/x-data-grid';
 
 import '../../css/SpDetail.css';
 import '../../css/SpDetailTap.css';
@@ -11,25 +13,21 @@ let SpDetail = () => {
     const type = useParams().Spkind;
     const [SpDetailData, setSpDetailData] = useState();
 
-    const [title, SetTitle] = useState(["특기 학교", "주요 업무", "지원자격", "배점 기준"]);
-    const titleKind = ["육군", "해군", "공군", "해병대"];
-    
+    const [title, SetTitle] = useState([]);
+
     const [activeIndex, setActiveIndex] = useState(0);
     const tabClickHandler = (index) => {
         setActiveIndex(index)
-    }
-    
-    const [activeIndexKind, setActiveIndexKind] = useState(0);
-    const tabClickHandlerKind = (index) => {
-        setActiveIndexKind(index)
     }
 
     async function getData() {
         await axios.get(`http://localhost:5000/api/speciality/list/${name}/${type}`)
             .then((response) => {
-                console.log(response);
                 console.log(response.data.data);
                 setSpDetailData(response.data.data);
+                console.log(response.data.data.contents);
+                let titles = [...response.data.data.contents];
+                SetTitle(titles);
             });
     }
 
@@ -37,107 +35,56 @@ let SpDetail = () => {
         getData();
     }, []);
 
-    if (SpDetailData==null) {
+
+    if (SpDetailData == null) {
         return (
             <div>해당하는 특기가 존재하지 않습니다.</div>
         );
     }
 
-    //군종 탭
-    const tabContArr_kind = [
-        {
-            tabTitle: (
-                <div className={activeIndexKind === 0 ? "is-activekind" : ""} onClick={() => { tabClickHandlerKind(0) }}>육군</div>
-            ),
-            tabCont: (
-                <>
-                    <BodyTitle title={`${title[2]}(${titleKind[0]})`}>
-                        <div>
-                            <p>
-                                {/* {SpDetailData.speciality_eligibility.army} */}
-                            </p>
-                        </div>
-                    </BodyTitle>
-                    <BodyTitle title={`${title[3]}(${titleKind[0]})`}>
-                        <div>
-                            <p>
-                                {/* {SpDetailData.score.army} */}
-                            </p>
-                        </div>
-                    </BodyTitle>
-                </>
-            )
-        },
-        {
-            tabTitle: (
-                <div className={activeIndexKind === 1 ? "is-activekind" : ""} onClick={() => { tabClickHandlerKind(1) }}>해군</div>
-            ),
-            tabCont: (
-                <>
-                    <BodyTitle title={`${title[2]}(${titleKind[1]})`}>
-                        <div>
-                            <p>
-                            {/* {SpDetailData.speciality_eligibility.navy} */}
-                            </p>
-                        </div>
-                    </BodyTitle>
-                    <BodyTitle title={`${title[3]}(${titleKind[1]})`}>
-                        <div>
-                            <p>
-                                {/* {SpDetailData.score.navy} */}
-                            </p>
-                        </div>
-                    </BodyTitle>
-                </>
-            )
-        },
-        {
-            tabTitle: (
-                <div className={activeIndexKind === 2 ? "is-activekind" : ""} onClick={() => { tabClickHandlerKind(2) }}>공군</div>
-            ),
-            tabCont: (
-                <>
-                    <BodyTitle title={`${title[2]}(${titleKind[2]})`}>
-                        <div>
-                            <p>
-                            {/* {SpDetailData.speciality_eligibility.airforce} */}
-                            </p>
-                        </div>
-                    </BodyTitle>
-                    <BodyTitle title={`${title[3]}(${titleKind[2]})`}>
-                        <div>
-                            <p>
-                                {/* {SpDetailData.score.airforce} */}
-                            </p>
-                        </div>
-                    </BodyTitle>
-                </>
-            )
-        },
-        {
-            tabTitle: (
-                <div className={activeIndexKind === 3 ? "is-activekind" : ""} onClick={() => { tabClickHandlerKind(3) }}>해병대</div>
-            ),
-            tabCont: (
-                <>
-                    <BodyTitle title={`${title[2]}(${titleKind[3]})`}>
-                        <div>
-                            <p>
-                            {/* {SpDetailData.speciality_eligibility.marine} */}
-                            </p>
-                        </div>
-                    </BodyTitle>
-                    <BodyTitle title={`${title[3]}(${titleKind[3]})`}>
-                        <div>
-                            <p>
-                                {/* {SpDetailData.score.marine} */}
-                            </p>
-                        </div>
-                    </BodyTitle>
-                </>
-            )
+    const handelGrid = (props) => {
+        let col = [];
+        let rows = [];
+
+        
+        col.push({ field: "id", headerName: "ID",hide:"true"});
+        for (let i = 0; i < props.table_header.length; i++) {
+            col.push(
+                {
+                    field: props.table_header[i],
+                    headerName: props.table_header[i],
+                    type: "number",
+                    sortable:false
+                }
+            );
         }
-    ];
+
+        for (let i = 0; i < props.table[props.table_header[0]].length; i++) {
+            let row = new Object();
+
+            for (let j = 0; j < props.table_header.length; j++) {
+                row["id"] = i;
+                row[props.table_header[j]] = props.table[props.table_header[j]][i];
+            }
+            
+            rows.push(row);
+        }
+
+        console.log(rows);
+
+        console.log(props.table);
+        console.log(col);
+        return (
+            <Box sx={{ height: 300, width: '100%',backgroundColor:"white",marginTop:"15px" }}>
+                <DataGrid
+                    rows={rows}
+                    columns={col}
+                    experimentalFeatures={{ newEditingApi: true }}
+                    rowsPerPageOptions="false"
+                />
+            </Box>
+        );
+    }
 
     //특기 탭
     const tabContArr = [
@@ -147,32 +94,31 @@ let SpDetail = () => {
             ),
             tabCont: (
                 <>
-                    <BodyTitle title={title[0]}>
-                        <div>
-                            <p>
-                                {SpDetailData.speciality_education}
-                            </p>
-                        </div>
-                    </BodyTitle>
-                    <BodyTitle title={title[1]}>
-                        <div>
-                            <p>
-                                {SpDetailData.speciality_work}
-                            </p>
-                        </div>
-                    </BodyTitle>
-
-                    <div className='tab'>
-                        <div className="tabbox_kind">
-                            {tabContArr_kind.map((section, index) => {
-                                return section.tabTitle
-                            })}
-                        </div>
-
-                        <div>
-                            {tabContArr_kind[activeIndexKind].tabCont}
-                        </div>
-                    </div>
+                    {
+                        title.map(data => {
+                            return (
+                                <BodyTitle title={data.title}>
+                                    <div>
+                                        <p>
+                                            {
+                                                data.content.map(cont => {
+                                                    if (cont instanceof Object) {
+                                                        return (
+                                                            handelGrid(cont)
+                                                        )
+                                                    } else {
+                                                        return (
+                                                            <span style={{ display: "block" }}>{cont}</span>
+                                                        )
+                                                    }
+                                                })
+                                            }
+                                        </p>
+                                    </div>
+                                </BodyTitle>
+                            );
+                        })
+                    }
                 </>
             )
         },
@@ -204,14 +150,20 @@ let SpDetail = () => {
                 <div className='header-img' />
                 <div className='header-content'>
                     <div className='header-content-name' style={{ display: "inline-block" }}>{name}</div>
-                    <span className='header-content-miltray_kind' style={{color:"gray"}}>
+                    <span className='header-content-miltray_kind' style={{ color: "gray" }}>
                         ({SpDetailData.speciality_code})
                     </span>
                     <div className='header-content-kind'>
                         {SpDetailData.military_kind} > {SpDetailData.class} > {SpDetailData.kind} > {SpDetailData.speciality_name}
                     </div>
                     <div className='desc'>
-                        {SpDetailData.speciality_summary}
+                        {
+                            SpDetailData.speciality_summary.map(data => {
+                                return (
+                                    <span style={{ display: "block" }}>{data}</span>
+                                );
+                            })
+                        }
                     </div>
                 </div>
             </div>
@@ -229,19 +181,6 @@ let SpDetail = () => {
                         {tabContArr[activeIndex].tabCont}
                     </div>
                 </div>
-
-                {/* 군종탭 */}
-                {/* <div className='tab'>
-                    <div className="tabbox_kind">
-                        {tabContArr_kind.map((section, index) => {
-                            return section.tabTitle
-                        })}
-                    </div>
-
-                    <div>
-                        {tabContArr_kind[activeIndexKind].tabCont}
-                    </div>
-                </div> */}
 
             </div>
         </div>
