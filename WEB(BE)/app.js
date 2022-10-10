@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import { fileURLToPath } from 'url';
 import path from "path";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import { router_speciality } from './router/speciality.js';
 import { router_auth } from './router/auth.js';
@@ -13,9 +14,14 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 5000;
 
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded( { extended: true } ));
+app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    credentials: true,
+    exposedHeaders: ["set-cookie"]
+}));
 
 // API 라우팅
 app.use('/api/speciality', router_speciality);
