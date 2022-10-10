@@ -14,7 +14,7 @@ const register = async (req, res) => {
         console.log(password);
         const credential = await createUserWithEmailAndPassword(auth, email, password);
         result.success = true;
-        result.data = credential.user;
+        result.data = credential;
     } catch (error) {
         result.error_code = error.code;
         result.error_msg = error.message;
@@ -36,7 +36,7 @@ const login = async (req, res) => {
         console.log(password);
         const credential = await signInWithEmailAndPassword(auth, email, password)
         result.success = true;
-        result.data = credential.user;
+        result.data = credential;
 
         res.cookie('email', credential.user.email, {
             httpOnly: true,
