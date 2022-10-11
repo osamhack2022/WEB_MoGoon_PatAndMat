@@ -2,13 +2,35 @@
 import { Result } from './ctrl.common.js';
 import { db } from '../firebase/db.js';
 import { collection, getDocs, doc, setDoc, query, where, getDoc, addDoc, DocumentReference } from 'firebase/firestore/lite';
+import { adminAuth } from '../firebase/admin.js';
 
 const speciality_list = async (req, res) => {
     const result = new Result();
+    const refresh_token = req.cookies.refresh_token;
+    const id_token = req.cookies.id_token;
 
     try {
+        let user_data = undefined;
+
+        if (id_token !== undefined) {
+            const decodedToken = await adminAuth.verifyIdToken(id_token);
+            console.log(decodedToken); // TODO : remove later
+            const email = decodedToken.email;
+            const user_doc = await getDoc(doc(db, "user", email));
+            if (user_doc.exists()) {
+                user_data = user_doc.data();
+                console.log(user_data); // TODO : remove later
+            }
+        }
+
         const snapshot = await getDocs(collection(db, 'speciality'));
-        const doc_list = snapshot.docs.map(doc => doc.data());
+        const doc_list = snapshot.docs.map((doc) => {
+            const doc_data = doc.data();
+            doc_data.is_favorite = user_data !== undefined && user_data.favorite_speciality.includes(doc.id);
+            return doc_data;
+        });
+
+        //console.log(doc_list); // TODO
 
         result.success = true;
         result.data = doc_list;
@@ -84,7 +106,7 @@ const speciality_desc = async (req, res) => {
     return res.json(result);
 }
 
-const add = async (req, res) => {
+const add = async (req, res) => { // TODO : remove function later
     const result = new Result();
 
     console.log(req.body);
@@ -98,10 +120,10 @@ const add = async (req, res) => {
     res.json(result);
 }
 
-const add_desc = async (req, res) => {
+const add_desc = async (req, res) => { // TODO : remove function later
     const result = new Result();
 
-    console.log(req.body);
+    console.log(req.body); 
     try {
         const docRef = await addDoc(collection(db, 'speciality_desc'), req.body);
         result.success = true;
@@ -117,6 +139,6 @@ export const ctrl_speciality = {
         speciality_list,
         speciality_desc,
     },
-    add,
-    add_desc,
+    add, // TODO : remove
+    add_desc, // TODO : remove
 };
