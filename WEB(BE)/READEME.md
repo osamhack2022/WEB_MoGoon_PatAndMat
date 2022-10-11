@@ -43,6 +43,7 @@ nodemon 이 실행됩니다.\
 |speciality_code|string|특기코드|16|
 |speciality_name|string|특기이름|화생방, 정보체계관리, ...|
 |tags|array|특기 태그|["교대근무", "휴가많음", "실내근무"]|
+|is_favorite|boolean|즐겨찾기한 특기 여부|true / false|
 
 ## GET /api/speciality/특기명(한글)/군종(한글)
 해당 군종에서의 특기 상세 정보를 가져옵니다.   
