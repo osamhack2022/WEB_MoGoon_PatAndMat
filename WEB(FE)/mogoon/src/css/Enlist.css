@@ -240,6 +240,7 @@ hr{
     transform: translateX(-50%);
 }
 
+/* content2 */
 .content2-wrap{
     width: 100%;
     height: 95%;
@@ -248,7 +249,6 @@ hr{
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
 }
 
 .content2-article{
@@ -261,7 +261,7 @@ hr{
     flex-wrap: wrap;
     /* border: 2px solid gray; */
     background-color: white;
-    box-shadow: 0px 1px 5px gray;
+    box-shadow: 0px 1px 3px gray;
     overflow-y: auto;
     position: relative;
     top: 30px;
@@ -278,7 +278,6 @@ hr{
 
 .content2-article::-webkit-scrollbar-track {
     background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
-    backgroundColor: ;
 }
 
 .content2-item{
@@ -297,8 +296,106 @@ hr{
     cursor: pointer;
 }
 
-/* .content2-item:active{
-    background-color: #183C8C;
-    border-color: white;
-    color: white;
-} */
+/* content3 */
+.content3-wrap{
+    width: 100%;
+    height: 90%;
+    /* background-color: blanchedalmond; */
+    padding: 0 40px 0 40px;
+    box-sizing: border-box;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+
+.pointTable{
+    height: 150px;
+    margin-top: 30px;
+    box-shadow: 0px 1px 3px gray;
+}
+
+.content3-article{
+    width: 95%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    /* background-color: white; */
+    /* box-shadow: 0px 1px 5px gray; */
+    overflow-y: auto;
+    position: relative;
+    /* top: 30px; */
+    overflow: visible;
+}
+
+.total{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.content3-title{
+    width: 23%;
+    height: 90%;
+    background-color: white;
+    margin: 0px 10px 0px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px gray;
+    /* border: 1.5px solid gray; */
+    padding: 15px 20px 15px 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.content3-title::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.content3-title::-webkit-scrollbar-thumb {
+    background: #183C8C; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.content3-title::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+.content3-Certificate, .content3-Major, .content3-Attendance{
+    display: bloxk;
+    margin-top: 15px;
+    width: 100%;
+    height: 40px;
+    border: 1.5px solid gray;
+    border-radius: 5px;
+}
+
+.content3-certLists{
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.content3-certLists > div{
+    width: 85%;
+    font-size: 16px;
+    margin-top: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+    /* border: 2px solid gray; */
+    box-shadow: 0px 1px 3px rgb(173, 173, 173);
+    border-radius: 5px;
+}
+
+.certdelete{
+    font-weight: 500;
+    position: absolute;
+    right: 10px;
+    color: #183C8C;
+    cursor: pointer;
+}
