@@ -12,6 +12,8 @@ nodemon 이 실행됩니다.\
 |:---:|:---:|:---:|
 |GET|/api/speciality/list|전체 특기를 객체 리스트로 반환합니다|
 |GET|/api/speciality/특기명(한글)/군종(한글)|해당 특기의 상세 정보 객체를 반환합니다|
+|POST|/api/speciality/특기명(한글)/군종(한글)/like/increase|해당 특기의 좋아요 수를 1 늘립니다|
+|POST|/api/speciality/특기명(한글)/군종(한글)/like/decrease|해당 특기의 좋아요 수를 1 줄입니다|
 |POST|/api/auth/register|이메일/비밀번호 계정 생성을 요청합니다|
 |POST|/api/auth/login|이메일/비밀번호 계정 로그인을 요청합니다|
 
@@ -113,6 +115,13 @@ content: [
 |:---:|:---:|
 |value1|value3|
 |value2|value4|
+
+## POST /api/speciality/특기명(한글)/군종(한글)/like/increase
+## POST /api/speciality/특기명(한글)/군종(한글)/like/decrease
+별도의 응답 데이터는 없습니다.   
+(result객체를 통해 보내는 데이터가 없다는 뜻입니다!)
+
+해당하는 특기의 좋아요 수를 1 증가시키거나(increase) 감소시킵니다.(decrease)
 
 ## POST /api/auth/login
 ## POST /api/auth/register
