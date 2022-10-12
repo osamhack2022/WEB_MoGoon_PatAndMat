@@ -9,13 +9,15 @@ export const router_speciality = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// API
 router_speciality.get('/list', ctrl_speciality.get.speciality_list);
 router_speciality.get('/list/:speciality_name/:military_kind', ctrl_speciality.get.speciality_desc);
+router_speciality.post('/:speciality_name/:military_kind/like/:is_increase', ctrl_speciality.post.speciality_like_increase);
 
+// manage page
 router_speciality.get('/add', (req, res) => {
     res.sendFile(path.join(__dirname,'../view/add_speciality.html'));
 });
-
 router_speciality.get('/add-desc', (req, res) => {
     res.sendFile(path.join(__dirname,'../view/add_speciality_desc.html'));
 });

@@ -1,7 +1,7 @@
 'use strict';
 import { Result } from './ctrl.common.js';
 import { db } from '../firebase/db.js';
-import { collection, getDocs, doc, setDoc, query, where, getDoc, addDoc, DocumentReference } from 'firebase/firestore/lite';
+import { collection, getDocs, doc, updateDoc, query, where, getDoc, addDoc, DocumentReference, increment } from 'firebase/firestore/lite';
 import { adminAuth } from '../firebase/admin.js';
 
 const speciality_list = async (req, res) => {
@@ -106,6 +106,50 @@ const speciality_desc = async (req, res) => {
     return res.json(result);
 }
 
+const speciality_like_increase = async (req, res) => {
+    // TODO : 특기 즐겨찾기 클릭시 좋아요 개수 증가
+    const result = new Result();
+    try {
+        const speciality_name = req.params.speciality_name;
+        const military_kind = req.params.military_kind;
+        const is_increase = req.params.is_increase;
+
+        console.log(speciality_name);
+        console.log(military_kind);
+
+        const q = query(collection(db, 'speciality'), 
+                            where("speciality_name", "==", speciality_name),
+                            where("military_kind", "==", military_kind));
+        const snapshot = await getDocs(q);
+        if (snapshot.empty) {
+            result.success = false;
+            result.err_msg = "해당하는 특기가 없습니다. 특기 이름과 군종을 확인하세요.";
+        }
+        else {
+            const docs = snapshot.docs.map(doc => doc.ref);
+            const speciality_doc = docs[0];
+            if (is_increase === 'increase') {
+                updateDoc(speciality_doc, {like: increment(1)});
+                result.success = true;
+            }
+            else if (is_increase === 'decrease') {
+                updateDoc(speciality_doc, {like: increment(-1)});
+                result.success = true;
+            }
+            else {
+                result.success = false;
+                result.err_msg = "API가 잘못되었습니다. like/increase like/decrease 이외의 값이 들어왔습니다.";
+            }
+        }
+    } catch (error) {
+        result.success = false;
+        result.err_code = error.code;
+        result.err_msg = error.message;
+    }
+
+    res.json(result);
+};
+
 const add = async (req, res) => { // TODO : remove function later
     const result = new Result();
 
@@ -138,6 +182,9 @@ export const ctrl_speciality = {
     get: {
         speciality_list,
         speciality_desc,
+    },
+    post: {
+        speciality_like_increase,
     },
     add, // TODO : remove
     add_desc, // TODO : remove
