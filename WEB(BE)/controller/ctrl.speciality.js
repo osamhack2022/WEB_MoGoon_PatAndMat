@@ -150,6 +150,85 @@ const speciality_like_increase = async (req, res) => {
     res.json(result);
 };
 
+const speciality_opinions = async (req, res) => {
+    const result = new Result();
+
+    try {
+        const speciality_name = req.params.speciality_name;
+        const military_kind = req.params.military_kind;
+
+        const q = query(collection(db, 'speciality_opinion'), 
+                        where("speciality_name", "==", speciality_name),
+                        where("military_kind", "==", military_kind));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+            result.success = false;
+            result.err_code = "-1";
+            result.err_msg = "no speciality, check speciality name";
+        }
+        else {
+            const doc_list = snapshot.docs.map(doc => doc.id);
+            const opinion_doc = doc_list[0];
+            console.log(`speciality_opinion/${opinion_doc}/opinions`);
+            const snapshot2 = await getDocs(query(collection(db, `speciality_opinion/${opinion_doc.toString()}/opinions`)));
+            if (snapshot2.empty) {
+                result.success = false;
+                result.err_code = "-1";
+                result.err_msg = "no speciality opinions, check speciality name";
+            }
+            else {
+                const opinion_list = snapshot2.docs.map(doc => doc.data());
+                console.log(opinion_list);            
+                result.success = true;
+                result.data = opinion_list;
+            }
+        }
+   
+    } catch (error) {
+        result.success = false;
+        result.err_code = error.code;
+        result.err_msg = error.message;
+        console.log(error);
+    }
+
+    return res.json(result);
+};
+
+const speciality_opinion = async (req, res) => {
+    const result = new Result();
+
+    try {
+        const speciality_name = req.params.speciality_name;
+        const military_kind = req.params.military_kind;
+
+        const q = query(collection(db, 'speciality_opinion'), 
+                        where("speciality_name", "==", speciality_name),
+                        where("military_kind", "==", military_kind));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+            result.success = false;
+            result.err_code = "-1";
+            result.err_msg = "no speciality, check speciality name";
+        }
+        else {
+            const doc_list = snapshot.docs.map(doc => doc.id);
+            const opinion_doc = doc_list[0];
+            const docRef = await addDoc(collection(db, `speciality_opinion/${opinion_doc.toString()}/opinions`), req.body);
+            result.success = true;
+        }
+   
+    } catch (error) {
+        result.success = false;
+        result.err_code = error.code;
+        result.err_msg = error.message;
+        console.log(error);
+    }
+
+    return res.json(result);
+};
+
 const add = async (req, res) => { // TODO : remove function later
     const result = new Result();
 
@@ -182,9 +261,11 @@ export const ctrl_speciality = {
     get: {
         speciality_list,
         speciality_desc,
+        speciality_opinions,
     },
     post: {
         speciality_like_increase,
+        speciality_opinion,
     },
     add, // TODO : remove
     add_desc, // TODO : remove
