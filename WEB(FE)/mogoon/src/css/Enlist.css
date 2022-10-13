@@ -363,7 +363,7 @@ hr{
     background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
 
-.content3-Certificate, .content3-Major, .content3-Attendance{
+.content3-Certificate, .content3-Major, .content3-Attendance, .content3-Extrapoint{
     display: bloxk;
     margin-top: 15px;
     width: 100%;
@@ -372,7 +372,7 @@ hr{
     border-radius: 5px;
 }
 
-.content3-certLists{
+.content3-certLists, .content3-extralist{
     width: 100%;
     margin-top: 10px;
     display: flex;
@@ -398,4 +398,16 @@ hr{
     right: 10px;
     color: #183C8C;
     cursor: pointer;
+}
+
+.content3-extralist{
+    width: 85%;
+    font-size: 16px;
+    padding: 8px;
+    box-sizing: border-box;
+    /* border: 2px solid gray; */
+    box-shadow: 0px 1px 3px rgb(173, 173, 173);
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 5px;
 }

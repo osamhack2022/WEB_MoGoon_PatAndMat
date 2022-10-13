@@ -18,6 +18,7 @@ let Enlist = (props) => {
     const [cont3CertList, setcont3CertList] = useState([]);
     const [cont3Major, setcont3Major] = useState(null);
     const [cont3Attendance, setcont3Attendance] = useState(null);
+    const [cont3Extra, setcont3Extra] = useState([]);
 
     useEffect(() => {
     }, [slideindex]);
@@ -94,6 +95,7 @@ let Enlist = (props) => {
 
     //특기 선택하면 스크롤 초기화되는거 수정해야함
     const handelcontItem = (e) => {
+
         if (cont2item.find(item => item.spindex == e.target.id) != undefined) {
             let spalready = cont2item.filter(data => data.spindex != e.target.id);
             setcont2item(spalready);
@@ -275,6 +277,79 @@ let Enlist = (props) => {
             )
         }
 
+        useEffect(() => {
+            console.log(cont3Extra);
+        }, [cont3Extra]);
+
+        const Extrapoints = [
+            {name:"관련분야 직업경력자 1년~2년 미만",score:4},
+            {name:"관련분야 직업경력자 6개월~1년 미만",score:3},
+            {name:"관련분야 직업경력자 6개월 미만",score:2},
+            {name:"독립유공자 (손)자녀",score:4},
+            {name:"질병치유 자원병역이행자",score:4},
+            {name:"국외이주자 중 현역복무지원자",score:4},
+            {name:"다자녀(3명 이상) 가정자녀 가산점",score:4},
+            {name:"다자녀(2명 이상) 가정자녀 가산점",score:2},
+            {name:"민기초생활보장법 제7조제1항제1호에 따른 생계급여 수급권자",score:4},
+            {name:"헌혈 8회 이상",score:8},
+            {name:"헌혈 7회 이상",score:7},
+            {name:"헌혈 6회 이상",score:6},
+            {name:"헌혈 5회 이상",score:5},
+            {name:"헌혈 4회 이상",score:4},
+            {name:"헌혈 3회 이상",score:3},
+            {name:"헌혈 2회 이상",score:2},
+            {name:"헌혈 1회 이상",score:1},
+            {name:"봉사 64시간 이상",score:8},
+            {name:"봉사 56~63시간",score:7},
+            {name:"봉사 48~55시간",score:6},
+            {name:"봉사 40~47시간",score:5},
+            {name:"봉사 32~39시간",score:4},
+            {name:"봉사 24~31시간",score:3},
+            {name:"봉사 16~23시간",score:2},
+            {name:"봉사 8~15시간",score:1}
+            //군종별로 더 있음
+        ]
+
+        AttendanceOptions.unshift({ name: "가산점을 선택해주세요.", scroe: 0 });
+
+        const handelExtrapoint = (e) =>{
+            if(e.target.value=="가산점을 선택해주세요."){
+                return null;
+            }
+
+            if (cont3Extra.find(item => item.name == e.target.value) != undefined) {
+                alert("이미 선택한 가산점 입니다.");
+                return;
+            }
+
+            let extraLists = [...cont3Extra];
+            extraLists.push({ name: e.target.value, score: Extrapoints.find(cert => cert.name == e.target.value).score });
+            setcont3Extra(extraLists);
+        }
+
+        const handelExtradelete = (e) => {
+            if (cont3Extra.find(item => item.name == e.target.attributes.name.value) != undefined) {
+                let extraDeleteItems = cont3Extra.filter(item => item.name != e.target.attributes.name.value);
+                setcont3Extra(extraDeleteItems);
+            }
+        }
+
+        const Extrapoint = (props) =>{
+
+            return (
+                <select className='content3-Extrapoint' onChange={handelExtrapoint} style={{marginBottom:"10px"}}>
+                    {props.options.map((option) => (
+                        <option
+                            key={option.value}
+                            value={option.name}
+                        >
+                            {option.name}
+                        </option>
+                    ))}
+                </select>
+            )
+        }
+
         return (
             <div className='content3-wrap'>
                 <img src='img/etc/배점표.png' className='pointTable' />
@@ -329,7 +404,17 @@ let Enlist = (props) => {
 
                     <div className='content3-title'>
                         <div style={{ fontSize: "18px", fontWeight: "500" }}>{spTitles[3]}</div>
-                        <div className='total'>?? : 점</div>
+                        <Extrapoint options={Extrapoints}></Extrapoint>
+                        {cont3Extra.map(data => {
+                                return (
+                                    <div className='content3-extralist'>
+                                        {data.name}
+                                        <span className='certdelete' name={data.name} onClick={handelExtradelete}>X</span>
+                                    </div>
+                                )
+                            })}
+                            {/* score의 총합으로 계산하기 */}
+                            <div className='total'>{cont3Extra.length == 0 ? "" : cont3Extra[0].score} : 점</div>
                     </div>
 
                 </div>
