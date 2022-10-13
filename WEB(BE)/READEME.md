@@ -12,17 +12,19 @@ nodemon 이 실행됩니다.\
 |:---:|:---:|:---:|
 |GET|/api/speciality/list|전체 특기를 객체 리스트로 반환합니다|
 |GET|/api/speciality/특기명(한글)/군종(한글)|해당 특기의 상세 정보 객체를 반환합니다|
+|GET|/api/speciality/특기명(한글)/군종(한글)/opinions|해당 특기의 의견 데이터 리스트를 불러옵니다.|
 |POST|/api/speciality/특기명(한글)/군종(한글)/like/increase|해당 특기의 좋아요 수를 1 늘립니다|
 |POST|/api/speciality/특기명(한글)/군종(한글)/like/decrease|해당 특기의 좋아요 수를 1 줄입니다|
 |POST|/api/auth/register|이메일/비밀번호 계정 생성을 요청합니다|
 |POST|/api/auth/login|이메일/비밀번호 계정 로그인을 요청합니다|
+|POST|/api/speciality/특기명(한글)/군종(한글)/opinion|해당 특기의 의견 데이터를 추가합니다.|
 
 # API 응답 객체 설명
 
 모든 요청에 대한 응답은 result 객체에 담겨서 반환됩니다.   
 아래는 result 객체의 구조입니다.
 
-|속성명|데이터타입|간단 설명|예시 값|
+|속성명|데이터 타입|간단 설명|예시 값|
 |:---:|:---:|:---:|:---:|
 |success|bool|성공여부|true / false|
 |data|object, array|반환 데이터|데이터 형식은 아래 상세 정보를 확인해주세요.|
@@ -31,106 +33,138 @@ nodemon 이 실행됩니다.\
 
 아래 설명하는 API의 반환 데이터 형식은 모두 result 객체의 data 프로퍼티를 통해 반환됩니다.
 
-## GET /api/speciality/list
-전체 특기의 객체 **리스트**가 반환되며 리스트 안의 각 객체의 속성은 아래 표와 같습니다.
+* ## GET /api/speciality/list
+    전체 특기의 객체 **리스트**가 반환되며 리스트 안의 각 객체의 속성은 아래 표와 같습니다.
 
-|속성명|데이터타입|간단 설명|예시 값|
-|:---:|:---:|:---:|:---:|
-|class|string|특기가 속한 분류|일반, 전문기술, 전문특기, ...|
-|kind|string|특기 분류|일반, 수송, 전자계산, 화생방, ...|
-|desc|string|한줄 설명|화학전에서 활약하는 특기|
-|imageSrc|string|대표 이미지 파일 경로|res/image/화생방.jpg|
-|like|number|특기를 찜한 사람 수|3564|
-|military_kind|string|해당 특기가 있는 군종|육군|
-|speciality_code|string|특기코드|16|
-|speciality_name|string|특기이름|화생방, 정보체계관리, ...|
-|tags|array|특기 태그|["교대근무", "휴가많음", "실내근무"]|
-|is_favorite|boolean|즐겨찾기한 특기 여부|true / false|
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |class|string|특기가 속한 분류|일반, 전문기술, 전문특기, ...|
+    |kind|string|특기 분류|일반, 수송, 전자계산, 화생방, ...|
+    |desc|string|한줄 설명|화학전에서 활약하는 특기|
+    |imageSrc|string|대표 이미지 파일 경로|res/image/화생방.jpg|
+    |like|number|특기를 찜한 사람 수|3564|
+    |military_kind|string|해당 특기가 있는 군종|육군|
+    |speciality_code|string|특기코드|16|
+    |speciality_name|string|특기이름|화생방, 정보체계관리, ...|
+    |tags|array|특기 태그|["교대근무", "휴가많음", "실내근무"]|
+    |is_favorite|boolean|즐겨찾기한 특기 여부|true / false|
 
-## GET /api/speciality/특기명(한글)/군종(한글)
-해당 군종에서의 특기 상세 정보를 가져옵니다.   
-**특기 리스트에서 해당 특기의 정보를 가져온 뒤** 그 내용에 아래 내용을 추가합니다.
-|속성명|데이터타입|간단 설명|예시 값|
-|:---:|:---:|:---:|:---:|
-|speciality_summary|array|특기요약|["정보체계 관리는..", "그렇습니다"]|
-|contents|array|콘텐츠 리스트|(아래에서 설명)|
+* ## GET /api/speciality/특기명(한글)/군종(한글)
+    해당 군종에서의 특기 상세 정보를 가져옵니다.   
+    **특기 리스트에서 해당 특기의 정보를 가져온 뒤** 그 내용에 아래 내용을 추가합니다.
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |speciality_summary|array|특기요약|["정보체계 관리는..", "그렇습니다"]|
+    |contents|array|콘텐츠 리스트|(아래에서 설명)|
 
-speciality_summary속성에는 특기 요약 설명 데이터가 있습니다.
-한줄 한줄 데이터를 리스트에 나눠 담아보내주므로, 받은 내용 사이사이에 줄바꿈을 해주어 보여주면 됩니다.   
-contents 속성에는 특기 상세 페이지에 보여줄 내용을 title, content 객체에 담아 리스트로 보여줍니다.   
+    speciality_summary속성에는 특기 요약 설명 데이터가 있습니다.
+    한줄 한줄 데이터를 리스트에 나눠 담아보내주므로, 받은 내용 사이사이에 줄바꿈을 해주어 보여주면 됩니다.   
+    contents 속성에는 특기 상세 페이지에 보여줄 내용을 title, content 객체에 담아 리스트로 보여줍니다.   
 
-```
-[
-    {title: 주요업무, content: [ ]},    
-    {title: 특기교육, content: [ ]},   
-    {title: 장단점, content: [ ]}
-]
-```
-
-와 같은 형식입니다.
-
-content속성에는 **(콘텐츠 리스트인 contents 속성과 구별!)**   
-각 내용 한 줄, 또는 표 데이터가 리스트로 들어갑니다.   
-각 내용은 스트링으로, 표 데이터는 객체로 들어갑니다.   
-따라서 프론트에서는 content 리스트를 순회할 때 instanceof Object 연산자를 이용하여 객체여부를 확인할 필요가 있습니다.   
-아래는 예시 데이터 입니다.
-```
-content: [
-    "정보체계관리의 특기 교육은 2개의 반으로 나누어 집니다",
-    "한 반은 하드웨어 장비를 다루는 교육을, 나머지 한 반은 소프트웨어를 다루는 교육을 받습니다",
-    {
-        표 객체
-    }
-
-]
-```
-
-한줄 한줄이 데이터로 들어가기 때문에, 한줄 데이터를 받고난 다음에는 명시적으로 다음줄로 넘기는 처리가 필요합니다.   
-(파이어베이스에서 줄넘김 처리를 저장하지 못하는 이슈 때문)
-
-표 객체는 아래와 같은 구성으로 이루어집니다.
-```
-{
-    "table_header": [    // 헤더 리스트 (헤더 순서)
-        "header1",
-        "header2"
+    ```
+    [
+        {title: 주요업무, content: [ ]},    
+        {title: 특기교육, content: [ ]},   
+        {title: 장단점, content: [ ]}
     ]
+    ```
 
-    "table": {           // 각 헤더에 들어갈 내용
-        "header1": [
-            "value1",
-            "value2"
-        ],
-        "header2": [
-            "value3",
-            "value4"
+    와 같은 형식입니다.
+
+    content속성에는 **(콘텐츠 리스트인 contents 속성과 구별!)**   
+    각 내용 한 줄, 또는 표 데이터가 리스트로 들어갑니다.   
+    각 내용은 스트링으로, 표 데이터는 객체로 들어갑니다.   
+    따라서 프론트에서는 content 리스트를 순회할 때 instanceof Object 연산자를 이용하여 객체여부를 확인할 필요가 있습니다.   
+    아래는 예시 데이터 입니다.
+    ```
+    content: [
+        "정보체계관리의 특기 교육은 2개의 반으로 나누어 집니다",
+        "한 반은 하드웨어 장비를 다루는 교육을, 나머지 한 반은 소프트웨어를 다루는 교육을 받습니다",
+        {
+            표 객체
+        }
+
+    ]
+    ```
+
+    한줄 한줄이 데이터로 들어가기 때문에, 한줄 데이터를 받고난 다음에는 명시적으로 다음줄로 넘기는 처리가 필요합니다.   
+    (파이어베이스에서 줄넘김 처리를 저장하지 못하는 이슈 때문)
+
+    표 객체는 아래와 같은 구성으로 이루어집니다.
+    ```
+    {
+        "table_header": [    // 헤더 리스트 (헤더 순서)
+            "header1",
+            "header2"
         ]
-    },
-}
-```
 
-이 객체는 아래와 같은 표를 나타냅니다.
+        "table": {           // 각 헤더에 들어갈 내용
+            "header1": [
+                "value1",
+                "value2"
+            ],
+            "header2": [
+                "value3",
+                "value4"
+            ]
+        },
+    }
+    ```
 
-|header1|header2|
-|:---:|:---:|
-|value1|value3|
-|value2|value4|
+    이 객체는 아래와 같은 표를 나타냅니다.
 
-## POST /api/speciality/특기명(한글)/군종(한글)/like/increase
-## POST /api/speciality/특기명(한글)/군종(한글)/like/decrease
-별도의 응답 데이터는 없습니다.   
-(result객체를 통해 보내는 데이터가 없다는 뜻입니다!)
+    |header1|header2|
+    |:---:|:---:|
+    |value1|value3|
+    |value2|value4|
 
-해당하는 특기의 좋아요 수를 1 증가시키거나(increase) 감소시킵니다.(decrease)
+* ## GET /api/speciality/특기명(한글)/군종(한글)/opinions
+    해당 특기의 의견 데이터 리스트를 응답 받습니다.   
+    응답 객체의 형태는 아래와 같습니다.
 
-## POST /api/auth/login
-## POST /api/auth/register
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |editor_nickname|string|작성자 닉네임|삼성애플맨|
+    |editor_email|string|작성자 이메일|"kckc0608@naver.com"|
+    |opinion|string|의견|"this is good speciality for study"|
+    |like|number|좋아요 수|0 (기본), 1, 2, ...|
+    |dislike|number|싫어요 수|0 (기본), 1, 2, ...|
 
-두 요청 모두 요청과 응답 형식이 같습니다.   
-요청의 경우 body로 아래의 값을 전달합니다.
-|속성명|데이터타입|간단 설명|예시 값|
-|:---:|:---:|:---:|:---:|
-|email|string|이메일|kckc0608@naver.com|
-|password|string|비밀번호|123412|
+* ## POST /api/speciality/특기명(한글)/군종(한글)/like/increase
+    해당하는 특기의 좋아요 수를 1 증가시킵니다.   
+    별도의 응답 데이터는 없습니다.   
+    (result객체를 통해 보내는 데이터가 없다는 뜻입니다!)
+* ## POST /api/speciality/특기명(한글)/군종(한글)/like/decrease
+    해당하는 특기의 좋아요 수를 1 감소시킵니다.   
+    별도의 응답 데이터는 없습니다.   
 
-응답은 파이어베이스의 인증 객체를 반환합니다.
+* ## POST /api/auth/login
+    서버에 입력한 계정 정보로 로그인을 요청합니다.   
+    요청시 body로 아래의 값을 전달합니다.
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |email|string|이메일|kckc0608@naver.com|
+    |password|string|비밀번호|123412|
+
+    응답은 파이어베이스의 인증 객체를 반환합니다.
+* ## POST /api/auth/register
+    서버에 입력한 계정 정보로 회원가입을 요청합니다.   
+    요청시 body로 아래의 값을 전달합니다.
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |email|string|이메일|kckc0608@naver.com|
+    |password|string|비밀번호|123412|
+
+    응답은 파이어베이스의 인증 객체를 반환합니다.
+
+* ## POST /api/speciality/특기명(한글)/군종(한글)/opinion
+    해당 특기의 의견 데이터 추가를 요청합니다.   
+    요청 객체의 형태는 아래와 같습니다.
+
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |editor_nickname|string|작성자 닉네임|삼성애플맨|
+    |editor_email|string|작성자 이메일|"kckc0608@naver.com"|
+    |opinion|string|의견|"this is good speciality for study"|
+    |like|number|좋아요 수|0 (기본), 1, 2, ...|
+    |dislike|number|싫어요 수|0 (기본), 1, 2, ...|
