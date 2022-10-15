@@ -215,7 +215,10 @@ const speciality_opinion = async (req, res) => {
         else {
             const doc_list = snapshot.docs.map(doc => doc.id);
             const opinion_doc = doc_list[0];
-            const docRef = await addDoc(collection(db, `speciality_opinion/${opinion_doc.toString()}/opinions`), req.body);
+            const body = req.body;
+            body.like = 0;
+            body.dislike = 0;
+            const docRef = await addDoc(collection(db, `speciality_opinion/${opinion_doc.toString()}/opinions`), body);
             result.success = true;
         }
    
