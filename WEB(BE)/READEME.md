@@ -13,11 +13,15 @@ nodemon 이 실행됩니다.\
 |GET|/api/speciality/list|전체 특기를 객체 리스트로 반환합니다|
 |GET|/api/speciality/특기명(한글)/군종(한글)|해당 특기의 상세 정보 객체를 반환합니다|
 |GET|/api/speciality/특기명(한글)/군종(한글)/opinions|해당 특기의 의견 데이터 리스트를 불러옵니다.|
+|GET|/api/speciality/특기명(한글)/군종(한글)/questions|해당 특기의 질문 데이터 리스트를 불러옵니다.|
+|GET|/api/speciality/특기명(한글)/군종(한글)/answers/질문코드|해당 특기 질문의 답변 데이터 리스트를 불러옵니다.|
 |POST|/api/speciality/특기명(한글)/군종(한글)/like/increase|해당 특기의 좋아요 수를 1 늘립니다|
 |POST|/api/speciality/특기명(한글)/군종(한글)/like/decrease|해당 특기의 좋아요 수를 1 줄입니다|
 |POST|/api/auth/register|이메일/비밀번호 계정 생성을 요청합니다|
 |POST|/api/auth/login|이메일/비밀번호 계정 로그인을 요청합니다|
 |POST|/api/speciality/특기명(한글)/군종(한글)/opinion|해당 특기의 의견 데이터를 추가합니다.|
+|POST|/api/speciality/특기명(한글)/군종(한글)/question|해당 특기의 질문 데이터를 추가합니다.|
+|POST|/api/speciality/특기명(한글)/군종(한글)/answer/질문코드|해당 특기 질문의 답변을 추가합니다.|
 
 # API 응답 객체 설명
 
@@ -130,6 +134,40 @@ nodemon 이 실행됩니다.\
     |like|number|좋아요 수|0 (기본), 1, 2, ...|
     |dislike|number|싫어요 수|0 (기본), 1, 2, ...|
 
+* ## GET /api/speciality/특기명(한글)/군종(한글)/questions
+    해당 특기의 질문 데이터 객체 **리스트**를 응답 받습니다.   
+    리스트 내 각 응답 객체의 데이터 형태는 아래와 같습니다.
+
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |editor_nickname|string|작성자 닉네임|삼성애플맨|
+    |editor_email|string|작성자 이메일|"kckc0608@naver.com"|
+    |question_id|string|질문코드|"8YtkkSvySGsrodugYUCw"|
+    |title|string|질문 제목|"what is?"|
+    |contents|array|질문 내용|["what is that?","what is that too?"]|
+
+    질문 내용은 한줄 한줄 데이터를 배열에 저장하여 전송하므로,
+    화면에 출력할 때는 줄넘김을 직접 구현해주어야 합니다.
+
+    질문코드는 해당 질문에 달린 답변을 조회할 때 사용됩니다.
+
+## GET /api/speciality/정보체계관리/공군/answers/질문코드
+    해당 특기의 답변 데이터 객체 **리스트**를 응답 받습니다.   
+    리스트 내 각 응답 객체의 데이터 형태는 아래와 같습니다.
+
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |editor_nickname|string|작성자 닉네임|삼성애플맨|
+    |editor_email|string|작성자 이메일|"kckc0608@naver.com"|
+    |contents|array|답변 내용|["what is that?","what is that too?"]|
+    |like|number|좋아요 수|0 (기본), 1, 2, ...|
+    |dislike|number|싫어요 수|0 (기본), 1, 2, ...|
+
+    질문 내용은 한줄 한줄 데이터를 배열에 저장하여 전송하므로,
+    화면에 출력할 때는 줄넘김을 직접 구현해주어야 합니다.
+
+    질문코드는 해당 질문에 달린 답변을 조회할 때 사용됩니다.
+
 * ## POST /api/speciality/특기명(한글)/군종(한글)/like/increase
     해당하는 특기의 좋아요 수를 1 증가시킵니다.   
     별도의 응답 데이터는 없습니다.   
@@ -166,5 +204,24 @@ nodemon 이 실행됩니다.\
     |editor_nickname|string|작성자 닉네임|삼성애플맨|
     |editor_email|string|작성자 이메일|"kckc0608@naver.com"|
     |opinion|string|의견|"this is good speciality for study"|
-    |like|number|좋아요 수|0 (기본), 1, 2, ...|
-    |dislike|number|싫어요 수|0 (기본), 1, 2, ...|
+
+* ## POST /api/speciality/특기명(한글)/군종(한글)/question
+    해당 특기의 질문 데이터 추가를 요청합니다.
+    요청 객체의 형태는 아래와 같습니다.
+
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |editor_nickname|string|작성자 닉네임|삼성애플맨|
+    |editor_email|string|작성자 이메일|"kckc0608@naver.com"|
+    |title|string|질문 제목|"what is?"|
+    |contents|array|질문 내용|["what is that?","what is that too?"]|
+
+## POST /api/speciality/정보체계관리/공군/answer/질문코드
+    해당 특기의 답변 데이터 추가를 요청합니다. 
+    요청 객체의 형태는 아래와 같습니다.
+
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |editor_nickname|string|작성자 닉네임|삼성애플맨|
+    |editor_email|string|작성자 이메일|"kckc0608@naver.com"|
+    |contents|array|답변 내용|["what is that?","what is that too?"]|
