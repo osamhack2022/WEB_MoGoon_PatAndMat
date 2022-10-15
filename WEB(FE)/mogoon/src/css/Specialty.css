@@ -1,3 +1,12 @@
+.state{
+    font-size: 1.5em;
+    font-weight: 600;
+    position: relative;
+    top: 70px;
+    text-align: center;
+    color: #102c69;
+}
+
 .spsearch{
     position: relative;
     left: 50%;
@@ -143,6 +152,7 @@
     text-decoration: none;
     padding: 0 5px 0 5px;
     border: 1.5px solid rgb(109, 109, 109);
+    font-weight: 400;
 }
 
 .spname {

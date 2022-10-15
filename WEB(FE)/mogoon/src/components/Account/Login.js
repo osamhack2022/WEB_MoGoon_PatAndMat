@@ -14,6 +14,8 @@ const Login = () => {
         password: "",
     })
 
+    const [load,setLoad] = useState(true);
+
     const handleChange = e => {
         setValues({
             ...values,
@@ -31,7 +33,13 @@ const Login = () => {
         getUser(values.email, values.password);
     }
 
+    const reSet = () => {
+        setValues({ email: "", password: "" });
+    }
+
     async function getUser(email, pw) {
+        setLoad(false);
+
         await axios.post('http://localhost:5000/api/auth/login',
             {
                 email: email,
@@ -40,8 +48,28 @@ const Login = () => {
         )
             .then(function (response) {
                 console.log(response);
-                console.log(JSON.stringify(values, null, 2));
+                setLoad(true);
+
+                switch (response.data.error_code) {
+                    case "auth/invalid-email":
+                        alert("아이디는 이메일 형식입니다.");
+                        reSet();
+                        return;
+                    case "auth/user-not-found":
+                        alert("존재하지 않는 이메일입니다.");
+                        reSet();
+                        return;
+                    case "auth/wrong-password":
+                        alert("패스워드가 일치하지 않습니다.");
+                        reSet();
+                        return;
+                    default:
+                }
+                //data가 유일키
                 alert("로그인 성공!");
+                reSet();
+                console.log(JSON.stringify(values, null, 2));
+                window.location = '/';
             })
             .catch(function (error) {
                 console.log(error);
@@ -75,10 +103,12 @@ const Login = () => {
                     <span style={{ margin: "0", fontWeight: "400", fontSize: "14px", color: "gray", cursor: "pointer", width: "80px" }}>
                         ID/PW 찾기
                     </span>
-                    <button className="btnlogin" type="submit">로그인</button>
+                    {load?<button className="btnlogin" type="submit">로그인</button>:<button className="btnlogin" type="submit" disabled style={{backgroundColor:"gray"}}>로딩중..</button>}
                 </form>
                 <div className="join" style={{ letterSpacing: "0.1px" }}>
-                    아직 <strong>"모군"</strong>의 회원이 아니신가요? <strong><span style={{ cursor: "pointer", textDecoration: "underline", color: "#183C8C" }}>회원가입</span></strong> 하시고 더나은 서비스를 즐겨보세요.
+                    아직 <strong>"모군"</strong>의 회원이 아니신가요? <strong><span style={{ cursor: "pointer", textDecoration: "underline", color: "#183C8C" }}>
+                        <Link to="/Account/Join">회원가입</Link>
+                    </span></strong> 하시고 더나은 서비스를 즐겨보세요.
                 </div>
             </div>
         </div>
