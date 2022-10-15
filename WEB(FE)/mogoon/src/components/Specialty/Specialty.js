@@ -14,6 +14,8 @@ const Specialty = (props) => {
     const [SpData, setSpData] = useState();
     const [search, setSearch] = useState("");
 
+    const [loading,setLoading] = useState("로딩중..");
+
     let searchData = null;
 
     axios.defaults.withCredentials = true;
@@ -22,12 +24,28 @@ const Specialty = (props) => {
             .then((response) => {
                 setSpData(response.data.data);
                 setMASTER_DATA(response.data.data);
-            });
+                setLoading("완료");
+            })
+            .catch((error)=>{
+                setLoading("오류");
+            })
     }
 
     useEffect(() => {
         getData();
     }, []);
+
+    if(loading=="오류"){
+        return(
+            <div className="state">데이터를 가져오는 도중 오류가 발생하였습니다.</div>
+        );
+    }
+
+    if(loading=="로딩중.."){
+        return(
+            <div className="state">데이터 로딩중.</div>
+        );
+    }
 
     if (!SpData) {
         return null;

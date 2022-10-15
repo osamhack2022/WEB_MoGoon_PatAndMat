@@ -19,6 +19,8 @@ let Enlist = (props) => {
     const [cont3Major, setcont3Major] = useState(null);
     const [cont3Attendance, setcont3Attendance] = useState(null);
     const [cont3Extra, setcont3Extra] = useState([]);
+    const sp3Ref = useRef();
+    // content4
 
     useEffect(() => {
     }, [slideindex]);
@@ -40,6 +42,11 @@ let Enlist = (props) => {
             return null;
         }
 
+        if (slideindex == 3 && (cont3CertList.length == 0 || cont3Major == null || cont3Attendance == null)) {
+            sp3Ref.current.innerText = "항목을 선택해주세요.";
+            return null;
+        }
+
         let t2 = slideindex + 1;
         setSlideindex(t2);
         slideRef.current.style.transform = `translateX(-${slideRef.current.offsetWidth / 4 * slideindex}px)`;
@@ -50,7 +57,7 @@ let Enlist = (props) => {
     let StepItem = () => {
         return (
             stSteps.map((item, index) => (
-                <div>
+                <div key={index}>
                     <div className={slideindex === (index + 1) ? "steps-index-active" : "steps-index"}>{index + 1}</div>
                     <span style={{ marginRight: "20px" }}>{item}</span>
                     <hr className={`steps-hr${index}`} />
@@ -178,12 +185,12 @@ let Enlist = (props) => {
 
             return (
                 <select className='content3-Certificate' onChange={handelSelect}>
-                    {props.options.map((option) => (
+                    {props.options.map((option, index) => (
                         <option
                             key={option.value}
                             value={option.name}
                         >
-                            {option.name}
+                            {index == 0 ? option.name : `${option.name} - ${option.score}점`}
                         </option>
                     ))}
                 </select>
@@ -228,12 +235,12 @@ let Enlist = (props) => {
         const Major = (props) => {
             return (
                 <select className='content3-Major' onChange={handelMajor}>
-                    {props.options.map((option) => (
+                    {props.options.map((option, index) => (
                         <option
                             key={option.value}
                             value={option.name}
                         >
-                            {option.name}
+                            {index == 0 ? option.name : `${option.name} - ${option.score}점`}
                         </option>
                     ))}
                 </select>
@@ -265,12 +272,12 @@ let Enlist = (props) => {
 
             return (
                 <select className='content3-Attendance' onChange={handelAttendance}>
-                    {props.options.map((option) => (
+                    {props.options.map((option, index) => (
                         <option
                             key={option.value}
                             value={option.name}
                         >
-                            {option.name}
+                            {index == 0 ? option.name : `${option.name} - ${option.score}점`}
                         </option>
                     ))}
                 </select>
@@ -278,42 +285,41 @@ let Enlist = (props) => {
         }
 
         useEffect(() => {
-            console.log(cont3Extra);
         }, [cont3Extra]);
 
         const Extrapoints = [
-            {name:"관련분야 직업경력자 1년~2년 미만",score:4},
-            {name:"관련분야 직업경력자 6개월~1년 미만",score:3},
-            {name:"관련분야 직업경력자 6개월 미만",score:2},
-            {name:"독립유공자 (손)자녀",score:4},
-            {name:"질병치유 자원병역이행자",score:4},
-            {name:"국외이주자 중 현역복무지원자",score:4},
-            {name:"다자녀(3명 이상) 가정자녀 가산점",score:4},
-            {name:"다자녀(2명 이상) 가정자녀 가산점",score:2},
-            {name:"민기초생활보장법 제7조제1항제1호에 따른 생계급여 수급권자",score:4},
-            {name:"헌혈 8회 이상",score:8},
-            {name:"헌혈 7회 이상",score:7},
-            {name:"헌혈 6회 이상",score:6},
-            {name:"헌혈 5회 이상",score:5},
-            {name:"헌혈 4회 이상",score:4},
-            {name:"헌혈 3회 이상",score:3},
-            {name:"헌혈 2회 이상",score:2},
-            {name:"헌혈 1회 이상",score:1},
-            {name:"봉사 64시간 이상",score:8},
-            {name:"봉사 56~63시간",score:7},
-            {name:"봉사 48~55시간",score:6},
-            {name:"봉사 40~47시간",score:5},
-            {name:"봉사 32~39시간",score:4},
-            {name:"봉사 24~31시간",score:3},
-            {name:"봉사 16~23시간",score:2},
-            {name:"봉사 8~15시간",score:1}
+            { name: "관련분야 직업경력자 1년~2년 미만", score: 4 },
+            { name: "관련분야 직업경력자 6개월~1년 미만", score: 3 },
+            { name: "관련분야 직업경력자 6개월 미만", score: 2 },
+            { name: "독립유공자 (손)자녀", score: 4 },
+            { name: "질병치유 자원병역이행자", score: 4 },
+            { name: "국외이주자 중 현역복무지원자", score: 4 },
+            { name: "다자녀(3명 이상) 가정자녀 가산점", score: 4 },
+            { name: "다자녀(2명 이상) 가정자녀 가산점", score: 2 },
+            { name: "민기초생활보장법 제7조제1항제1호에 따른 생계급여 수급권자", score: 4 },
+            { name: "헌혈 8회 이상", score: 8 },
+            { name: "헌혈 7회 이상", score: 7 },
+            { name: "헌혈 6회 이상", score: 6 },
+            { name: "헌혈 5회 이상", score: 5 },
+            { name: "헌혈 4회 이상", score: 4 },
+            { name: "헌혈 3회 이상", score: 3 },
+            { name: "헌혈 2회 이상", score: 2 },
+            { name: "헌혈 1회 이상", score: 1 },
+            { name: "봉사 64시간 이상", score: 8 },
+            { name: "봉사 56~63시간", score: 7 },
+            { name: "봉사 48~55시간", score: 6 },
+            { name: "봉사 40~47시간", score: 5 },
+            { name: "봉사 32~39시간", score: 4 },
+            { name: "봉사 24~31시간", score: 3 },
+            { name: "봉사 16~23시간", score: 2 },
+            { name: "봉사 8~15시간", score: 1 }
             //군종별로 더 있음
         ]
 
-        AttendanceOptions.unshift({ name: "가산점을 선택해주세요.", scroe: 0 });
+        Extrapoints.unshift({ name: "가산점을 선택해주세요.", scroe: 0 });
 
-        const handelExtrapoint = (e) =>{
-            if(e.target.value=="가산점을 선택해주세요."){
+        const handelExtrapoint = (e) => {
+            if (e.target.value == "가산점을 선택해주세요.") {
                 return null;
             }
 
@@ -334,16 +340,16 @@ let Enlist = (props) => {
             }
         }
 
-        const Extrapoint = (props) =>{
+        const Extrapoint = (props) => {
 
             return (
-                <select className='content3-Extrapoint' onChange={handelExtrapoint} style={{marginBottom:"10px"}}>
-                    {props.options.map((option) => (
+                <select className='content3-Extrapoint' onChange={handelExtrapoint} style={{ marginBottom: "10px" }}>
+                    {props.options.map((option, index) => (
                         <option
                             key={option.value}
                             value={option.name}
                         >
-                            {option.name}
+                            {index == 0 ? option.name : `${option.name} - ${option.score}점`}
                         </option>
                     ))}
                 </select>
@@ -368,9 +374,9 @@ let Enlist = (props) => {
 
                         <Certificate options={certOption}></Certificate>
                         <div className='content3-certLists'>
-                            {cont3CertList.map(data => {
+                            {cont3CertList.map((data, index) => {
                                 return (
-                                    <div className='content3-certList'>
+                                    <div key={index} className='content3-certList'>
                                         {data.name}
                                         <span className='certdelete' name={data.name} onClick={handeldelete}>X</span>
                                     </div>
@@ -379,7 +385,7 @@ let Enlist = (props) => {
                         </div>
 
                         {/* 가지고 있는 자격증이 여러개면? */}
-                        <div className='total'>{cont3CertList.length == 0 ? "" : cont3CertList[0].score} : 점</div>
+                        <div className='total'>{cont3CertList.length == 0 ? "" : Math.max.apply(Math, cont3CertList.map(value => { return value.score; }))} : 점</div>
                     </div>
 
                     <div className='content3-title'>
@@ -405,18 +411,34 @@ let Enlist = (props) => {
                     <div className='content3-title'>
                         <div style={{ fontSize: "18px", fontWeight: "500" }}>{spTitles[3]}</div>
                         <Extrapoint options={Extrapoints}></Extrapoint>
-                        {cont3Extra.map(data => {
-                                return (
-                                    <div className='content3-extralist'>
-                                        {data.name}
-                                        <span className='certdelete' name={data.name} onClick={handelExtradelete}>X</span>
-                                    </div>
-                                )
-                            })}
-                            {/* score의 총합으로 계산하기 */}
-                            <div className='total'>{cont3Extra.length == 0 ? "" : cont3Extra[0].score} : 점</div>
+                        {cont3Extra.map((data, index) => {
+                            return (
+                                <div key={index} className='content3-extralist'>
+                                    {data.name}
+                                    <span className='certdelete' name={data.name} onClick={handelExtradelete}>X</span>
+                                </div>
+                            )
+                        })}
+                        {/* score의 총합으로 계산하기 */}
+                        <div className='total'>{cont3Extra.length == 0 ? "" : cont3Extra.reduce((accumulator, current) => accumulator + current.score, 0)} : 점</div>
                     </div>
 
+                </div>
+            </div>
+        )
+    }
+
+    const Content4 = () => {
+
+        return (
+            <div className='content4-wrap'>
+                <div className='content4-article'>
+                    {cont2item.map((data, index) => {
+                        return (
+                            <div>{data.spname}</div>
+                        )
+                    })
+                    }
                 </div>
             </div>
         )
@@ -449,7 +471,7 @@ let Enlist = (props) => {
                             {/* {cont2item.length == 1 ? cont2item.spname : cont2item.join(",")} */}
                             {cont2item.map((data, index) => {
                                 return (
-                                    <span>{cont2item.length == index + 1 ? data.spname : data.spname + ","}</span>
+                                    <span key={index}>{cont2item.length == index + 1 ? data.spname : data.spname + ","}</span>
                                 )
                             })
                             }
@@ -461,9 +483,10 @@ let Enlist = (props) => {
                 </div>
                 <div className='stepper-content-inner'>
                     <Content3 />
+                    <span className='content3-selector' ref={sp3Ref}></span>
                 </div>
                 <div className='stepper-content-inner'>
-                    안녕하세요3
+                    <Content4 />
                 </div>
             </div>
         </div>

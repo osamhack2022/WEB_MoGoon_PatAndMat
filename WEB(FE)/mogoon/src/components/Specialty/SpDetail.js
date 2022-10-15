@@ -13,6 +13,8 @@ let SpDetail = () => {
     const type = useParams().Spkind;
     const [SpDetailData, setSpDetailData] = useState();
 
+    const [loading,setLoading] = useState("로딩중..");
+
     const [title, SetTitle] = useState([]);
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -21,40 +23,56 @@ let SpDetail = () => {
     }
 
     async function getData() {
+
         await axios.get(`http://localhost:5000/api/speciality/list/${name}/${type}`)
             .then((response) => {
-                console.log(response.data.data);
+                console.log();
                 setSpDetailData(response.data.data);
                 console.log(response.data.data.contents);
                 let titles = [...response.data.data.contents];
                 SetTitle(titles);
-            });
+
+                setLoading("완료");
+            })
+            .catch((error)=>{
+                setLoading("오류");
+            })
+
     }
 
     useEffect(() => {
         getData();
     }, []);
 
-
-    if (SpDetailData == null) {
-        return (
-            <div>해당하는 특기가 존재하지 않습니다.</div>
+    if(loading=="로딩중.."){
+        return(
+            <div className="state">데이터 로딩중..</div>
         );
+    }
+
+    if(loading=="오류"){
+        return(
+            <div className="pagestate">데이터를 가져오는 도중 오류가 발생하였습니다.</div>
+        );
+    }
+
+    if (!SpDetailData) {
+        return null;
     }
 
     const handelGrid = (props) => {
         let col = [];
         let rows = [];
 
-        
-        col.push({ field: "id", headerName: "ID",hide:"true"});
+
+        col.push({ field: "id", headerName: "ID", hide: "true" });
         for (let i = 0; i < props.table_header.length; i++) {
             col.push(
                 {
                     field: props.table_header[i],
                     headerName: props.table_header[i],
                     type: "number",
-                    sortable:false
+                    sortable: false
                 }
             );
         }
@@ -66,7 +84,7 @@ let SpDetail = () => {
                 row["id"] = i;
                 row[props.table_header[j]] = props.table[props.table_header[j]][i];
             }
-            
+
             rows.push(row);
         }
 
@@ -75,7 +93,7 @@ let SpDetail = () => {
         console.log(props.table);
         console.log(col);
         return (
-            <Box sx={{ height: 300, width: '100%',backgroundColor:"white",marginTop:"15px" }}>
+            <Box sx={{ height: 300, width: '100%', backgroundColor: "white", marginTop: "15px" }}>
                 <DataGrid
                     rows={rows}
                     columns={col}

@@ -27,12 +27,12 @@ let Header = (props) => {
                     <HeaderItem title="마이페이지" />
                 </ul>
                 <div>
-                    <Button variant="contained" className='btnLogin' style={{ margin: "5px" }}>
+                    <Button variant="contained" className='btnLogin' style={{ margin: "5px",backgroundColor:"#183C8C"}}>
                         <Link to="/Account/Login">
                             로그인
                         </Link>
                     </Button>
-                    <Button variant="outlined" className='btnJoin' style={{ margin: "5px" }}>
+                    <Button variant="outlined" className='btnJoin' style={{ margin: "5px",color:"#183C8C",borderColor:"#183C8C"}}>
                         <Link to="/Account/Join">
                             회원가입
                         </Link>

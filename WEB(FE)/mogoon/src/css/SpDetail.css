@@ -3,10 +3,17 @@
     margin-top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    /* min-height: 100vh; */
     width: 60%;
-    /* height: 100%; */
     background-color: white;
+}
+
+.pagestate{
+    font-size: 1.5em;
+    font-weight: 600;
+    position: relative;
+    top: 70px;
+    text-align: center;
+    color: #102c69;
 }
 
 .SpDetail-content>div {
