@@ -151,7 +151,7 @@ nodemon 이 실행됩니다.\
 
     질문코드는 해당 질문에 달린 답변을 조회할 때 사용됩니다.
 
-## GET /api/speciality/정보체계관리/공군/answers/질문코드
+* ## GET /api/speciality/정보체계관리/공군/answers/질문코드
     해당 특기의 답변 데이터 객체 **리스트**를 응답 받습니다.   
     리스트 내 각 응답 객체의 데이터 형태는 아래와 같습니다.
 
@@ -216,7 +216,7 @@ nodemon 이 실행됩니다.\
     |title|string|질문 제목|"what is?"|
     |contents|array|질문 내용|["what is that?","what is that too?"]|
 
-## POST /api/speciality/정보체계관리/공군/answer/질문코드
+* ## POST /api/speciality/정보체계관리/공군/answer/질문코드
     해당 특기의 답변 데이터 추가를 요청합니다. 
     요청 객체의 형태는 아래와 같습니다.
 
