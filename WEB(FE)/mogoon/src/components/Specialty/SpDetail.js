@@ -44,9 +44,12 @@ let SpDetail = () => {
         getData();
     }, []);
 
-    if(loading=="로딩중.."){
-        return(
-            <div className="state">데이터 로딩중..</div>
+    if (loading == "로딩중..") {
+        return (
+            <>
+                <div className="state">Loading..</div>
+                <div class="loader"></div>
+            </>
         );
     }
 
@@ -63,7 +66,6 @@ let SpDetail = () => {
     const handelGrid = (props) => {
         let col = [];
         let rows = [];
-
 
         col.push({ field: "id", headerName: "ID", hide: "true" });
         for (let i = 0; i < props.table_header.length; i++) {
