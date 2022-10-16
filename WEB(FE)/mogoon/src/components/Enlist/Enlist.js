@@ -1,14 +1,14 @@
 import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
-import ClearIcon from '@mui/icons-material/Clear';
+import styled, { keyframes } from 'styled-components';
 
 import "../../css/Enlist.css"
-import { positions } from '@mui/system';
 
 let Enlist = (props) => {
     const slideRef = useRef();
     const [slideindex, setSlideindex] = useState(1);
     // contnet1
     const [bannerstyle, setbannerstyle] = useState(null);
+    const bannerRef = useRef([]);
     const spRef = useRef();
     // contnet2
     const [cont2item, setcont2item] = useState([]);
@@ -67,7 +67,70 @@ let Enlist = (props) => {
     }
 
     useEffect(() => {
+        for (let i = 0; i < 4; i++) {
+            bannerRef.current[i].style.transition = "all 0.7s";
+        }
+
     }, [bannerstyle]);
+
+    const handelBanner = (e) =>{
+        console.log(e.target.attributes.name.value);
+        setbannerstyle(e.target.attributes.name.value);
+
+        for (let i = 0; i < 4; i++) {
+            bannerRef.current[i].style.transition = "all 0.7s";
+        }
+
+        switch (bannerstyle) {
+            case "육군": 
+                for (let i = 0; i < 4; i++) {
+                    if(i==0){
+                        bannerRef.current[i].style.width = "100%";
+                    }else{
+                        bannerRef.current[i].style.width = "0%";
+                    }
+                }
+
+                break;
+            case "해군":
+                for (let i = 0; i < 4; i++) {
+                    if(i==1){
+                        bannerRef.current[i].style.width = "100%";
+                    }else{
+                        bannerRef.current[i].style.width = "0%";
+                    }
+                }
+                break;
+            case "공군":
+                for (let i = 0; i < 4; i++) {
+                    if(i==2){
+                        bannerRef.current[i].style.width = "100%";
+                    }else{
+                        bannerRef.current[i].style.width = "0%";
+                    }
+                }
+                break;
+            case "해병대":
+                for (let i = 0; i < 4; i++) {
+                    if(i==3){
+                        bannerRef.current[i].style.width = "100%";
+                    }else{
+                        bannerRef.current[i].style.width = "0%";
+                    }
+                }
+                break;
+            default:
+                console.log(bannerstyle);
+                break;
+        }
+    }
+    
+    const handelAnimate = () =>{
+        console.log("애니 끝");
+        let t2 = slideindex + 1;
+        setSlideindex(t2);
+        slideRef.current.style.transform = `translateX(-${slideRef.current.offsetWidth / 4 * slideindex}px)`;
+    }
 
     const handelbtn = (e) => {
         setbannerstyle(e.target.innerText);
@@ -78,21 +141,18 @@ let Enlist = (props) => {
             <>
                 <div className='content1-wrap'>
                     <div>
-                        <div className="content1-article" >
-                            <div className={bannerstyle == "육군" ? "content1-banner banner-active" : 'content1-banner'} ></div>
-                            <div className='banner-btn' onClick={handelbtn}>육군</div>
+                        <div ref={elem => (bannerRef.current[0] = elem)} className="content1-article" onClick={handelBanner} onAnimationEnd={handelAnimate}>
+                            <div className='content1-banner' name="육군"></div>
+                            {/* <div className='banner-btn' onClick={handelbtn}>육군</div> */}
                         </div>
-                        <div className="content1-article" >
-                            <div className={bannerstyle == "해군" ? "content1-banner banner-active" : 'content1-banner'}></div>
-                            <div className='banner-btn' onClick={handelbtn}>해군</div>
+                        <div ref={elem => (bannerRef.current[1] = elem)} className="content1-article" onClick={handelBanner}>
+                            <div className='content1-banner' name="해군"></div>
                         </div>
-                        <div className="content1-article" >
-                            <div className={bannerstyle == "공군" ? "content1-banner banner-active" : 'content1-banner'}></div>
-                            <div className='banner-btn' onClick={handelbtn}>공군</div>
+                        <div ref={elem => (bannerRef.current[2] = elem)} className="content1-article" onClick={handelBanner}>
+                            <div className='content1-banner' name="공군"></div>
                         </div>
-                        <div className="content1-article" >
-                            <div className={bannerstyle == "해병대" ? "content1-banner banner-active" : 'content1-banner'}></div>
-                            <div className='banner-btn' onClick={handelbtn}>해병대</div>
+                        <div ref={elem => (bannerRef.current[3] = elem)} className="content1-article" onClick={handelBanner}>
+                            <div className='content1-banner' name="해병대"></div>
                         </div>
                     </div>
                 </div>
@@ -447,22 +507,22 @@ let Enlist = (props) => {
     return (
         <div className='Enlist-wrap'>
             <button className={slideindex === 1 ? "btnblock" : "btnpre"} onClick={handelpre}>이전</button>
-            {/* <button className={slideindex === 4 ? "btnblock" : "btnnext"} disabled={bannerstyle==null ? true:false} onClick={handelnext}>다음</button> */}
-            <button className={slideindex === 4 ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button>
+            {/* <button className={(slideindex === 1 || slideindex === 4) ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button> */}
+            <button className={(slideindex === 4) ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button>
             <div className='stepper-wrap'>
                 <StepItem />
             </div>
             <div className='stepper-content' ref={slideRef}>
                 <div className='stepper-content-inner'>
                     <Content1 />
-                    <span className='content1-selector'>
+                    {/* <span className='content1-selector'>
                         <span className='selector-box' style={{ fontSize: "20px", fontWeight: 500 }}>
                             {bannerstyle}
                         </span>
                         <span ref={spRef}>
                             {bannerstyle == null ? "" : "을(를) 선택하셨습니다."}
                         </span>
-                    </span>
+                    </span> */}
                 </div>
                 <div className='stepper-content-inner'>
                     <Content2 />
