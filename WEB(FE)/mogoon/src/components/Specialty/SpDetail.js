@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -7,10 +7,21 @@ import { DataGrid } from '@mui/x-data-grid';
 import '../../css/SpDetail.css';
 import '../../css/SpDetailTap.css';
 
-let SpDetail = () => {
+let SpDetail = (EnlistSpName) => {
     //name을 기준으로 DB에서 값 가져오기
-    const name = useParams().SpName;
-    const type = useParams().Spkind;
+    let name = useParams().SpName;
+    let type = useParams().Spkind;
+    let ref = useRef();
+
+    //Enlist Test
+    if(name==undefined || type==undefined){
+        name="정보체계관리";
+        type="공군";
+
+        console.log(name);
+        console.log(type);
+    }
+
     const [SpDetailData, setSpDetailData] = useState();
 
     const [loading,setLoading] = useState("로딩중..");
@@ -165,7 +176,7 @@ let SpDetail = () => {
     ];
 
     return (
-        <div className='SpDetail-content'>
+        <div className='SpDetail-content' ref={ref}>
             <div className='section-header'>
                 <div className='header-img' />
                 <div className='header-content'>

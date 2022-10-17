@@ -136,14 +136,18 @@ hr{
 .content1-article{
     width: 20%;
     height: 100%;
-    /* margin: 0px 20px 0px 20px; */
+    margin: 0px 10px 0px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    transition: all 0.7s;
+    transition: 0.7s;
     -webkit-transition:all 0.7s;
+}
+
+.content1-article:hover{
+    width: 100%;
 }
 
 .content1-banner,.banner-active{
@@ -245,7 +249,7 @@ hr{
 .content2-item{
     border: 2px solid #183C8C;
     border-radius: 10px;
-    width: 180px;
+    width: 150px;
     height: 50px;
     margin: 20px;
     background-color: white;
@@ -275,6 +279,7 @@ hr{
     height: 150px;
     margin-top: 30px;
     box-shadow: 0px 1px 3px gray;
+    margin-bottom: 30px;
 }
 
 .content3-article{
@@ -283,7 +288,7 @@ hr{
     border-radius: 10px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     flex-wrap: wrap;
     overflow-y: auto;
     position: relative;
@@ -294,11 +299,12 @@ hr{
     position: absolute;
     right: 10px;
     bottom: 10px;
+    
 }
 
 .content3-title{
     width: 23%;
-    height: 90%;
+    height: auto;
     background-color: white;
     margin: 0px 10px 0px 10px;
     border-radius: 10px;
@@ -307,6 +313,7 @@ hr{
     padding: 15px 20px 15px 20px;
     box-sizing: border-box;
     overflow-y: auto;
+    padding-bottom: 35px;
 }
 
 .content3-title::-webkit-scrollbar {
