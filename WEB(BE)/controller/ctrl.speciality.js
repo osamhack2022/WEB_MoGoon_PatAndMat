@@ -7,7 +7,13 @@ import { adminAuth } from '../firebase/admin.js';
 const speciality_list = async (req, res) => {
     const result = new Result();
     const refresh_token = req.cookies.refresh_token;
-    const [ auth_type, id_token ] = req.headers.authorization.split(' ');
+    
+    let auth_type = undefined;
+    let id_token = undefined;
+
+    if (!!req.headers.authorization) {
+        [ auth_type, id_token ] = req.headers.authorization.split(' ');
+    }
 
     try {
         let user_data = undefined;
