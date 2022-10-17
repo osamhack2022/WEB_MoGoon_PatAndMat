@@ -37,8 +37,9 @@
   - Firebase Admin SDK
  
 ### Front-End
-- react.js
-- redux
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+<img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white">
 
 ## 설치 안내 (Installation Process)
  - 프로젝트 진행하면서 수정할 예정입니다.
@@ -49,14 +50,18 @@
     $ npm install -- force
     $ npm run build
     ```
- 2. 백엔드 서버를 실행합니다.
+
+ 2. 데이터베이스 접속을 위해 백엔드 폴더에 .env 파일을 생성합니다. 이 과정은 개발자에게 문의해주세요.
+
+ 3. 백엔드 서버를 실행합니다.
 
     ```shell
     $ cd ../../WEB(BE)/
     $ npm install
     $ npm start
     ```
- 3. http://127.0.0.1:5000 에서 결과물을 확인할 수 있습니다.
+
+ 4. http://127.0.0.1:5000 에서 결과물을 확인할 수 있습니다.
 
 ## 프로젝트 사용법 (Getting Started)
 - 프로젝트 개발하면서 수정할 예정입니다.

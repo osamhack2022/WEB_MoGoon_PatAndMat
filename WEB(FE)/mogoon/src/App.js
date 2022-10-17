@@ -17,9 +17,18 @@ import Enlist from './components/Enlist/Enlist';
 import './App.css';
 import './css/Header.css';
 import './css/Specialty.css';
-// import './css/Login.css';
+
+//redux
+import { useDispatch } from "react-redux";
+import { loginUser } from './reducer/userSlice';
 
 function App() {
+  const dispatch = useDispatch();
+
+  if(localStorage.getItem("userInfo")!=null){
+    dispatch(loginUser(localStorage.getItem("userInfo")));
+  }
+
   return (
     <div className="App">
       <BrowserRouter>

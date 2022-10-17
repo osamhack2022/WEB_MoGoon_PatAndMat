@@ -7,19 +7,23 @@ import { adminAuth } from '../firebase/admin.js';
 const speciality_list = async (req, res) => {
     const result = new Result();
     const refresh_token = req.cookies.refresh_token;
-    const id_token = req.cookies.id_token;
+    
+    let auth_type = undefined;
+    let id_token = undefined;
+
+    if (!!req.headers.authorization) {
+        [ auth_type, id_token ] = req.headers.authorization.split(' ');
+    }
 
     try {
         let user_data = undefined;
 
-        if (id_token !== undefined) {
+        if (!!id_token) {
             const decodedToken = await adminAuth.verifyIdToken(id_token);
-            console.log(decodedToken); // TODO : remove later
             const email = decodedToken.email;
             const user_doc = await getDoc(doc(db, "user", email));
             if (user_doc.exists()) {
                 user_data = user_doc.data();
-                console.log(user_data); // TODO : remove later
             }
         }
 
@@ -29,8 +33,6 @@ const speciality_list = async (req, res) => {
             doc_data.is_favorite = user_data !== undefined && user_data.favorite_speciality.includes(doc.id);
             return doc_data;
         });
-
-        //console.log(doc_list); // TODO
 
         result.success = true;
         result.data = doc_list;
@@ -107,7 +109,6 @@ const speciality_desc = async (req, res) => {
 }
 
 const speciality_like_increase = async (req, res) => {
-    // TODO : 특기 즐겨찾기 클릭시 좋아요 개수 증가
     const result = new Result();
     try {
         const speciality_name = req.params.speciality_name;
@@ -150,6 +151,88 @@ const speciality_like_increase = async (req, res) => {
     res.json(result);
 };
 
+const speciality_opinions = async (req, res) => {
+    const result = new Result();
+
+    try {
+        const speciality_name = req.params.speciality_name;
+        const military_kind = req.params.military_kind;
+
+        const q = query(collection(db, 'speciality_opinion'), 
+                        where("speciality_name", "==", speciality_name),
+                        where("military_kind", "==", military_kind));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+            result.success = false;
+            result.err_code = "-1";
+            result.err_msg = "no speciality, check speciality name";
+        }
+        else {
+            const doc_list = snapshot.docs.map(doc => doc.id);
+            const opinion_doc = doc_list[0];
+            console.log(`speciality_opinion/${opinion_doc}/opinions`);
+            const snapshot2 = await getDocs(query(collection(db, `speciality_opinion/${opinion_doc.toString()}/opinions`)));
+            if (snapshot2.empty) {
+                result.success = false;
+                result.err_code = "-1";
+                result.err_msg = "no speciality opinions, check speciality name";
+            }
+            else {
+                const opinion_list = snapshot2.docs.map(doc => doc.data());
+                console.log(opinion_list);            
+                result.success = true;
+                result.data = opinion_list;
+            }
+        }
+   
+    } catch (error) {
+        result.success = false;
+        result.err_code = error.code;
+        result.err_msg = error.message;
+        console.log(error);
+    }
+
+    return res.json(result);
+};
+
+const speciality_opinion = async (req, res) => {
+    const result = new Result();
+
+    try {
+        const speciality_name = req.params.speciality_name;
+        const military_kind = req.params.military_kind;
+
+        const q = query(collection(db, 'speciality_opinion'), 
+                        where("speciality_name", "==", speciality_name),
+                        where("military_kind", "==", military_kind));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+            result.success = false;
+            result.err_code = "-1";
+            result.err_msg = "no speciality, check speciality name";
+        }
+        else {
+            const doc_list = snapshot.docs.map(doc => doc.id);
+            const opinion_doc = doc_list[0];
+            const body = req.body;
+            body.like = 0;
+            body.dislike = 0;
+            const docRef = await addDoc(collection(db, `speciality_opinion/${opinion_doc.toString()}/opinions`), body);
+            result.success = true;
+        }
+   
+    } catch (error) {
+        result.success = false;
+        result.err_code = error.code;
+        result.err_msg = error.message;
+        console.log(error);
+    }
+
+    return res.json(result);
+};
+
 const add = async (req, res) => { // TODO : remove function later
     const result = new Result();
 
@@ -182,9 +265,11 @@ export const ctrl_speciality = {
     get: {
         speciality_list,
         speciality_desc,
+        speciality_opinions,
     },
     post: {
         speciality_like_increase,
+        speciality_opinion,
     },
     add, // TODO : remove
     add_desc, // TODO : remove
