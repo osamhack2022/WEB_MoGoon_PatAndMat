@@ -10,11 +10,8 @@ const register = async (req, res) => {
     const result = new Result();
 
     try {
-        console.log(email); // TODO
-        console.log(password); // TODO
         const credential = await createUserWithEmailAndPassword(auth, email, password);
         result.success = true;
-        result.data = credential;
     } catch (error) {
         result.error_code = error.code;
         result.error_msg = error.message;
@@ -32,14 +29,11 @@ const login = async (req, res) => {
     const result = new Result();
 
     try {
-        console.log(email); // TODO
-        console.log(password); // TODO
         const credential = await signInWithEmailAndPassword(auth, email, password);
         
         result.success = true;
         result.data = await credential.user.getIdToken();
         res.cookie('refresh_token', credential.user.refreshToken, cookieOption);
-        res.cookie('id_token', await credential.user.getIdToken(), cookieOption);
         
     } catch (error) {
         result.error_code = error.code;
