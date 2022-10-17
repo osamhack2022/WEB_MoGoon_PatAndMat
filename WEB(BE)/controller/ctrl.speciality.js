@@ -7,19 +7,17 @@ import { adminAuth } from '../firebase/admin.js';
 const speciality_list = async (req, res) => {
     const result = new Result();
     const refresh_token = req.cookies.refresh_token;
-    const id_token = req.cookies.id_token;
+    const [ auth_type, id_token ] = req.headers.authorization.split(' ');
 
     try {
         let user_data = undefined;
 
-        if (id_token !== undefined) {
+        if (!!id_token) {
             const decodedToken = await adminAuth.verifyIdToken(id_token);
-            console.log(decodedToken); // TODO : remove later
             const email = decodedToken.email;
             const user_doc = await getDoc(doc(db, "user", email));
             if (user_doc.exists()) {
                 user_data = user_doc.data();
-                console.log(user_data); // TODO : remove later
             }
         }
 
@@ -29,8 +27,6 @@ const speciality_list = async (req, res) => {
             doc_data.is_favorite = user_data !== undefined && user_data.favorite_speciality.includes(doc.id);
             return doc_data;
         });
-
-        //console.log(doc_list); // TODO
 
         result.success = true;
         result.data = doc_list;
@@ -107,7 +103,6 @@ const speciality_desc = async (req, res) => {
 }
 
 const speciality_like_increase = async (req, res) => {
-    // TODO : 특기 즐겨찾기 클릭시 좋아요 개수 증가
     const result = new Result();
     try {
         const speciality_name = req.params.speciality_name;

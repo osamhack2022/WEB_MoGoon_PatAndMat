@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 
 import { router_speciality } from './router/speciality.js';
 import { router_auth } from './router/auth.js';
+import { router_user } from './router/user.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,6 +26,7 @@ app.use(cors({
 // API 라우팅
 app.use('/api/speciality', router_speciality);
 app.use('/api/auth', router_auth);
+app.use('/api/user', router_user);
 
 // 프론트 연동
 app.use(express.static(path.join(__dirname,"../WEB(FE)/mogoon/build")));
