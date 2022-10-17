@@ -1,20 +1,26 @@
 // import React, { useState } from 'react';
 import React, { useEffect, useState, useCallback } from "react";
-import { createStore } from 'redux'
-import { Link } from 'react-router-dom';
+import { json, Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
+// redux
+import { useDispatch } from "react-redux";
+import { clearUser, loginUser } from "../../reducer/userSlice.js";
+import { useSelector } from "react-redux";
 
 import "../../css/Login.css"
 
 const Login = () => {
+    let user = useSelector((state) => {return state.user});
+    const dispatch = useDispatch();
+
     const [values, setValues] = useState({
         email: "",
         password: "",
     })
 
-    const [load,setLoad] = useState(true);
+    const [load, setLoad] = useState(true);
 
     const handleChange = e => {
         setValues({
@@ -66,9 +72,11 @@ const Login = () => {
                     default:
                 }
                 //data가 유일키
+                dispatch(loginUser(values));
+                localStorage.setItem("userInfo",JSON.stringify(values));
                 alert("로그인 성공!");
                 reSet();
-                console.log(JSON.stringify(values, null, 2));
+
                 window.location = '/';
             })
             .catch(function (error) {
@@ -103,7 +111,7 @@ const Login = () => {
                     <span style={{ margin: "0", fontWeight: "400", fontSize: "14px", color: "gray", cursor: "pointer", width: "80px" }}>
                         ID/PW 찾기
                     </span>
-                    {load?<button className="btnlogin" type="submit">로그인</button>:<button className="btnlogin" type="submit" disabled style={{backgroundColor:"gray"}}>로딩중..</button>}
+                    {load ? <button className="btnlogin" type="submit">로그인</button> : <button className="btnlogin" type="submit" disabled style={{ backgroundColor: "gray" }}>로딩중..</button>}
                 </form>
                 <div className="join" style={{ letterSpacing: "0.1px" }}>
                     아직 <strong>"모군"</strong>의 회원이 아니신가요? <strong><span style={{ cursor: "pointer", textDecoration: "underline", color: "#183C8C" }}>
