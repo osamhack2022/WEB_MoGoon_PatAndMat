@@ -68,8 +68,10 @@ let Enlist = (props) => {
 
     useEffect(() => {
         for (let i = 0; i < 4; i++) {
-            bannerRef.current[i].style.transition = "all 0.7s";
+            bannerRef.current[i].style.opacity = "1.5";
         }
+
+        console.log(bannerstyle);
 
     }, [bannerstyle]);
 

@@ -5,7 +5,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import axios from 'axios';
-import { Skeleton } from '@mui/material';
+
 
 //임시 필터 체크박스 데이터
 let chkGroup = ["육군", "해군", "공군", "해병대"];
