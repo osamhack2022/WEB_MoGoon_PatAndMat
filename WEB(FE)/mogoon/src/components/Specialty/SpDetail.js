@@ -7,7 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import '../../css/SpDetail.css';
 import '../../css/SpDetailTap.css';
 
-let SpDetail = (EnlistSpName) => {
+let SpDetail = (props) => {
     //name을 기준으로 DB에서 값 가져오기
     let name = useParams().SpName;
     let type = useParams().Spkind;
@@ -18,14 +18,10 @@ let SpDetail = (EnlistSpName) => {
         name="정보체계관리";
         type="공군";
 
-        console.log(name);
-        console.log(type);
     }
 
     const [SpDetailData, setSpDetailData] = useState();
-
     const [loading,setLoading] = useState("로딩중..");
-
     const [title, SetTitle] = useState([]);
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -37,9 +33,9 @@ let SpDetail = (EnlistSpName) => {
 
         await axios.get(`http://localhost:5000/api/speciality/list/${name}/${type}`)
             .then((response) => {
-                console.log();
+                // console.log();
                 setSpDetailData(response.data.data);
-                console.log(response.data.data.contents);
+                // console.log(response.data.data.contents);
                 let titles = [...response.data.data.contents];
                 SetTitle(titles);
 
@@ -101,10 +97,10 @@ let SpDetail = (EnlistSpName) => {
             rows.push(row);
         }
 
-        console.log(rows);
+        // console.log(rows);
 
-        console.log(props.table);
-        console.log(col);
+        // console.log(props.table);
+        // console.log(col);
         return (
             <Box sx={{ height: 300, width: '100%', backgroundColor: "white", marginTop: "15px" }}>
                 <DataGrid
@@ -176,7 +172,7 @@ let SpDetail = (EnlistSpName) => {
     ];
 
     return (
-        <div className='SpDetail-content' ref={ref}>
+        <div className='SpDetail-content' style={props.name=="군지원"?{width:"100%",marginTop:"60px"}:{width:"60%"}}>
             <div className='section-header'>
                 <div className='header-img' />
                 <div className='header-content'>

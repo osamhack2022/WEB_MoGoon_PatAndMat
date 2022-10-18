@@ -24,6 +24,8 @@ let Enlist = (props) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [handelTargetText,sethandelTargetText] = useState(null);
+    const [handelTargetindex,sethandelTargetindex] = useState(null);
     // content3
     const [cont3CertList, setcont3CertList] = useState([]);
     const [cont3Major, setcont3Major] = useState(null);
@@ -112,23 +114,41 @@ let Enlist = (props) => {
         );
     }
 
-    //특기 선택하면 스크롤 초기화되는거 수정해야함
-    const handelcontItem = (e) => {
+    useEffect(()=>{
+        if(handelTargetText==null || handelTargetindex==null){
+            return;
+        }
+        
+    },[handelTargetText,handelTargetindex]);
+    
+    const handelModal = (e) =>{
+        sethandelTargetindex(e.target.id);
+        sethandelTargetText(e.target.innerText);
+
         if (cont2item.find(item => item.spindex == e.target.id) != undefined) {
             let spalready = cont2item.filter(data => data.spindex != e.target.id);
             setcont2item(spalready);
             return;
         }
-
+        
         if (cont2item.length == 3) {
             alert("특기는 최대 3개까지 선택가능합니다.");
-            return null;
+            return;
         }
 
-        let spdata = [...cont2item];
-        spdata.push({ spname: e.target.innerText, spindex: e.target.id });
-        setcont2item(spdata);
         handleOpen();
+    }
+
+    //특기 선택하면 스크롤 초기화되는거 수정해야함
+
+    const handelcontItem = (e) => {
+        let spdata = [...cont2item];
+        spdata.push({ spname: handelTargetText, spindex: handelTargetindex});
+        setcont2item(spdata);
+
+        sethandelTargetindex(null);
+        sethandelTargetText(null);
+        handleClose();
     }
 
     const Content2 = () => {
@@ -139,8 +159,8 @@ let Enlist = (props) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: "60%",
-            height:"80%",
+            width: "50%",
+            height:"60%",
             bgcolor: 'background.paper',
             border: '2px solid #000',
             boxShadow: 24,
@@ -157,22 +177,19 @@ let Enlist = (props) => {
                                 color: cont2item.find(item => item.spindex == index) != undefined ? 'white' : 'black',
                                 backgroundColor: cont2item.find(item => item.spindex == index) != undefined ? '#183C8C' : 'white'
                             }}
-                            key={index} id={index} onClick={handelcontItem}>{item}</div>
+                            key={index} id={index} onClick={handelModal}>{item}</div>
                     ))}
                 </div>
                 <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        </Typography>
-
-                        <SpDetail/>
+                        <div style={{width:"100%",display:"flex",justifyContent:"right"}}>
+                            <div id="modal-modal-title" className='model-support' onClick={handelcontItem}>지원하기</div>
+                        </div>
+                        <SpDetail name="군지원"/>
                     </Box>
                 </Modal>
             </div>
