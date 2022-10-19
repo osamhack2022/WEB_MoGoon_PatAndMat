@@ -263,6 +263,23 @@ hr{
     cursor: pointer;
 }
 
+.content2-item > span{
+    font-size: 12px;
+    position: absolute;
+    right: 5px;
+    top: 1px;
+    text-decoration: underline;
+    color: #183C8C;
+
+    display: none;
+}
+
+.content2-item:hover > span{
+    display: block;
+}
+
+
+
 .model-support{
     width: 120px;
     height: 45px;

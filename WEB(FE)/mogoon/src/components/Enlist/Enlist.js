@@ -126,29 +126,47 @@ let Enlist = (props) => {
             return;
         }
 
+        
+
     }, [handelTargetText, handelTargetindex]);
 
     const handelModal = (e) => {
-        sethandelTargetindex(e.target.id);
-        sethandelTargetText(e.target.innerText);
-
-        if (cont2item.find(item => item.spindex == e.target.id) != undefined) {
-            let spalready = cont2item.filter(data => data.spindex != e.target.id);
-            setcont2item(spalready);
-            return;
+        if(e.target.className=="content2-item"){
+            sethandelTargetindex(e.target.id);
+            sethandelTargetText(e.target.attributes.name.value);
+            if (cont2item.find(item => item.spindex == e.target.id) != undefined) {
+                let spalready = cont2item.filter(data => data.spindex != e.target.id);
+                setcont2item(spalready);
+                return;
+            }
+    
+            if (cont2item.length == 3) {
+                alert("특기는 최대 3개까지 선택가능합니다.");
+                return;
+            }
+    
+            let spdata = [...cont2item];
+            spdata.push({ spname: e.target.attributes.name.value, spindex: e.target.id });
+            setcont2item(spdata);
         }
-
-        if (cont2item.length == 3) {
-            alert("특기는 최대 3개까지 선택가능합니다.");
-            return;
-        }
-
+    }
+    
+    const handelDetail = (e) =>{
+        // sethandelTargetindex(e.target.id);
+        // sethandelTargetText(e.target.name);
+        
         handleOpen();
+        return;
     }
 
     //특기 선택하면 스크롤 초기화되는거 수정해야함
 
     const handelcontItem = (e) => {
+        if (cont2item.length == 3) {
+            alert("특기는 최대 3개까지 선택가능합니다.");
+            return;
+        }
+
         let spdata = [...cont2item];
         spdata.push({ spname: handelTargetText, spindex: handelTargetindex });
         setcont2item(spdata);
@@ -184,7 +202,9 @@ let Enlist = (props) => {
                                 color: cont2item.find(item => item.spindex == index) != undefined ? 'white' : 'black',
                                 backgroundColor: cont2item.find(item => item.spindex == index) != undefined ? '#183C8C' : 'white'
                             }}
-                            key={index} id={index} onClick={handelModal}>{item}</div>
+                            key={index} name={item} id={index} onClick={handelModal}>{item}
+                                <span id={index} name={item} onClick={handelDetail}>자세히</span>
+                            </div>
                     ))}
                 </div>
                 <Modal
