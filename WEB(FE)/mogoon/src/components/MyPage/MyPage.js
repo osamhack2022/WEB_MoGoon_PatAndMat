@@ -34,7 +34,7 @@ const MyPage = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                await axios.get('http://127.0.0.1:5000/api/user/info', {
+                await axios.get('http://localhost:5000/api/user/info', {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
