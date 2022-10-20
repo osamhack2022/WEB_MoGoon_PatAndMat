@@ -1,6 +1,5 @@
 // import React, { useState } from 'react';
 import React, { useEffect, useState, useCallback } from "react";
-import SpecialtyItem from "../Specialty/SpecialtyItem.js";
 import { json, Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
@@ -10,8 +9,13 @@ import { useDispatch } from "react-redux";
 import { clearUser, loginUser } from "../../reducer/userSlice.js";
 import { useSelector } from "react-redux";
 
+// components
+import SpecialtyItem from "../Specialty/SpecialtyItem.js";
+import MyEnInfoItem from "./MyEnInfoItem.js";
+import MyQuestionItem from "./MyQuestionItem.js";
+
 // css
-import "../../css/MyPage.css"
+import "../../css/MyPage/MyPage.css"
 
 const MyPage = () => {
     const [item, setItem] = useState(null);
@@ -60,7 +64,7 @@ const MyPage = () => {
 
     console.log(item);
     return (
-        <div className="main-content">
+        <div className="my-page-content">
             <h2>안녕하세요, {item.name}님!😎</h2>
             <h3>내가 찜해둔 특기</h3>
             <div>
@@ -72,7 +76,18 @@ const MyPage = () => {
                 })}
             </div>
             <h3>내 지원 정보</h3>
+            <div className="my-en-info-container">
+                <MyEnInfoItem title="자격/면허"/>
+                <MyEnInfoItem title="전공"/>
+                <MyEnInfoItem title="결석 일수"/>
+                <MyEnInfoItem title="가산점"/>
+            </div>
             <h3>내 질문</h3>
+            <div>
+                <MyQuestionItem />
+                <MyQuestionItem />
+                <MyQuestionItem />
+            </div>
         </div>
 
     );
