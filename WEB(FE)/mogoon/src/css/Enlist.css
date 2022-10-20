@@ -264,11 +264,10 @@ hr{
 }
 
 .content2-item > span{
-    font-size: 12px;
+    font-size: 16px;
     position: absolute;
     right: 5px;
     top: 1px;
-    text-decoration: underline;
     color: #183C8C;
 
     display: none;
@@ -429,6 +428,7 @@ hr{
     border-radius: 5px;
     margin: auto;
     margin-top: 5px;
+    
 }
 
 .content4-wrap{

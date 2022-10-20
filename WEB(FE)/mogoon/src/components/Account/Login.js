@@ -74,7 +74,6 @@ const Login = () => {
                 //data가 유일키
                 dispatch(loginUser(values));
                 localStorage.setItem("userInfo",JSON.stringify(values));
-                alert("로그인 성공!");
                 reSet();
 
                 window.location = '/';
