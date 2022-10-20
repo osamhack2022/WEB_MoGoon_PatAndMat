@@ -12,6 +12,7 @@ import SpDetail from './components/Specialty/SpDetail';
 import Login from './components/Account/Login';
 import Join from './components/Account/Join';
 import Enlist from './components/Enlist/Enlist';
+import MyPage from './components/MyPage/MyPage';
 
 //css
 import './App.css';
@@ -43,6 +44,7 @@ function App() {
             <Route path="/Specialty" element={<Specialty />}></Route>
             <Route path="/Specialty/list/:SpName/:Spkind" element={<SpDetail />}></Route>
             <Route path="/Enlist" element={<Enlist />}></Route>
+            <Route path="/MyPage" element={<MyPage />}></Route>
           </Routes>
         </div>
       </BrowserRouter>
