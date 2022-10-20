@@ -1,7 +1,21 @@
 import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import SpDetail from "../Specialty/SpDetail";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 import "../../css/Enlist.css"
+
+// test
+import "../../css/SpDetail.css"
 
 let Enlist = (props) => {
     const slideRef = useRef();
@@ -14,6 +28,11 @@ let Enlist = (props) => {
     const [cont2item, setcont2item] = useState([]);
     const sp2Ref = useRef();
     const articleScrollRef = useRef();
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [handelTargetText, sethandelTargetText] = useState(null);
+    const [handelTargetindex, sethandelTargetindex] = useState(null);
     // content3
     const [cont3CertList, setcont3CertList] = useState([]);
     const [cont3Major, setcont3Major] = useState(null);
@@ -22,9 +41,6 @@ let Enlist = (props) => {
     const sp3Ref = useRef();
     // content4
 
-    useEffect(() => {
-    }, [slideindex]);
-
     const handelpre = () => {
         let t1 = slideindex - 1
         setSlideindex(t1);
@@ -32,11 +48,6 @@ let Enlist = (props) => {
     }
 
     const handelnext = () => {
-        if (bannerstyle == null || slideindex == null) {
-            spRef.current.innerText = "군종을 선택해주세요.";
-            return null;
-        }
-
         if (slideindex == 2 && cont2item.length == 0) {
             sp2Ref.current.innerText = "특기를 선택해주세요.";
             return null;
@@ -66,76 +77,25 @@ let Enlist = (props) => {
         );
     }
 
+    let stBanners = ["육군", "해군", "공군", "해병대"];
     useEffect(() => {
         for (let i = 0; i < 4; i++) {
-            bannerRef.current[i].style.opacity = "1.5";
+            bannerRef.current[i].addEventListener("click", () => {
+                for (let j = 0; j < 4; j++) {
+                    if (i == j) {
+                        setbannerstyle(stBanners[j]);
+                        setSlideindex(2);
+                        slideRef.current.style.transform = `translateX(-${slideRef.current.offsetWidth / 4 * slideindex}px)`;
+                    }
+                }
+            });
         }
 
-        console.log(bannerstyle);
+    }, [bannerstyle, slideindex]);
 
-    }, [bannerstyle]);
-
-    const handelBanner = (e) =>{
+    const handelBanner = (e) => {
         console.log(e.target.attributes.name.value);
         setbannerstyle(e.target.attributes.name.value);
-
-        for (let i = 0; i < 4; i++) {
-            bannerRef.current[i].style.transition = "all 0.7s";
-        }
-
-        switch (bannerstyle) {
-            case "육군": 
-                for (let i = 0; i < 4; i++) {
-                    if(i==0){
-                        bannerRef.current[i].style.width = "100%";
-                    }else{
-                        bannerRef.current[i].style.width = "0%";
-                    }
-                }
-
-                break;
-            case "해군":
-                for (let i = 0; i < 4; i++) {
-                    if(i==1){
-                        bannerRef.current[i].style.width = "100%";
-                    }else{
-                        bannerRef.current[i].style.width = "0%";
-                    }
-                }
-                break;
-            case "공군":
-                for (let i = 0; i < 4; i++) {
-                    if(i==2){
-                        bannerRef.current[i].style.width = "100%";
-                    }else{
-                        bannerRef.current[i].style.width = "0%";
-                    }
-                }
-                break;
-            case "해병대":
-                for (let i = 0; i < 4; i++) {
-                    if(i==3){
-                        bannerRef.current[i].style.width = "100%";
-                    }else{
-                        bannerRef.current[i].style.width = "0%";
-                    }
-                }
-                break;
-            default:
-                console.log(bannerstyle);
-                break;
-        }
-    }
-    
-    const handelAnimate = () =>{
-        console.log("애니 끝");
-        let t2 = slideindex + 1;
-        setSlideindex(t2);
-        slideRef.current.style.transform = `translateX(-${slideRef.current.offsetWidth / 4 * slideindex}px)`;
-    }
-
-    const handelbtn = (e) => {
-        setbannerstyle(e.target.innerText);
     }
 
     const Content1 = () => {
@@ -143,17 +103,16 @@ let Enlist = (props) => {
             <>
                 <div className='content1-wrap'>
                     <div>
-                        <div ref={elem => (bannerRef.current[0] = elem)} className="content1-article" onClick={handelBanner} onAnimationEnd={handelAnimate}>
+                        <div ref={elem => (bannerRef.current[0] = elem)} className="content1-article">
                             <div className='content1-banner' name="육군"></div>
-                            {/* <div className='banner-btn' onClick={handelbtn}>육군</div> */}
                         </div>
-                        <div ref={elem => (bannerRef.current[1] = elem)} className="content1-article" onClick={handelBanner}>
+                        <div ref={elem => (bannerRef.current[1] = elem)} className="content1-article">
                             <div className='content1-banner' name="해군"></div>
                         </div>
-                        <div ref={elem => (bannerRef.current[2] = elem)} className="content1-article" onClick={handelBanner}>
+                        <div ref={elem => (bannerRef.current[2] = elem)} className="content1-article">
                             <div className='content1-banner' name="공군"></div>
                         </div>
-                        <div ref={elem => (bannerRef.current[3] = elem)} className="content1-article" onClick={handelBanner}>
+                        <div ref={elem => (bannerRef.current[3] = elem)} className="content1-article">
                             <div className='content1-banner' name="해병대"></div>
                         </div>
                     </div>
@@ -162,27 +121,77 @@ let Enlist = (props) => {
         );
     }
 
-    //특기 선택하면 스크롤 초기화되는거 수정해야함
-    const handelcontItem = (e) => {
-
-        if (cont2item.find(item => item.spindex == e.target.id) != undefined) {
-            let spalready = cont2item.filter(data => data.spindex != e.target.id);
-            setcont2item(spalready);
+    useEffect(() => {
+        if (handelTargetText == null || handelTargetindex == null) {
             return;
         }
 
+        
+
+    }, [handelTargetText, handelTargetindex]);
+
+    const handelModal = (e) => {
+        if(e.target.className=="content2-item"){
+            sethandelTargetindex(e.target.id);
+            sethandelTargetText(e.target.attributes.name.value);
+            if (cont2item.find(item => item.spindex == e.target.id) != undefined) {
+                let spalready = cont2item.filter(data => data.spindex != e.target.id);
+                setcont2item(spalready);
+                return;
+            }
+    
+            if (cont2item.length == 3) {
+                alert("특기는 최대 3개까지 선택가능합니다.");
+                return;
+            }
+    
+            let spdata = [...cont2item];
+            spdata.push({ spname: e.target.attributes.name.value, spindex: e.target.id });
+            setcont2item(spdata);
+        }
+    }
+    
+    const handelDetail = (e) =>{
+        // sethandelTargetindex(e.target.id);
+        // sethandelTargetText(e.target.name);
+        
+        handleOpen();
+        return;
+    }
+
+    //특기 선택하면 스크롤 초기화되는거 수정해야함
+
+    const handelcontItem = (e) => {
         if (cont2item.length == 3) {
             alert("특기는 최대 3개까지 선택가능합니다.");
-            return null;
+            return;
         }
 
         let spdata = [...cont2item];
-        spdata.push({ spname: e.target.innerText, spindex: e.target.id });
+        spdata.push({ spname: handelTargetText, spindex: handelTargetindex });
         setcont2item(spdata);
+
+        sethandelTargetindex(null);
+        sethandelTargetText(null);
+        handleClose();
     }
 
     const Content2 = () => {
         const sp = ["CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐"];
+
+        const style = {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: "50%",
+            height: "60%",
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+            overflow: "auto"
+        };
 
         return (
             <div className='content2-wrap'>
@@ -193,9 +202,23 @@ let Enlist = (props) => {
                                 color: cont2item.find(item => item.spindex == index) != undefined ? 'white' : 'black',
                                 backgroundColor: cont2item.find(item => item.spindex == index) != undefined ? '#183C8C' : 'white'
                             }}
-                            key={index} id={index} onClick={handelcontItem}>{item}</div>
+                            key={index} name={item} id={index} onClick={handelModal}>{item}
+                                <span id={index} name={item} onClick={handelDetail}>자세히</span>
+                            </div>
                     ))}
                 </div>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                >
+                    <Box sx={style}>
+                        <div style={{ width: "100%", display: "flex", justifyContent: "right" }}>
+                            <div id="modal-modal-title" className='model-support' onClick={handelcontItem}>지원하기</div>
+                        </div>
+                        <SpDetail name="군지원" />
+                    </Box>
+                </Modal>
             </div>
         )
     }
@@ -418,9 +441,80 @@ let Enlist = (props) => {
             )
         }
 
+        const table_cell = {
+            fontSize: "1.1em",
+            fontWeight: "900",
+            backgroundColor: "rgb(240, 240, 240)",
+        }
+
+        const table_cell_point = {
+            fontSize: "1em",
+        }
+
         return (
             <div className='content3-wrap'>
-                <img src='img/etc/배점표.png' className='pointTable' />
+                {/* <img src='img/etc/배점표.png' className='pointTable' /> */}
+                <div className='table-wrap'>
+                    <div className='table'>
+                        <div style={{fontSize:"16px",fontWeight:500}}>일반기술병</div>
+                        <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray" ,boxShadow: "0px 1px 3px gray"}}>
+                            <Table>
+                                <TableRow sx={{ height: 80 }}>
+                                    <TableCell sx={table_cell} align='center' rowSpan={2}>구분</TableCell>
+                                    <TableCell sx={table_cell} align='center' colSpan={3}>📝서류전형</TableCell>
+                                    <TableCell sx={table_cell} align='center' rowSpan={2}>👨‍🏫면접</TableCell>
+                                    <TableCell sx={table_cell} align='center' rowSpan={2}>계</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell sx={table_cell} align='center'>💳자격/면허</TableCell>
+                                    <TableCell sx={table_cell} align='center'>🎒출결</TableCell>
+                                    <TableCell sx={table_cell} align='center'>👍가산점</TableCell>
+                                </TableRow>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>70</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>20</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>15</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>110</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>215</TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </div>
+                    <div className='table'>
+                    <div style={{fontSize:"16px",fontWeight:500}}>전문기술병</div>
+                        <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray",boxShadow: "0px 1px 3px gray" }}>
+                            <Table>
+                                <TableRow sx={{ height: 80 }}>
+                                    <TableCell sx={table_cell} align='center' rowSpan={2}>구분</TableCell>
+                                    <TableCell sx={table_cell} align='center' colSpan={4}>📝서류전형</TableCell>
+                                    <TableCell sx={table_cell} align='center' rowSpan={2}>👨‍🏫면접</TableCell>
+                                    <TableCell sx={table_cell} align='center' rowSpan={2}>계</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell sx={table_cell} align='center'>💳자격/면허</TableCell>
+                                    <TableCell sx={table_cell} align='center'>💳전공</TableCell>
+                                    <TableCell sx={table_cell} align='center'>🎒출결</TableCell>
+                                    <TableCell sx={table_cell} align='center'>👍가산점</TableCell>
+                                </TableRow>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>50</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>40</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>10</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>15</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>100</TableCell>
+                                        <TableCell sx={table_cell_point} align='center'>215</TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </div>
+
+                </div>
 
                 <div className='content3-article'>
                     {/* {spTitles.map(data=>{
@@ -501,6 +595,7 @@ let Enlist = (props) => {
                         )
                     })
                     }
+                    {bannerstyle}
                 </div>
             </div>
         )
