@@ -76,6 +76,7 @@ const Login = () => {
                 localStorage.setItem("userInfo",JSON.stringify(values));
                 localStorage.setItem("IdToken",response.data.data);
                 alert("로그인 성공!");
+
                 reSet();
 
                 window.location = '/';
