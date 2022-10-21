@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 // API
 router_speciality.get('/list', ctrl_speciality.get.speciality_list);
-router_speciality.get('/list/:speciality_name/:military_kind', ctrl_speciality.get.speciality_desc);
+router_speciality.get('/:speciality_name/:military_kind', ctrl_speciality.get.speciality_desc);
 router_speciality.get('/:speciality_name/:military_kind/opinions', ctrl_speciality.get.speciality_opinions);
 router_speciality.get('/:speciality_name/:military_kind/questions', ctrl_speciality_question.get.speciality_questions);
 router_speciality.get('/:speciality_name/:military_kind/answers/:question_code', ctrl_speciality_question.get.speciality_answers);
