@@ -20,8 +20,8 @@ let SpecialtyItem = (props) => {
     }
 
     return (
-        <Link to={`/Specialty/list/${props.name}/${props.military_kind}`}>
-            <div className='specialtyitem'>
+        <div className='specialtyitem'>
+            <Link to={`/Specialty/list/${props.name}/${props.military_kind}`}>
                 <div className='spimg' style={{ content: `URL(${props.imageSrc})` }} />
                 <div className='spcontent'>
                     <div className='sptype'>
@@ -40,15 +40,15 @@ let SpecialtyItem = (props) => {
                             marginRight: "0", marginLeft: "auto", padding: "0", "& .MuiBadge-badge": {
                                 color: "white",
                                 backgroundColor: "#1976d2",
-                                fontSize:"10px"
+                                fontSize: "10px"
                             }
                         }}>
-                        <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
+                            <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
                         </Badge>
                     </div>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
     );
 };
 
