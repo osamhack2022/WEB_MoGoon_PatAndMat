@@ -24,6 +24,7 @@ let Header = (props) => {
         if (alertLogout) {
             dispatch(clearUser());
             localStorage.removeItem("userInfo");
+            localStorage.removeItem("IdToken");
             window.location.reload();
         }
     }
@@ -42,7 +43,9 @@ let Header = (props) => {
                         <HeaderItem title="군지원" />
                     </Link>
                     <HeaderItem title="커뮤니티" />
-                    <HeaderItem title="마이페이지" />
+                    <Link to="/MyPage">
+                        <HeaderItem title="마이페이지" />
+                    </Link>
                 </ul>
                 <div>
                     <Button variant="contained" className='btnLogin' style={{ margin: "5px",backgroundColor:"#183C8C"}}>
