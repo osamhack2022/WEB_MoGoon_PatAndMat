@@ -16,6 +16,7 @@ import "../../css/Enlist.css"
 
 // test
 import "../../css/SpDetail.css"
+import { fontWeight } from '@mui/system';
 
 let Enlist = (props) => {
     const slideRef = useRef();
@@ -34,6 +35,14 @@ let Enlist = (props) => {
     const [handelTargetText, sethandelTargetText] = useState(null);
     const [handelTargetindex, sethandelTargetindex] = useState(null);
     // content3
+    const [openModal, setOpenModal] = React.useState(false);
+    const [modalKind,setmodalKind] = useState();
+    const handleModalOpen = (e) => {
+        console.log(e.target.attributes.name.value);   
+        setmodalKind(e.target.attributes.name.value);
+        setOpenModal(true);
+    }
+    const handleModalClose = () => setOpenModal(false);
     const [cont3CertList, setcont3CertList] = useState([]);
     const [cont3Major, setcont3Major] = useState(null);
     const [cont3Attendance, setcont3Attendance] = useState(null);
@@ -131,9 +140,10 @@ let Enlist = (props) => {
     }, [handelTargetText, handelTargetindex]);
 
     const handelModal = (e) => {
+        sethandelTargetindex(e.target.id);
+        sethandelTargetText(e.target.attributes.name.value);
+
         if(e.target.className=="content2-item"){
-            sethandelTargetindex(e.target.id);
-            sethandelTargetText(e.target.attributes.name.value);
             if (cont2item.find(item => item.spindex == e.target.id) != undefined) {
                 let spalready = cont2item.filter(data => data.spindex != e.target.id);
                 setcont2item(spalready);
@@ -152,8 +162,8 @@ let Enlist = (props) => {
     }
     
     const handelDetail = (e) =>{
-        // sethandelTargetindex(e.target.id);
-        // sethandelTargetText(e.target.name);
+        sethandelTargetindex(e.target.id);
+        sethandelTargetText(e.target.name);
         
         handleOpen();
         return;
@@ -187,9 +197,9 @@ let Enlist = (props) => {
             width: "50%",
             height: "60%",
             bgcolor: 'background.paper',
-            border: '2px solid #000',
+            border: '1px solid #000',
             boxShadow: 24,
-            p: 4,
+            p: 2,
             overflow: "auto"
         };
 
@@ -203,7 +213,7 @@ let Enlist = (props) => {
                                 backgroundColor: cont2item.find(item => item.spindex == index) != undefined ? '#183C8C' : 'white'
                             }}
                             key={index} name={item} id={index} onClick={handelModal}>{item}
-                                <span id={index} name={item} onClick={handelDetail}>자세히</span>
+                                <span id={index} name={item} onClick={handelDetail}>🔍</span>
                             </div>
                     ))}
                 </div>
@@ -442,146 +452,587 @@ let Enlist = (props) => {
         }
 
         const table_cell = {
+            fontFamily: "Noto Sans KR",
             fontSize: "1.1em",
-            fontWeight: "900",
+            fontWeight: "500",
             backgroundColor: "rgb(240, 240, 240)",
         }
 
         const table_cell_point = {
+            fontFamily: "Noto Sans KR",
             fontSize: "1em",
+            cursor: "pointer",
+            textDecoration: "underline",
+            color: "#183C8C",
+            fontWeight:"500"
         }
 
+        const styleModal = {
+            fontFamily: "Noto Sans KR",
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: "auto",
+            height: "auto",
+            bgcolor: 'background.paper',
+            border: '1px solid #000',
+            boxShadow: 24,
+            p: 2,
+            overflow: "auto"
+        };
+
+        const table_cell_detail = {
+            width:"auto",
+            fontFamily: "Noto Sans KR",
+            fontSize: "1.1em",
+            fontWeight: "600",
+            backgroundColor: "rgb(240, 240, 240)",
+        }
+
+        const table_cell_point__detail = {
+            wordBreak : "nomal",
+            width:"auto",
+            fontFamily: "Noto Sans KR",
+            fontSize: "1em",
+            fontWeight:"400"
+        }
+
+        useEffect(()=>{
+
+        },[modalKind]);
+
+        const NomalCertificate = () =>{
+            return(
+                <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray" ,boxShadow: "0px 1px 3px gray"}}>
+                <Table>
+                    <TableRow sx={{ height: 80 }}>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>구분</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' colSpan={3}>국가기술자격증</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' colSpan={3}>일학습병행자격증</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' colSpan={2}>일반자격증</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>미소지</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell sx={table_cell_detail} align='center'>기사이상</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>산업기사</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>기능사</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>L6, L5</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>L4, L3</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>L2</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>공인</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>비공인</TableCell>
+                    </TableRow>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>70</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>68</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>66</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>70</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>68</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>66</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>64</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>62</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>60</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            )
+        }
+
+        const Nomalattendance = () =>{
+            return(
+                <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray" ,boxShadow: "0px 1px 3px gray"}}>
+                <Table>
+                    <TableRow sx={{ height: 80 }}>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>구분</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' colSpan={5}>결석일자</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>비고</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell sx={table_cell_detail} align='center'>0일</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>1~2일</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>3~4일</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>5~6일</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>7일</TableCell>
+                    </TableRow>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>20</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>19</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>18</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>17</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>16</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>고교3년간 누계적용</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            )
+        }
+
+        const Nomalextra = () =>{
+            return(
+                <img src='img/etc/가산점.png' style={{height:"70vh"}}></img>
+            )
+        }
+
+        const Nomalinterview = () =>{
+            return(
+                <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray" ,boxShadow: "0px 1px 3px gray"}}>
+                <Table>
+                    <TableRow sx={{ height: 80 }}>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>평가내용</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>면접태도</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>표현력</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>정신력/의지력</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>성품</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>학교생활</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>계</TableCell>
+                    </TableRow>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>22</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>22</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>22</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>22</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>22</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>110</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            )
+        }
+
+        const SpecialtyCertificate = () =>{
+            return(
+                <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray" ,boxShadow: "0px 1px 3px gray"}}>
+                <Table>
+                    <TableRow sx={{ height: 80 }}>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>구분</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' colSpan={3}>국가기술자격증</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' colSpan={3}>일학습병행자격증</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' colSpan={2}>일반자격증</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' colSpan={2}>운전면허증(수송)</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>미소지</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell sx={table_cell_detail} align='center'>기사이상</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>산업기사</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>기능사</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>L6, L5</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>L4, L3</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>L2</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>공인</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>비공인</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>대형/특수</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>1종보통</TableCell>
+                    </TableRow>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>50</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>45</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>40</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>50</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>45</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>40</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>30</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>26</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>50</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>45</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>20</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            )
+        }
+
+        const SpecialtyMajor = () =>{
+            return(
+                <img src='img/etc/전공배점.png' style={{height:"75vh"}}></img>
+            )
+        }
+
+        const Specialtyattendance = () =>{
+            return(
+                <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray" ,boxShadow: "0px 1px 3px gray"}}>
+                <Table>
+                    <TableRow sx={{ height: 80 }}>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>구분</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' colSpan={5}>결석일자</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>비고</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell sx={table_cell_detail} align='center'>0일</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>1~2일</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>3~4일</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>5~6일</TableCell>
+                        <TableCell sx={table_cell_detail} align='center'>7일</TableCell>
+                    </TableRow>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>10</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>9</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>8</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>7</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>6</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>고교3년간 누계적용</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            )
+        }
+
+        const Specialtyinterview = () =>{
+            return(
+                <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray" ,boxShadow: "0px 1px 3px gray"}}>
+                <Table>
+                    <TableRow sx={{ height: 80 }}>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>평가내용</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>면접태도</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>표현력</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>정신력/의지력</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>성품</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>학교생활</TableCell>
+                        <TableCell sx={table_cell_detail} align='center' rowSpan={2}>계</TableCell>
+                    </TableRow>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>20</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>20</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>20</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>20</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>20</TableCell>
+                            <TableCell sx={table_cell_point__detail} align='center'>100</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            )
+        }
+
+        const TotalModal = () => {
+          switch (modalKind) {
+            case "일반자격":
+              return <NomalCertificate />;
+
+            case "일반출결":
+              return <Nomalattendance />;
+            case "일반가산점":
+              return <Nomalextra />;
+            case "일반면접":
+              return <Nomalinterview />;
+            case "전문자격":
+              return <SpecialtyCertificate />;
+            case "전문전공":
+              return <SpecialtyMajor />;
+            case "전문출결":
+              return <Specialtyattendance  />;
+            case "전문가산점":
+              return <Nomalextra />;
+            case "전문면접":
+              return <Specialtyinterview />;
+            default:
+              break;
+          }
+        };
+
         return (
-            <div className='content3-wrap'>
-                {/* <img src='img/etc/배점표.png' className='pointTable' /> */}
-                <div className='table-wrap'>
-                    <div className='table'>
-                        <div style={{fontSize:"16px",fontWeight:500}}>일반기술병</div>
-                        <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray" ,boxShadow: "0px 1px 3px gray"}}>
-                            <Table>
-                                <TableRow sx={{ height: 80 }}>
-                                    <TableCell sx={table_cell} align='center' rowSpan={2}>구분</TableCell>
-                                    <TableCell sx={table_cell} align='center' colSpan={3}>📝서류전형</TableCell>
-                                    <TableCell sx={table_cell} align='center' rowSpan={2}>👨‍🏫면접</TableCell>
-                                    <TableCell sx={table_cell} align='center' rowSpan={2}>계</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell sx={table_cell} align='center'>💳자격/면허</TableCell>
-                                    <TableCell sx={table_cell} align='center'>🎒출결</TableCell>
-                                    <TableCell sx={table_cell} align='center'>👍가산점</TableCell>
-                                </TableRow>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>70</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>20</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>15</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>110</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>215</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </div>
-                    <div className='table'>
-                    <div style={{fontSize:"16px",fontWeight:500}}>전문기술병</div>
-                        <TableContainer sx={{ width: "100%", height: "100%", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray",boxShadow: "0px 1px 3px gray" }}>
-                            <Table>
-                                <TableRow sx={{ height: 80 }}>
-                                    <TableCell sx={table_cell} align='center' rowSpan={2}>구분</TableCell>
-                                    <TableCell sx={table_cell} align='center' colSpan={4}>📝서류전형</TableCell>
-                                    <TableCell sx={table_cell} align='center' rowSpan={2}>👨‍🏫면접</TableCell>
-                                    <TableCell sx={table_cell} align='center' rowSpan={2}>계</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell sx={table_cell} align='center'>💳자격/면허</TableCell>
-                                    <TableCell sx={table_cell} align='center'>💳전공</TableCell>
-                                    <TableCell sx={table_cell} align='center'>🎒출결</TableCell>
-                                    <TableCell sx={table_cell} align='center'>👍가산점</TableCell>
-                                </TableRow>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell sx={{ height: 30 }} align='center'>배점</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>50</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>40</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>10</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>15</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>100</TableCell>
-                                        <TableCell sx={table_cell_point} align='center'>215</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </div>
-
+          <div className="content3-wrap">
+            {/* <img src='img/etc/배점표.png' className='pointTable' /> */}
+            <div className="table-wrap">
+              <div className="table">
+                <div style={{ fontSize: "16px", fontWeight: 500 }}>
+                  일반기술병
                 </div>
-
-                <div className='content3-article'>
-                    {/* {spTitles.map(data=>{
-                        return(
-                            <div className='content3-title'>
-                                <div style={{fontSize:"18px",fontWeight:"500"}}>{data}</div>
-                                
-                            </div>
-                        )
-                    })} */}
-                    <div className='content3-title'>
-                        <div style={{ fontSize: "18px", fontWeight: "500" }}>{spTitles[0]}</div>
-
-                        <Certificate options={certOption}></Certificate>
-                        <div className='content3-certLists'>
-                            {cont3CertList.map((data, index) => {
-                                return (
-                                    <div key={index} className='content3-certList'>
-                                        {data.name}
-                                        <span className='certdelete' name={data.name} onClick={handeldelete}>X</span>
-                                    </div>
-                                )
-                            })}
-                        </div>
-
-                        {/* 가지고 있는 자격증이 여러개면? */}
-                        <div className='total'>{cont3CertList.length == 0 ? "" : Math.max.apply(Math, cont3CertList.map(value => { return value.score; }))} : 점</div>
-                    </div>
-
-                    <div className='content3-title'>
-                        <div style={{ fontSize: "18px", fontWeight: "500" }}>{spTitles[1]}</div>
-                        <Major options={MajorOption}></Major>
-                        <div className='Majorselect' style={{ textAlign: "center", marginTop: '20px' }}>
-                            {cont3Major == null ? "" : cont3Major.name}
-                        </div>
-                        <div className='total'>{cont3Major == null ? "" : cont3Major.score} : 점</div>
-                    </div>
-
-                    <div className='content3-title'>
-                        <div style={{ fontSize: "18px", fontWeight: "500", display: "inline-block", marginRight: "5px" }}>{spTitles[2]}</div>
-                        <span style={{ color: "gray", fontSize: "12px" }}>※고교 3년간 누계 적용</span>
-                        <Attendance options={AttendanceOptions}></Attendance>
-                        <div style={{ textAlign: "center", marginTop: '20px' }}>
-                            {cont3Attendance == null ? "" : cont3Attendance.name}
-                        </div>
-
-                        <div className='total'>{cont3Attendance == null ? "" : cont3Attendance.score} : 점</div>
-                    </div>
-
-                    <div className='content3-title'>
-                        <div style={{ fontSize: "18px", fontWeight: "500" }}>{spTitles[3]}</div>
-                        <Extrapoint options={Extrapoints}></Extrapoint>
-                        {cont3Extra.map((data, index) => {
-                            return (
-                                <div key={index} className='content3-extralist'>
-                                    {data.name}
-                                    <span className='certdelete' name={data.name} onClick={handelExtradelete}>X</span>
-                                </div>
-                            )
-                        })}
-                        {/* score의 총합으로 계산하기 */}
-                        <div className='total'>{cont3Extra.length == 0 ? "" : cont3Extra.reduce((accumulator, current) => accumulator + current.score, 0)} : 점</div>
-                    </div>
-
+                <TableContainer
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "white",
+                    borderRadius: "10px",
+                    border: "1px solid gray",
+                    boxShadow: "0px 1px 3px gray",
+                  }}
+                >
+                  <Table>
+                    <TableRow sx={{ height: 80 }}>
+                      <TableCell sx={table_cell} align="center" rowSpan={2}>
+                        구분
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center" colSpan={3}>
+                        📝서류전형
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center" rowSpan={2}>
+                        👨‍🏫면접
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center" rowSpan={2}>
+                        계
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={table_cell} align="center">
+                        💳자격/면허
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center">
+                        🎒출결
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center">
+                        👍가산점
+                      </TableCell>
+                    </TableRow>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell sx={{ height: 30 }} align="center">
+                          배점
+                        </TableCell>
+                        <TableCell
+                          sx={table_cell_point}
+                          align="center"
+                          name="일반자격"
+                          onClick={handleModalOpen}
+                        >
+                          70
+                        </TableCell>
+                        <TableCell
+                          sx={table_cell_point}
+                          align="center"
+                          name="일반출결"
+                          onClick={handleModalOpen}
+                        >
+                          20
+                        </TableCell>
+                        <TableCell
+                          sx={table_cell_point}
+                          align="center"
+                          name="일반가산점"
+                          onClick={handleModalOpen}
+                        >
+                          15
+                        </TableCell>
+                        <TableCell
+                          sx={table_cell_point}
+                          align="center"
+                          name="일반면접"
+                          onClick={handleModalOpen}
+                        >
+                          110
+                        </TableCell>
+                        <TableCell
+                          sx={{ fontSize: "1em", fontWeight: "700" }}
+                          align="center"
+                        >
+                          215점
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+              <div className="table">
+                <div style={{ fontSize: "16px", fontWeight: 500 }}>
+                  전문기술병
                 </div>
+                <TableContainer
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "white",
+                    borderRadius: "10px",
+                    border: "1px solid gray",
+                    boxShadow: "0px 1px 3px gray",
+                  }}
+                >
+                  <Table>
+                    <TableRow sx={{ height: 80 }}>
+                      <TableCell sx={table_cell} align="center" rowSpan={2}>
+                        구분
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center" colSpan={4}>
+                        📝서류전형
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center" rowSpan={2}>
+                        👨‍🏫면접
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center" rowSpan={2}>
+                        계
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={table_cell} align="center">
+                        💳자격/면허
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center">
+                        💳전공
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center">
+                        🎒출결
+                      </TableCell>
+                      <TableCell sx={table_cell} align="center">
+                        👍가산점
+                      </TableCell>
+                    </TableRow>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell sx={{ height: 30 }} align="center">
+                          배점
+                        </TableCell>
+                        <TableCell sx={table_cell_point} align="center" name="전문자격" onClick={handleModalOpen}>
+                          50
+                        </TableCell>
+                        <TableCell sx={table_cell_point} align="center" name="전문전공" onClick={handleModalOpen}>
+                          40
+                        </TableCell>
+                        <TableCell sx={table_cell_point} align="center" name="전문출결" onClick={handleModalOpen}>
+                          10
+                        </TableCell>
+                        <TableCell sx={table_cell_point} align="center" name="전문가산점" onClick={handleModalOpen}>
+                          15
+                        </TableCell>
+                        <TableCell sx={table_cell_point} align="center" name="전문면접" onClick={handleModalOpen}>
+                          100
+                        </TableCell>
+                        <TableCell
+                          sx={{ fontSize: "1em", fontWeight: "700" }}
+                          align="center"
+                        >
+                          215점
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+              <Modal
+                open={openModal}
+                onClose={handleModalClose}
+                aria-labelledby="modal-modal-title"
+              >
+                <Box sx={styleModal}>{<TotalModal/>}</Box>
+              </Modal>
             </div>
-        )
+
+            <div className="content3-article">
+              <div className="content3-title">
+                <div style={{ fontSize: "18px", fontWeight: "500" }}>
+                  {spTitles[0]}
+                </div>
+
+                <Certificate options={certOption}></Certificate>
+                <div className="content3-certLists">
+                  {cont3CertList.map((data, index) => {
+                    return (
+                      <div key={index} className="content3-certList">
+                        {data.name}
+                        <span
+                          className="certdelete"
+                          name={data.name}
+                          onClick={handeldelete}
+                        >
+                          X
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* 가지고 있는 자격증이 여러개면? */}
+                <div className="total">
+                  {cont3CertList.length == 0
+                    ? ""
+                    : Math.max.apply(
+                        Math,
+                        cont3CertList.map((value) => {
+                          return value.score;
+                        })
+                      )}{" "}
+                  : 점
+                </div>
+              </div>
+
+              <div className="content3-title">
+                <div style={{ fontSize: "18px", fontWeight: "500" }}>
+                  {spTitles[1]}
+                </div>
+                <Major options={MajorOption}></Major>
+                <div
+                  className="Majorselect"
+                  style={{ textAlign: "center", marginTop: "20px" }}
+                >
+                  {cont3Major == null ? "" : cont3Major.name}
+                </div>
+                <div className="total">
+                  {cont3Major == null ? "" : cont3Major.score} : 점
+                </div>
+              </div>
+
+              <div className="content3-title">
+                <div
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "500",
+                    display: "inline-block",
+                    marginRight: "5px",
+                  }}
+                >
+                  {spTitles[2]}
+                </div>
+                <span style={{ color: "gray", fontSize: "12px" }}>
+                  ※고교 3년간 누계 적용
+                </span>
+                <Attendance options={AttendanceOptions}></Attendance>
+                <div style={{ textAlign: "center", marginTop: "20px" }}>
+                  {cont3Attendance == null ? "" : cont3Attendance.name}
+                </div>
+
+                <div className="total">
+                  {cont3Attendance == null ? "" : cont3Attendance.score} : 점
+                </div>
+              </div>
+
+              <div className="content3-title">
+                <div style={{ fontSize: "18px", fontWeight: "500" }}>
+                  {spTitles[3]}
+                </div>
+                <Extrapoint options={Extrapoints}></Extrapoint>
+                {cont3Extra.map((data, index) => {
+                  return (
+                    <div key={index} className="content3-extralist">
+                      {data.name}
+                      <span
+                        className="certdelete"
+                        name={data.name}
+                        onClick={handelExtradelete}
+                      >
+                        X
+                      </span>
+                    </div>
+                  );
+                })}
+                {/* score의 총합으로 계산하기 */}
+                <div className="total">
+                  {cont3Extra.length == 0
+                    ? ""
+                    : cont3Extra.reduce(
+                        (accumulator, current) => accumulator + current.score,
+                        0
+                      )}{" "}
+                  : 점
+                </div>
+              </div>
+            </div>
+          </div>
+        );
     }
 
     const Content4 = () => {
