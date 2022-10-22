@@ -1,0 +1,70 @@
+.en-info-edit-container {
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    margin-top: 50px;
+    padding: 30px;
+}
+
+.en-info-edit-container > h3 {
+    margin: 0;
+}
+
+.en-info-edit-container > ul {
+    display: block;
+    list-style-type: disc;
+}
+
+.en-info-edit-container > ul > li {
+    display: list-item;
+    list-style: disc;
+    padding: 0;
+    margin-left: 30px;
+}
+
+.en-info-edit-container > ul > li:hover {
+    display: list-item;
+    list-style: disc;
+    padding: 0;
+    margin-left: 30px;
+}
+
+.en-info-edit-list-container {
+    display: flex;
+}
+
+.en-info-edit-list-item {
+    text-align: center;
+    width: 120px;
+    background-color: lightgrey;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 8px;
+}
+
+.en-info-edit-list-item:hover {
+    border-color: #183C8C
+}
+
+.en-info-edit-list-item:checked {
+    border-style: dashed;
+    border-color: #183C8C
+}
+
+.en-info-edit-button-section {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#save-button {
+    width: 120px;
+}
+
+#cancel-button {
+    width: 120px;
+    background-color: #b2b2b2;
+}
+
+#cancel-button:hover {
+    background-color: #8b8b8b;
+}

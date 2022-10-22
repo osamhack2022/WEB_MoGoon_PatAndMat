@@ -15,6 +15,7 @@ nodemon 이 실행됩니다.\
 |GET|/api/speciality/특기명(한글)/군종(한글)/opinions|해당 특기의 의견 데이터 리스트를 불러옵니다.|
 |GET|/api/speciality/특기명(한글)/군종(한글)/questions|해당 특기의 질문 데이터 리스트를 불러옵니다.|
 |GET|/api/speciality/특기명(한글)/군종(한글)/answers/질문코드|해당 특기 질문의 답변 데이터 리스트를 불러옵니다.|
+|GET|/api/user/info|현재 로그인한 유저 정보를 불러옵니다.|
 |POST|/api/speciality/특기명(한글)/군종(한글)/like/increase|해당 특기의 좋아요 수를 1 늘립니다|
 |POST|/api/speciality/특기명(한글)/군종(한글)/like/decrease|해당 특기의 좋아요 수를 1 줄입니다|
 |POST|/api/auth/register|이메일/비밀번호 계정 생성을 요청합니다|
@@ -168,13 +169,74 @@ nodemon 이 실행됩니다.\
 
     질문코드는 해당 질문에 달린 답변을 조회할 때 사용됩니다.
 
+* ## GET /api/user/info
+    현재 로그인 중인 사용자의 정보를 불러옵니다.
+    현재 로그인 중인 사용자를 전달하기 위해 요청 헤더 중
+    Authorization 헤더에 Bearer 타입의 ID Token을 넘깁니다.
+
+    아래는 반환 데이터 입니다.
+    
+    |속성명|데이터 타입|간단 설명|예시 값|
+    |:---:|:---:|:---:|:---:|
+    |name|string|이름|"권찬"|
+    |nickname|string|닉네임|"에버듀"|
+    |favorite_speciality|array|좋아요 누른 특기 리스트|["km1sF8jysWoBiRxSUWXg", "km1sF8jysWoBiRxSUWXn"]|
+    |school|map|학교 및 전공 정보|하단 참고|
+    |certificate|map|자격증 정보|하단 참고|
+    |extra_point|map|가산점 정보|하단 참고|
+    |extra_point|map|가산점 정보|하단 참고|
+
+    학교 및 전공 정보는 아래와 같은 데이터를 가집니다.
+    ```json
+    "school": {
+        "work_school": "2년 수료", // 직업전문학교, 인재개발원 경력 : 2년 수료, 1년 수료, 6개월 ~ 1년 중 하나의 값
+        "type": "대학교", // 대학교, 전문대(2년), 전문대(3년), 고졸 중 하나의 값
+        "grade": "1학년", // 1학년, 2학년, 3학년, 4학년 중 하나의 값
+        "is_major": "전공", // 고졸 선택시 전공 / 비전공 여부
+        "is_register": "재학" // 재학 / 수료 여부
+    },
+    ```
+    자격증 정보는 아래와 같은 데이터를 가집니다.
+    ```json
+    "certificate": {
+        "national": "기사이상", // 국가기술자격: 기사이상 / 산업기사 / 기능사 / null 중 하나의 값
+        "general": "공인", // 일반자격: 공인 / 민간 / null 중 하나의 값
+        "drive_license": "대형 / 특수", // 운전면허: 대형 / 특수, 1종 보통, 2종 보통(수동) / null 중 하나의 값
+        "work_learn": "L2" // 일학습 병행 자격증: L6, L5 / L4, L3, L2, null 중 하나의 값
+    },
+    ```
+    가산점은 아래와 같은 데이터를 가집니다.
+    ```json
+    "extra_point": {
+        "other": {
+            "국가유공자_독립운동가": true,
+            "국외이주자": true,
+            "경제적약자": true
+        },
+        "volunteer": 8, // 봉사활동 시간: 0 8 16 24 32 40 48 56 64 중 하나의 값
+        "blood_donation": 8, // 헌혈 횟수: 0~8 사이의 값
+        "child_count": "2인", // 다자녀 여부: 2인 / 3인이상 / null 중 하나의 값
+        "history_cert": "1, 2급",// 한국사능력검정시험: 1, 2급 / 3, 4급 / null 중 하나의 값
+        "korean_cert": "1, 2급" // 한국어능력검정시험: 1, 2급 / 3, 4급 / null 중 하나의 값
+    }
+    ```
+
 * ## POST /api/speciality/특기명(한글)/군종(한글)/like/increase
-    해당하는 특기의 좋아요 수를 1 증가시킵니다.   
+    요청시 Authorization 헤더를 통해 Bearer 타입의 아이디 토큰을 보내야 합니다.
+
+    해당하는 특기의 좋아요 수를 1 증가시키고,
+    현재 로그인한 유저의 즐겨찾기 특기 리스트에 해당 특기를 추가합니다.
+    
     별도의 응답 데이터는 없습니다.   
-    (result객체를 통해 보내는 데이터가 없다는 뜻입니다!)
+    (result객체를 통해 보내는 데이터가 없다는 뜻입니다)
 * ## POST /api/speciality/특기명(한글)/군종(한글)/like/decrease
-    해당하는 특기의 좋아요 수를 1 감소시킵니다.   
-    별도의 응답 데이터는 없습니다.   
+    요청시 Authorization 헤더를 통해 Bearer 타입의 아이디 토큰을 보내야 합니다.
+
+    해당하는 특기의 좋아요 수를 1 감소시키고,
+    현재 로그인한 유저의 즐겨찾기 특기 리스트에서 해당 특기를 삭제합니다.
+
+    별도의 응답 데이터는 없습니다.
+    (result객체를 통해 보내는 데이터가 없다는 뜻입니다)
 
 * ## POST /api/auth/login
     서버에 입력한 계정 정보로 로그인을 요청합니다.   
@@ -184,7 +246,9 @@ nodemon 이 실행됩니다.\
     |email|string|이메일|kckc0608@naver.com|
     |password|string|비밀번호|123412|
 
-    응답은 파이어베이스의 인증 객체를 반환합니다.
+    응답은 **ID Token을 반환합니다.**
+    반환 받은 ID Token은 매 요청시 Authorization 헤더에 Bearer type으로 넣어서 요청해주세요.
+    이 토큰의 존재 여부로 로그인 여부를 알 수 있습니다.
 * ## POST /api/auth/register
     서버에 입력한 계정 정보로 회원가입을 요청합니다.   
     요청시 body로 아래의 값을 전달합니다.
@@ -193,7 +257,7 @@ nodemon 이 실행됩니다.\
     |email|string|이메일|kckc0608@naver.com|
     |password|string|비밀번호|123412|
 
-    응답은 파이어베이스의 인증 객체를 반환합니다.
+    result 응답 객체에 담기는 데이터는 없습니다.
 
 * ## POST /api/speciality/특기명(한글)/군종(한글)/opinion
     해당 특기의 의견 데이터 추가를 요청합니다.   

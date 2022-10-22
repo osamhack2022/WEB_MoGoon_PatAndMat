@@ -1,0 +1,13 @@
+.my-page-content {
+    margin: auto;
+    padding-bottom: 20px;
+    width: 90%;
+}
+
+.info-area {
+    text-align: center;
+}
+
+.my-en-info-container {
+    display: flex;
+}

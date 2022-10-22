@@ -114,7 +114,8 @@ const speciality_question = async (req, res) => {
         else {
             const doc_list = snapshot.docs.map(doc => doc.id);
             const questions_doc = doc_list[0];
-            const docRef = await addDoc(collection(db, `speciality_qna/${questions_doc}/questions`), req.body);
+            const body = req.body;
+            const docRef = await addDoc(collection(db, `speciality_qna/${questions_doc}/questions`), body);
             result.success = true;
         }
     } catch (error) {
@@ -148,7 +149,10 @@ const speciality_answer = async (req, res) => {
         else {
             const doc_list = snapshot.docs.map(doc => doc.id);
             const questions_doc = doc_list[0];
-            const docRef = await addDoc(collection(db, `speciality_qna/${questions_doc}/questions/${question_code}/answers`), req.body);
+            const body = req.body;
+            body.like = 0;
+            body.dislike = 0;
+            const docRef = await addDoc(collection(db, `speciality_qna/${questions_doc}/questions/${question_code}/answers`), body);
             result.success = true;
             
         }

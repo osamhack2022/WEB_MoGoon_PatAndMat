@@ -2,6 +2,8 @@
 import { Result, cookieOption } from './ctrl.common.js';
 import { auth } from '../firebase/auth.js';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from "firebase/firestore/lite";
+import { db } from '../firebase/db.js';
 
 const register = async (req, res) => {
     const email = req.body.email;
@@ -10,11 +12,39 @@ const register = async (req, res) => {
     const result = new Result();
 
     try {
-        console.log(email); // TODO
-        console.log(password); // TODO
         const credential = await createUserWithEmailAndPassword(auth, email, password);
         result.success = true;
-        result.data = credential;
+        await setDoc(doc(db, "user", email), {
+            school: {
+                work_school: "",
+                type: "",
+                is_register: "",
+                grade: "",
+                is_major: ""
+            },
+            extra_point: {
+                blood_donation: 0,
+                volunteer: 0,
+                korean_cert: "",
+                history_cert: "",
+                other: {
+                    "국가유공자_독립운동가": false,
+                    "국외이주자": false,
+                    "경제적약자": false
+                },
+                child_count: ""
+            },
+            certificate: {
+                "national": "",
+                "general": "",
+                "drive_license": "",
+                "work_learn": ""
+            },
+            name: "user",
+            nickname: "nick",
+            favorite_speciality: [],
+            absent_days: "0일"
+        });
     } catch (error) {
         result.error_code = error.code;
         result.error_msg = error.message;
@@ -32,14 +62,11 @@ const login = async (req, res) => {
     const result = new Result();
 
     try {
-        console.log(email); // TODO
-        console.log(password); // TODO
         const credential = await signInWithEmailAndPassword(auth, email, password);
         
         result.success = true;
         result.data = await credential.user.getIdToken();
         res.cookie('refresh_token', credential.user.refreshToken, cookieOption);
-        res.cookie('id_token', await credential.user.getIdToken(), cookieOption);
         
     } catch (error) {
         result.error_code = error.code;
