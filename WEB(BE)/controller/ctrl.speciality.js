@@ -1,25 +1,29 @@
 'use strict';
 import { Result } from './ctrl.common.js';
 import { db } from '../firebase/db.js';
-import { collection, getDocs, doc, updateDoc, query, where, getDoc, addDoc, DocumentReference, increment } from 'firebase/firestore/lite';
+import { collection, getDocs, doc, updateDoc, query, where, getDoc, addDoc, DocumentReference, increment, arrayUnion, arrayRemove } from 'firebase/firestore/lite';
 import { adminAuth } from '../firebase/admin.js';
 
 const speciality_list = async (req, res) => {
     const result = new Result();
     const refresh_token = req.cookies.refresh_token;
-    const id_token = req.cookies.id_token;
+    
+    let auth_type = undefined;
+    let id_token = undefined;
+
+    if (!!req.headers.authorization) {
+        [ auth_type, id_token ] = req.headers.authorization.split(' ');
+    }
 
     try {
         let user_data = undefined;
 
-        if (id_token !== undefined) {
+        if (!!id_token) {
             const decodedToken = await adminAuth.verifyIdToken(id_token);
-            console.log(decodedToken); // TODO : remove later
             const email = decodedToken.email;
             const user_doc = await getDoc(doc(db, "user", email));
             if (user_doc.exists()) {
                 user_data = user_doc.data();
-                console.log(user_data); // TODO : remove later
             }
         }
 
@@ -29,8 +33,6 @@ const speciality_list = async (req, res) => {
             doc_data.is_favorite = user_data !== undefined && user_data.favorite_speciality.includes(doc.id);
             return doc_data;
         });
-
-        //console.log(doc_list); // TODO
 
         result.success = true;
         result.data = doc_list;
@@ -106,40 +108,71 @@ const speciality_desc = async (req, res) => {
     return res.json(result);
 }
 
-const speciality_like_increase = async (req, res) => {
-    // TODO : 특기 즐겨찾기 클릭시 좋아요 개수 증가
+const speciality_like = async (req, res) => {
     const result = new Result();
     try {
         const speciality_name = req.params.speciality_name;
         const military_kind = req.params.military_kind;
         const is_increase = req.params.is_increase;
 
-        console.log(speciality_name);
-        console.log(military_kind);
+        if (!req.headers.authorization) {
+            result.success = false;
+            result.err_code = 'user/no-authorization-header';
+            result.err_msg = 'check authorization header';
+
+            return res.json(result);
+        }
+
+        const [ auth_type, id_token ] = req.headers.authorization.split(' ');
+        if (!id_token) {
+            result.success = false;
+            result.err_code = 'user/no-token';
+            result.err_msg = 'no id_token, check id_token in authorization header';
+
+            return res.json(result);
+        }
+
+        const decodedToken = await adminAuth.verifyIdToken(id_token);
+        const email = decodedToken.email;
+        const user_doc = await getDoc(doc(db, "user", email));
+        if (!user_doc.exists()) {
+            result.success = false;
+            result.err_code = 'user/no-email';
+            result.err_msg = '토큰 내 유저 이메일이 디비에 존재하지 않습니다.';
+            return res.json(result);
+        }
 
         const q = query(collection(db, 'speciality'), 
                             where("speciality_name", "==", speciality_name),
                             where("military_kind", "==", military_kind));
         const snapshot = await getDocs(q);
+        
         if (snapshot.empty) {
             result.success = false;
+            result.err_code = "specialtiy/not-found"
             result.err_msg = "해당하는 특기가 없습니다. 특기 이름과 군종을 확인하세요.";
+            return res.json(result);
+        }
+        
+        const docs = snapshot.docs.map(doc => [doc.ref, doc.id]);
+        const [speciality_doc, speciality_id] = docs[0];
+        if (is_increase === 'increase') {
+            updateDoc(speciality_doc, {like: increment(1)});
+            updateDoc(user_doc.ref, {
+                favorite_speciality: arrayUnion(speciality_id)
+            });
+            result.success = true;
+        }
+        else if (is_increase === 'decrease') {
+            updateDoc(speciality_doc, {like: increment(-1)});
+            updateDoc(user_doc.ref, {
+                favorite_speciality: arrayRemove(speciality_id)
+            });
+            result.success = true;
         }
         else {
-            const docs = snapshot.docs.map(doc => doc.ref);
-            const speciality_doc = docs[0];
-            if (is_increase === 'increase') {
-                updateDoc(speciality_doc, {like: increment(1)});
-                result.success = true;
-            }
-            else if (is_increase === 'decrease') {
-                updateDoc(speciality_doc, {like: increment(-1)});
-                result.success = true;
-            }
-            else {
-                result.success = false;
-                result.err_msg = "API가 잘못되었습니다. like/increase like/decrease 이외의 값이 들어왔습니다.";
-            }
+            result.success = false;
+            result.err_msg = "API가 잘못되었습니다. like/increase like/decrease 이외의 값이 들어왔습니다.";
         }
     } catch (error) {
         result.success = false;
@@ -267,7 +300,7 @@ export const ctrl_speciality = {
         speciality_opinions,
     },
     post: {
-        speciality_like_increase,
+        speciality_like,
         speciality_opinion,
     },
     add, // TODO : remove

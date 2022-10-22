@@ -12,14 +12,24 @@ import SpDetail from './components/Specialty/SpDetail';
 import Login from './components/Account/Login';
 import Join from './components/Account/Join';
 import Enlist from './components/Enlist/Enlist';
+import MyPage from './components/MyPage/MyPage';
 
 //css
 import './App.css';
 import './css/Header.css';
 import './css/Specialty.css';
-// import './css/Login.css';
+
+//redux
+import { useDispatch } from "react-redux";
+import { loginUser } from './reducer/userSlice';
 
 function App() {
+  const dispatch = useDispatch();
+
+  if(localStorage.getItem("userInfo")!=null){
+    dispatch(loginUser(localStorage.getItem("userInfo")));
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -34,6 +44,7 @@ function App() {
             <Route path="/Specialty" element={<Specialty />}></Route>
             <Route path="/Specialty/list/:SpName/:Spkind" element={<SpDetail />}></Route>
             <Route path="/Enlist" element={<Enlist />}></Route>
+            <Route path="/MyPage" element={<MyPage />}></Route>
           </Routes>
         </div>
       </BrowserRouter>
