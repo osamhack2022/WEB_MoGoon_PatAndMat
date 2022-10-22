@@ -37,18 +37,18 @@
     text-align: center;
     width: 120px;
     background-color: lightgrey;
+    border: 3px solid lightgrey;
     border-radius: 8px;
     padding: 10px;
     margin: 10px 8px;
 }
 
-.en-info-edit-list-item:hover {
-    border-color: #183C8C
+.en-info-edit-list-item:hover {   
+    cursor: pointer;
 }
 
-.en-info-edit-list-item:checked {
-    border-style: dashed;
-    border-color: #183C8C
+.clicked {
+    border: 3px solid #183C8C;
 }
 
 .en-info-edit-button-section {
