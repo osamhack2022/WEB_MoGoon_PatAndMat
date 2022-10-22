@@ -31,7 +31,7 @@ let Header = (props) => {
 
     return (
         <div className='headerWapper'>
-            <nav>
+            <nav className='header'>
                 <ul>
                     <Link to="/">
                         <div className='logo'></div>
@@ -42,7 +42,9 @@ let Header = (props) => {
                     <Link to="/Enlist">
                         <HeaderItem title="군지원" />
                     </Link>
-                    <HeaderItem title="커뮤니티" />
+                    <Link to="/">
+                        <HeaderItem title="커뮤니티" />
+                    </Link>
                     <Link to="/MyPage">
                         <HeaderItem title="마이페이지" />
                     </Link>

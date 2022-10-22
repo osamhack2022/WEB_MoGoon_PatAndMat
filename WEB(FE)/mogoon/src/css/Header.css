@@ -28,7 +28,7 @@ nav{
     width: 100%;
 }
 
-ul{
+.header > ul{
     display: inline-flex;
     position: relative;
     justify-content: space-around;
@@ -41,7 +41,7 @@ ul{
     /* background-color: ; */
 }   
 
-li {
+.header > ul > a > li {
     font-size: 1.1em;
     display: inline-block;
     letter-spacing :0.5px;
@@ -49,12 +49,12 @@ li {
     border-radius: 20px;
 }
 
-li:hover{
+.header > ul > a > li:hover{
     background-color: #f7f7f8;
     cursor: pointer;
 }
 
-nav > div{
+.header > div{
     display: flex;
     align-items: center;
     margin-left: auto;
