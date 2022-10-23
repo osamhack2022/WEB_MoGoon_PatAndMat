@@ -1,9 +1,8 @@
 // import React, { useState } from 'react';
 import React, { useEffect, useState, useCallback } from "react";
 import { json, Link } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import Alert from '@mui/material/Alert';
+
 // redux
 import { useDispatch } from "react-redux";
 import { clearUser, loginUser } from "../../reducer/userSlice.js";
@@ -18,7 +17,7 @@ import MyQuestionItem from "./MyQuestionItem.js";
 import "../../css/MyPage/MyPage.css"
 
 const MyPage = () => {
-    const [item, setItem] = useState(null);
+    const [myPageData, setMyPageData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -40,12 +39,12 @@ const MyPage = () => {
                     },
                 }).then((response) => {
                     return response.data;
-                }).then((data) => {
+                }).then((result) => {
                     setLoading(false);
-                    if (data.success)
-                        setItem(data.data);
+                    if (result.success)
+                        setMyPageData(result.data);
                     else
-                        setError(data.err_msg);
+                        setError(result.err_msg);
                 });    
             } catch (error) {
                 console.log(error);
@@ -58,18 +57,24 @@ const MyPage = () => {
     if (loading)
         return <div className="info-area">now Loading..</div>
 
-    if (!item) {
-        return <div>데이터가 없어요! 개발자에게 문의해주세요😨</div>
+    if (!myPageData) {
+        return <div>데이터를 받지 못했어요! 개발자에게 문의해주세요😨</div>
     }
 
-    console.log(item);
+    console.log(myPageData);
+
+    const info_div_style = {
+        marginLeft: "16px",
+    };
+
     return (
         <div className="my-page-content">
-            <h2>안녕하세요, {item.name}님!😎</h2>
+            <h2>안녕하세요, {myPageData.name}님!😎</h2>
             <h3>내가 찜해둔 특기</h3>
             <div>
-                {item.favorite_speciality.map((data) => {
-                    console.log(item.favorite_speciality);
+                {myPageData.favorite_speciality.length === 0 
+                ? <div style={info_div_style}>찜한 특기가 없어요! 특기 소개 페이지에서 관심있는 특기를 찜해보세요.</div> 
+                : myPageData.favorite_speciality.map((data) => {
                     return <SpecialtyItem key={data.speciality_name} code={data.speciality_code} name={data.speciality_name} class={data.class}
                     desc={data.desc} military_kind={data.military_kind} tags={data.tags}
                     imageSrc={data.imageSrc} kind={data.kind} like={data.like} />
