@@ -134,6 +134,10 @@ nodemon 이 실행됩니다.\
     |opinion|string|의견|"this is good speciality for study"|
     |like|number|좋아요 수|0 (기본), 1, 2, ...|
     |dislike|number|싫어요 수|0 (기본), 1, 2, ...|
+    |created_time|object|의견 생성 시간|{"seconds": 1666505548, "nanoseconds": 141000000}|
+
+    생성 시간은 타임스탬프 입니다.
+    날짜로 활용하기 위해서는 변환이 필요합니다.
 
 * ## GET /api/speciality/특기명(한글)/군종(한글)/questions
     해당 특기의 질문 데이터 객체 **리스트**를 응답 받습니다.   
