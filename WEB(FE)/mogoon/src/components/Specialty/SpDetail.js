@@ -1,8 +1,9 @@
-import React, { useEffect, useState,useRef } from 'react';
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useRef } from 'react';
+import { Await, useParams } from "react-router-dom";
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import TextField from '@mui/material/TextField';
 
 import '../../css/SpDetail.css';
 import '../../css/SpDetailTap.css';
@@ -14,15 +15,21 @@ let SpDetail = (props) => {
     let ref = useRef();
 
     //Enlist Test
-    if(name==undefined || type==undefined){
-        name="정보체계관리";
-        type="공군";
+    if (name == undefined || type == undefined) {
+        name = "정보체계관리";
+        type = "공군";
 
     }
 
+    //특기소개
     const [SpDetailData, setSpDetailData] = useState();
-    const [loading,setLoading] = useState("로딩중..");
+    const [loading, setLoading] = useState("로딩중..");
     const [title, SetTitle] = useState([]);
+
+    //의견 및 기타
+    const [Spopinions, setSpopinions] = useState();
+    const user = localStorage.getItem('userInfo');
+    const token = localStorage.getItem('IdToken');
 
     const [activeIndex, setActiveIndex] = useState(0);
     const tabClickHandler = (index) => {
@@ -30,25 +37,126 @@ let SpDetail = (props) => {
     }
 
     async function getData() {
-
-        await axios.get(`http://localhost:5000/api/speciality/list/${name}/${type}`)
+        await axios.get(`http://localhost:5000/api/speciality/${name}/${type}`)
             .then((response) => {
-                // console.log();
                 setSpDetailData(response.data.data);
-                // console.log(response.data.data.contents);
                 let titles = [...response.data.data.contents];
                 SetTitle(titles);
 
                 setLoading("완료");
             })
-            .catch((error)=>{
+            .catch((error) => {
                 setLoading("오류");
             })
+    }
 
+    async function getDataopinions() {
+        await axios.get(`http://localhost:5000/api/speciality/${name}/${type}/opinions`)
+            .then((response) => {
+                console.log(response);
+                let opData = [...response.data.data];
+
+                setSpopinions(opData);
+            })
+            .catch((error) => {
+                setLoading("오류");
+            })
+    }
+
+    const handelLike = (e) =>{
+        let chkLike = e.target.attributes.name.value;
+        console.log(chkLike);
+
+        //아직 없음
+        if(chkLike=="like"){
+
+        }else{
+
+        }
+
+        // getDataopinions();
+    }
+
+    useEffect(()=>{
+    },[Spopinions]);
+
+    const HandelOpinionAdd = () =>{
+        let opInputValue = "";
+
+        async function postDataopinions() {
+            await axios.get('http://localhost:5000/api/user/info', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("IdToken")}`,
+                },
+            })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+
+            await axios.post(`http://localhost:5000/api/speciality/${name}/${type}/opinion`,
+                // {
+                //     editor_nickname: "WBCode3",
+                //     editor_email: user.email,
+                //     opinion: opInputValue
+                // }
+                // 닉네임 없으니까 지금은 그냥 이메일로
+                {
+                    editor_nickname: user.email,
+                    editor_email: user.email,
+                    opinion: opInputValue
+                }
+            ).then((response) => {
+                console.log(response);
+                getDataopinions();
+            })
+        }
+
+        const handelopinionAdd_button = () =>{
+            if (!opInputValue == "") {
+
+                postDataopinions();
+
+
+                //여기서부터
+            } else {
+                alert("의견을 입력해주세요.");
+                return;
+            }
+        }
+
+        if(!token){
+            return(
+                <div>앗, 여긴 로그인이 필요해요!</div>
+            )
+        }else{
+            return (
+                <>
+                    <TextField
+                        id="standard-multiline-static"
+                        label=""
+                        multiline
+                        multiline
+                        fullWidth
+                        rows={3}
+                        sx={{backgroundColor:"white",borderRadius:"5px",padding:"10px",boxSizing:"border-box",paddingBottom:"1px"}}
+                        placeholder="내 의견이 아직 없습니다 내 의견을 작성해주세요."
+                        variant="standard"
+                        onChange={(e)=>{opInputValue = e.target.value}}
+                    />
+                    <div className='opinionAdd'>
+                        <button className='opinionAdd_button' onClick={handelopinionAdd_button}>작성</button>
+                    </div>
+                </>
+            )
+        }
     }
 
     useEffect(() => {
         getData();
+        getDataopinions();
     }, []);
 
     if (loading == "로딩중..") {
@@ -60,13 +168,13 @@ let SpDetail = (props) => {
         );
     }
 
-    if(loading=="오류"){
-        return(
+    if (loading == "오류") {
+        return (
             <div className="pagestate">데이터를 가져오는 도중 오류가 발생하였습니다.</div>
         );
     }
 
-    if (!SpDetailData) {
+    if (!SpDetailData || !Spopinions) {
         return null;
     }
 
@@ -122,20 +230,20 @@ let SpDetail = (props) => {
             tabCont: (
                 <>
                     {
-                        title.map(data => {
+                        title.map((data, index) => {
                             return (
-                                <BodyTitle title={data.title}>
+                                <BodyTitle key={index} title={data.title}>
                                     <div>
                                         <p>
                                             {
-                                                data.content.map(cont => {
+                                                data.content.map((cont, index) => {
                                                     if (cont instanceof Object) {
                                                         return (
                                                             handelGrid(cont)
                                                         )
                                                     } else {
                                                         return (
-                                                            <span style={{ display: "block" }}>{cont}</span>
+                                                            <span key={index} style={{ display: "block" }}>{cont}</span>
                                                         )
                                                     }
                                                 })
@@ -155,7 +263,43 @@ let SpDetail = (props) => {
             ),
             tabCont: (
                 <>
-                    <div> 의견 및 기타 내용 </div>
+                    <BodyTitle title="내 의견">
+                        <div>
+                            <p style={{ whiteSpace: "pre-wrap",height:"auto" }}>
+                                <HandelOpinionAdd/>
+                            </p>
+                        </div>
+                    </BodyTitle>
+
+                    <BodyTitle title="의견">
+                        {/* <span>전체보기</span> */}
+                        {Spopinions.map((data, index) => {
+                            return (
+                                <div key={index} style={Spopinions.length==(index+1)? {margin:"0px"}:{marginBottom:"20px"}}>
+                                    <span style={{fontWeight:500,fontSize:"1.2em",marginBottom:"10px"}}>
+                                        {data.editor_nickname}
+                                    </span>
+                                    <p>
+                                        {data.opinion}
+                                        <div style={{marginTop:"20px"}}>
+                                            <div style={{display:"inline-block",marginRight:"10px"}}>
+                                                <span name="like" style={{ cursor: "pointer" }} onClick={handelLike}>
+                                                    좋아요
+                                                </span>
+                                                {data.like}
+                                            </div>
+                                            <div style={{display:"inline-block"}}>
+                                                <span name="dislike" style={{ cursor: "pointer" }} onClick={handelLike}>
+                                                    싫어요
+                                                </span>
+                                                {data.dislike}
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+                            )
+                        })}
+                    </BodyTitle>
                 </>
             )
         },
@@ -172,7 +316,7 @@ let SpDetail = (props) => {
     ];
 
     return (
-        <div className='SpDetail-content' style={props.name=="군지원"?{width:"100%",marginTop:"60px"}:{width:"60%"}}>
+        <div className='SpDetail-content' style={props.name == "군지원" ? { width: "100%", marginTop: "60px" } : { width: "60%" }}>
             <div className='section-header'>
                 <div className='header-img' />
                 <div className='header-content'>
@@ -185,9 +329,9 @@ let SpDetail = (props) => {
                     </div>
                     <div className='desc'>
                         {
-                            SpDetailData.speciality_summary.map(data => {
+                            SpDetailData.speciality_summary.map((data, index) => {
                                 return (
-                                    <span style={{ display: "block" }}>{data}</span>
+                                    <span key={index} style={{ display: "block" }}>{data}</span>
                                 );
                             })
                         }
@@ -216,7 +360,7 @@ let SpDetail = (props) => {
 
 let BodyTitle = (props) => {
     return (
-        <article className='body-artical' style={{ marginBottom: "30px" }}>
+        <article className='body-artical'>
             <span className='body-title'>{props.title}</span>
             {props.children}
             {/* <hr/> */}

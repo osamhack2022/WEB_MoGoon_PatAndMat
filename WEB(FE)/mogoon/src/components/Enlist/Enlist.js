@@ -38,7 +38,6 @@ let Enlist = (props) => {
   const [openModal, setOpenModal] = React.useState(false);
   const [modalKind, setmodalKind] = useState();
   const handleModalOpen = (e) => {
-    console.log(e.target.attributes.name.value);
     setmodalKind(e.target.attributes.name.value);
     setOpenModal(true);
   }
@@ -1055,8 +1054,8 @@ let Enlist = (props) => {
   return (
     <div className='Enlist-wrap'>
       <button className={slideindex === 1 ? "btnblock" : "btnpre"} onClick={handelpre}>이전</button>
-      {/* <button className={(slideindex === 1 || slideindex === 4) ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button> */}
-      <button className={(slideindex === 4) ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button>
+      <button className={(slideindex === 1 || slideindex === 4) ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button>
+      {/* <button className={(slideindex === 4) ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button> */}
       <div className='stepper-wrap'>
         <StepItem />
       </div>
