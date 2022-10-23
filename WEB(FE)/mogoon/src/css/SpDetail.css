@@ -135,6 +135,18 @@
     margin-bottom: 10px;
 }
 
+.view-all{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: gray;
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
 .body-artical{
     margin-bottom: 30px;
 }
@@ -152,6 +164,16 @@
     color: #141414;
     background-color: rgb(240, 240, 240);
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
+    /* display: none; */
+    margin-bottom: 20px;
+}
+
+/* .body-artical > div:nth-child(-n+5){
+    display: block;
+} */
+
+.body-artical > div:nth-last-child(1){
+    margin-bottom: 0px;
 }
 
 .section-body ~ p{
@@ -183,3 +205,9 @@
     background-color: #102c69;
     color: white;
 }
+
+.dislike{
+    position: relative;
+    top: 3px;
+}
+
