@@ -60,7 +60,7 @@ let Header = (props) => {
                         </Link>
                     </Button>:""}
 
-                    <AccountCircleIcon className='account' fontSize='large' />
+                    {/* <AccountCircleIcon className='account' fontSize='large' /> */}
                 </div>
             </nav>
         </div>

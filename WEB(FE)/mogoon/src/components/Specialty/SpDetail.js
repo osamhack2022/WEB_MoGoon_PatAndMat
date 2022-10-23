@@ -1,11 +1,14 @@
-import React, { useEffect, useState,useRef } from 'react';
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useRef } from 'react';
+import { Await, json, useParams } from "react-router-dom";
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import TextField from '@mui/material/TextField';
+import Badge from '@mui/material/Badge';
 
 import '../../css/SpDetail.css';
 import '../../css/SpDetailTap.css';
+import { display } from '@mui/system';
 
 let SpDetail = (props) => {
     //name을 기준으로 DB에서 값 가져오기
@@ -14,15 +17,22 @@ let SpDetail = (props) => {
     let ref = useRef();
 
     //Enlist Test
-    if(name==undefined || type==undefined){
-        name="정보체계관리";
-        type="공군";
-
+    if (name == undefined || type == undefined) {
+        name = "정보체계관리";
+        type = "공군";
     }
 
+    //특기소개
     const [SpDetailData, setSpDetailData] = useState();
-    const [loading,setLoading] = useState("로딩중..");
+    const [loading, setLoading] = useState("로딩중..");
     const [title, SetTitle] = useState([]);
+
+    //의견 및 기타
+    const [Spopinions, setSpopinions] = useState();
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+    const token = localStorage.getItem('IdToken');
+    const [userOpinput, setuserOpinput] = useState();
+    const [onView,setonView] = useState(false);
 
     const [activeIndex, setActiveIndex] = useState(0);
     const tabClickHandler = (index) => {
@@ -30,25 +40,137 @@ let SpDetail = (props) => {
     }
 
     async function getData() {
-
-        await axios.get(`http://localhost:5000/api/speciality/list/${name}/${type}`)
+        await axios.get(`http://localhost:5000/api/speciality/${name}/${type}`)
             .then((response) => {
-                // console.log();
                 setSpDetailData(response.data.data);
-                // console.log(response.data.data.contents);
                 let titles = [...response.data.data.contents];
                 SetTitle(titles);
 
                 setLoading("완료");
             })
-            .catch((error)=>{
+            .catch((error) => {
+                console.log(error)
                 setLoading("오류");
             })
+    }
 
+    async function getDataopinions() {
+        await axios.get(`http://localhost:5000/api/speciality/${name}/${type}/opinions`)
+            .then((response) => {
+                // console.log(response);
+                let opData = [...response.data.data];
+                opData = opData.sort((a, b) => a.created_time.seconds - b.created_time.seconds);
+                console.log(opData);
+                setSpopinions(opData);
+            })
+            .catch((error) => {
+                setLoading("오류");
+            })
+    }
+
+    const handelLike = (e) => {
+        let chkLike = e;
+        console.log(chkLike);
+
+        // //아직 없음
+        // if(chkLike=="like"){
+
+        // }else{
+
+        // }
+
+        // getDataopinions();
+    }
+
+    const handelViewAll = () => {
+        if(onView){
+            setonView(false);
+        }else{
+            setonView(true);
+        }
+    }
+
+    useEffect(() => {
+        if (Spopinions != undefined) {
+            if (Spopinions.findIndex(data => data.editor_email == user.email) != -1) {
+                // console.log(Spopinions.find(data=>data.editor_email==user.email).opinion);
+                let myOpinion = Spopinions.find(data => data.editor_email == user.email).opinion;
+                setuserOpinput(myOpinion);
+            }
+        }
+    }, [Spopinions]);
+
+    const HandelOpinionAdd = () => {
+        let opInputValue = "";
+
+        async function postDataopinions() {
+            await axios.get('http://localhost:5000/api/user/info', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("IdToken")}`,
+                },
+            })
+                .then((response) => {
+                    // console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+
+            await axios.post(`http://localhost:5000/api/speciality/${name}/${type}/opinion`,
+                {
+                    editor_nickname: user.email,
+                    editor_email: user.email,
+                    opinion: opInputValue
+                }
+            ).then((response) => {
+                getDataopinions();
+            })
+        }
+
+        useEffect(() => {
+            opInputValue = userOpinput;
+        }, [userOpinput]);
+
+        const handelopinionAdd_button = () => {
+            if (!opInputValue == "") {
+                postDataopinions();
+            } else {
+                alert("의견을 입력해주세요.");
+                return;
+            }
+        }
+
+        if (!token) {
+            return (
+                <div>앗, 여긴 로그인이 필요해요!</div>
+            )
+        } else {
+            return (
+                <>
+                    <TextField
+                        id="standard-multiline-static"
+                        label=""
+                        multiline
+                        multiline
+                        fullWidth
+                        rows={3}
+                        sx={{ backgroundColor: "white", borderRadius: "5px", padding: "10px", boxSizing: "border-box", paddingBottom: "1px" }}
+                        placeholder={userOpinput == "undefined" ? "내 의견이 아직 없습니다 내 의견을 작성해주세요." : ""}
+                        variant="standard"
+                        onChange={(e) => { opInputValue = e.target.value }}
+                        defaultValue={userOpinput}
+                    />
+                    <div className='opinionAdd'>
+                        <button className='opinionAdd_button' onClick={handelopinionAdd_button}>작성</button>
+                    </div>
+                </>
+            )
+        }
     }
 
     useEffect(() => {
         getData();
+        getDataopinions();
     }, []);
 
     if (loading == "로딩중..") {
@@ -60,8 +182,8 @@ let SpDetail = (props) => {
         );
     }
 
-    if(loading=="오류"){
-        return(
+    if (loading == "오류") {
+        return (
             <div className="pagestate">데이터를 가져오는 도중 오류가 발생하였습니다.</div>
         );
     }
@@ -69,6 +191,11 @@ let SpDetail = (props) => {
     if (!SpDetailData) {
         return null;
     }
+
+    // if(!Spopinions){
+    //     setSpopinions(null);
+    //     return;
+    // }
 
     const handelGrid = (props) => {
         let col = [];
@@ -122,20 +249,20 @@ let SpDetail = (props) => {
             tabCont: (
                 <>
                     {
-                        title.map(data => {
+                        title.map((data, index) => {
                             return (
-                                <BodyTitle title={data.title}>
+                                <BodyTitle key={index} title={data.title}>
                                     <div>
                                         <p>
                                             {
-                                                data.content.map(cont => {
+                                                data.content.map((cont, index) => {
                                                     if (cont instanceof Object) {
                                                         return (
                                                             handelGrid(cont)
                                                         )
                                                     } else {
                                                         return (
-                                                            <span style={{ display: "block" }}>{cont}</span>
+                                                            <span key={index} style={{ display: "block" }}>{cont}</span>
                                                         )
                                                     }
                                                 })
@@ -155,7 +282,47 @@ let SpDetail = (props) => {
             ),
             tabCont: (
                 <>
-                    <div> 의견 및 기타 내용 </div>
+                    <BodyTitle title="내 의견">
+                        <div>
+                            <p style={{ whiteSpace: "pre-wrap", height: "auto" }}>
+                                <HandelOpinionAdd />
+                            </p>
+                        </div>
+                    </BodyTitle>
+
+                    <BodyTitle title="의견">
+                        <section className='view-all'>
+                            {Spopinions == undefined ? "" : Spopinions.length <= 3 ? "" : <span onClick={handelViewAll}>{onView?"간략히":"전체보기"}</span>}
+                        </section>
+                        {Spopinions == undefined ? <div><p>아직 작성된 의견이 없습니다.</p></div> : Spopinions.map((data, index) => {
+                            return (
+                                <div key={index} style={index<=2?{display:"blcok"}:onView?{display:"block"}:{display:"none"}}>
+                                    <span style={{ fontWeight: 500, fontSize: "1.2em", marginBottom: "10px" }}>
+                                        {data.editor_nickname}
+                                    </span>
+                                    <p>
+                                        {data.opinion}
+                                        <div style={{ marginTop: "20px" }}>
+                                            <div style={{ display: "inline-block", marginRight: "10px" }}>
+                                                <span className='like' name="like" style={{ cursor: "pointer" }} onClick={handelLike}>
+                                                    {/* <img style={{height:"20px"}} src='/img/etc/up_before.svg'/> */}
+                                                    <img style={{ height: "20px" }} src='/img/etc/up_after.svg' />
+                                                </span>
+                                                {data.like}
+                                            </div>
+                                            <div style={{ display: "inline-block" }}>
+                                                <span className='dislike' name="dislike" style={{ cursor: "pointer" }} onClick={handelLike}>
+                                                    {/* <img style={{height:"20px"}} src='/img/etc/down_after.svg'/> */}
+                                                    <img style={{ height: "20px" }} src='/img/etc/down_before.svg' />
+                                                </span>
+                                                {data.dislike}
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+                            )
+                        })}
+                    </BodyTitle>
                 </>
             )
         },
@@ -172,7 +339,7 @@ let SpDetail = (props) => {
     ];
 
     return (
-        <div className='SpDetail-content' style={props.name=="군지원"?{width:"100%",marginTop:"60px"}:{width:"60%"}}>
+        <div className='SpDetail-content' style={props.name == "군지원" ? { width: "100%", marginTop: "60px" } : { width: "60%" }}>
             <div className='section-header'>
                 <div className='header-img' />
                 <div className='header-content'>
@@ -185,9 +352,9 @@ let SpDetail = (props) => {
                     </div>
                     <div className='desc'>
                         {
-                            SpDetailData.speciality_summary.map(data => {
+                            SpDetailData.speciality_summary.map((data, index) => {
                                 return (
-                                    <span style={{ display: "block" }}>{data}</span>
+                                    <span key={index} style={{ display: "block" }}>{data}</span>
                                 );
                             })
                         }
@@ -216,7 +383,7 @@ let SpDetail = (props) => {
 
 let BodyTitle = (props) => {
     return (
-        <article className='body-artical' style={{ marginBottom: "30px" }}>
+        <article className='body-artical'>
             <span className='body-title'>{props.title}</span>
             {props.children}
             {/* <hr/> */}

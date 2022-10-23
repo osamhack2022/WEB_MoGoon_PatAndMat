@@ -135,17 +135,25 @@
     margin-bottom: 10px;
 }
 
-/* .section-body  div{
-    border-radius: 7px;
-    box-sizing: border-box;
-    padding: 15px;
-    
-    word-spacing: 1px;
-    line-height: 1.6;
-    color: #141414;
-    background-color: rgb(240, 240, 240);
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
-} */
+.view-all{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: gray;
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.body-artical{
+    margin-bottom: 30px;
+}
+
+.body-artical:last-child{
+    margin-bottom: 0px;
+}
 
 .body-artical > div{
     border-radius: 7px;
@@ -156,8 +164,50 @@
     color: #141414;
     background-color: rgb(240, 240, 240);
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
+    /* display: none; */
+    margin-bottom: 20px;
+}
+
+/* .body-artical > div:nth-child(-n+5){
+    display: block;
+} */
+
+.body-artical > div:nth-last-child(1){
+    margin-bottom: 0px;
 }
 
 .section-body ~ p{
     word-wrap: break-word;
 }
+
+.opinionAdd{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.opinionAdd_button{
+    background-color: white;
+    border: 1px solid #102c69;
+    color: #102c69;
+    border-radius: 5px;
+    height: 35px;
+    width: 75px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0px 1px 3px gray;
+    transition: 0.1s;
+    margin-top: 10px;
+}
+
+.opinionAdd_button:active{
+    background-color: #102c69;
+    color: white;
+}
+
+.dislike{
+    position: relative;
+    top: 3px;
+}
+
