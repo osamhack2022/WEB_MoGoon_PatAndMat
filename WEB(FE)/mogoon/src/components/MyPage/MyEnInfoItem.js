@@ -25,17 +25,16 @@ const MyEnInfoItem = (props) => {
             try {
                 const token = localStorage.getItem('IdToken');
                 //setSavingModalOpen(true);
-                await axios.put('http://localhost:5000/api/user/en-info', {
+                await axios.put(`http://localhost:5000/api/user/en-info/${props["en-info-type"]}`, selectionObj, {
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        'Authorization': `Bearer ${token}`
                     },
-                    body: selectionObj,
                 }).then((response) => {
                     return response.data;
                 }).then((result) => {
                 //    setSavingModalOpen(false);
                     if (!result.success)
-                        setError(result.err_msg);
+                        console.log(result.err_msg);
                 });    
             } catch (error) {
                 console.log(error);

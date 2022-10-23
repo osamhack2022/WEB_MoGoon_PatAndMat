@@ -76,29 +76,10 @@ const MyPage = () => {
             </div>
             <h3>내 지원 정보</h3>
             <div className="my-en-info-container">
-                <MyEnInfoItem title="자격/면허" selectionObj={{
-                    national: null,
-                    general: null,
-                    work_learn: null,
-                    drive_license: null
-                }}/>
-                <MyEnInfoItem title="전공" selectionObj={{
-                    type: null,
-                    grade: null,
-                    is_register: null,
-                    is_major: null,
-                    work_school: null
-                }}/>
-                <MyEnInfoItem title="결석 일수" selectionObj={{
-                    absent_days: null
-                }}/>
-                <MyEnInfoItem title="가산점" selectionObj={{
-                    blood_donation: null,
-                    volunteer: null,
-                    child_count: null,
-                    history_cert: null,
-                    korean_cert: null
-                }}/>
+                <MyEnInfoItem title="자격/면허" en-info-type="certificate" selectionObj={myPageData.certificate}/>
+                <MyEnInfoItem title="전공" en-info-type="school" selectionObj={myPageData.school}/>
+                <MyEnInfoItem title="결석 일수" en-info-type="absent_days" selectionObj={myPageData.absent_days}/>
+                <MyEnInfoItem title="가산점" en-info-type="extra_point" selectionObj={myPageData.extra_point}/>
             </div>
             <h3>내 질문</h3>
             <div>
