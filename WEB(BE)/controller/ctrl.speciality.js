@@ -1,7 +1,7 @@
 'use strict';
 import { Result } from './ctrl.common.js';
 import { db } from '../firebase/db.js';
-import { collection, getDocs, doc, updateDoc, query, where, getDoc, addDoc, DocumentReference, increment, arrayUnion, arrayRemove } from 'firebase/firestore/lite';
+import { collection, getDocs, doc, updateDoc, query, where, getDoc, addDoc, DocumentReference, increment, arrayUnion, arrayRemove, serverTimestamp } from 'firebase/firestore/lite';
 import { adminAuth } from '../firebase/admin.js';
 
 const speciality_list = async (req, res) => {
@@ -190,6 +190,7 @@ const speciality_opinions = async (req, res) => {
         const speciality_name = req.params.speciality_name;
         const military_kind = req.params.military_kind;
 
+        // 군종-특기 의 모든 의견 가져오기
         const q = query(collection(db, 'speciality_opinion'), 
                         where("speciality_name", "==", speciality_name),
                         where("military_kind", "==", military_kind));
@@ -197,13 +198,13 @@ const speciality_opinions = async (req, res) => {
 
         if (snapshot.empty) {
             result.success = false;
-            result.err_code = "-1";
-            result.err_msg = "no speciality, check speciality name";
+            result.err_code = "speciality/opinion/no-speciality";
+            result.err_msg = "의견 데이터베이스에 해당하는 특기가 존재하지 않습니다. 군종과 특기이름을 확인하세요.";
         }
         else {
             const doc_list = snapshot.docs.map(doc => doc.id);
             const opinion_doc = doc_list[0];
-            console.log(`speciality_opinion/${opinion_doc}/opinions`);
+            // 모든 의견 다 불러오기
             const snapshot2 = await getDocs(query(collection(db, `speciality_opinion/${opinion_doc.toString()}/opinions`)));
             if (snapshot2.empty) {
                 result.success = false;
@@ -249,8 +250,10 @@ const speciality_opinion = async (req, res) => {
             const doc_list = snapshot.docs.map(doc => doc.id);
             const opinion_doc = doc_list[0];
             const body = req.body;
+            console.log(req.body);
             body.like = 0;
             body.dislike = 0;
+            body.created_time = serverTimestamp();
             const docRef = await addDoc(collection(db, `speciality_opinion/${opinion_doc.toString()}/opinions`), body);
             result.success = true;
         }
