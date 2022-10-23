@@ -1,12 +1,6 @@
 // import React, { useState } from 'react';
 import React, { useEffect, useState, useCallback } from "react";
-import { json, Link } from 'react-router-dom';
 import axios from 'axios';
-
-// redux
-import { useDispatch } from "react-redux";
-import { clearUser, loginUser } from "../../reducer/userSlice.js";
-import { useSelector } from "react-redux";
 
 // components
 import SpecialtyItem from "../Specialty/SpecialtyItem.js";
@@ -82,14 +76,14 @@ const MyPage = () => {
             </div>
             <h3>내 지원 정보</h3>
             <div className="my-en-info-container">
-                <MyEnInfoItem title="자격/면허"/>
-                <MyEnInfoItem title="전공"/>
-                <MyEnInfoItem title="결석 일수"/>
-                <MyEnInfoItem title="가산점"/>
+                <MyEnInfoItem title="자격/면허" en-info-type="certificate" selectionObj={myPageData.certificate}/>
+                <MyEnInfoItem title="전공" en-info-type="school" selectionObj={myPageData.school}/>
+                <MyEnInfoItem title="결석 일수" en-info-type="absent_days" selectionObj={myPageData.absent_days}/>
+                <MyEnInfoItem title="가산점" en-info-type="extra_point" selectionObj={myPageData.extra_point}/>
             </div>
             <h3>내 질문</h3>
             <div>
-                <MyQuestionItem />
+                <MyQuestionItem /> {/* 일단 커뮤 페이지가 없으니까 클릭하면 특기 상세 페이지의 질문 보기 페이지로 이동시키기 */}
                 <MyQuestionItem />
                 <MyQuestionItem />
             </div>
