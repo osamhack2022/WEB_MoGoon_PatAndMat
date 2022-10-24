@@ -91,11 +91,13 @@ let SpDetail = (props) => {
     }
 
     useEffect(() => {
-        if (Spopinions != undefined) {
-            if (Spopinions.findIndex(data => data.editor_email == user.email) != -1) {
-                // console.log(Spopinions.find(data=>data.editor_email==user.email).opinion);
-                let myOpinion = Spopinions.find(data => data.editor_email == user.email).opinion;
-                setuserOpinput(myOpinion);
+        if(user!=null){
+            if (Spopinions != undefined) {
+                if (Spopinions.findIndex(data => data.editor_email == user.email) != -1) {
+                    // console.log(Spopinions.find(data=>data.editor_email==user.email).opinion);
+                    let myOpinion = Spopinions.find(data => data.editor_email == user.email).opinion;
+                    setuserOpinput(myOpinion);
+                }
             }
         }
     }, [Spopinions]);

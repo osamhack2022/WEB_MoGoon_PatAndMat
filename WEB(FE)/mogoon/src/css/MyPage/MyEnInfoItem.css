@@ -21,6 +21,7 @@ h4 {
 .en-info-edit {
     color: grey;
     font-size: 16px;
+    margin-top: 3px;
     margin-right: 4px;
 }
 
@@ -32,6 +33,6 @@ h4 {
 .en-info-content {
     text-align: center;
     border-radius: 10px;
-    background-color: lightgray;
+    background-color: rgb(225, 225, 225);
     padding: 30px 0;
 }
