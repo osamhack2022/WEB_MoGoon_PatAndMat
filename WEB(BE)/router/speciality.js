@@ -18,6 +18,7 @@ router_speciality.get('/:speciality_name/:military_kind/questions', ctrl_special
 router_speciality.get('/:speciality_name/:military_kind/answers/:question_code', ctrl_speciality_question.get.speciality_answers);
 router_speciality.post('/:speciality_name/:military_kind/like/:is_increase', ctrl_speciality.post.speciality_like);
 router_speciality.post('/:speciality_name/:military_kind/opinion', ctrl_speciality.post.speciality_opinion);
+router_speciality.put('/:speciality_name/:military_kind/opinion', ctrl_speciality.put.update_opinion);
 router_speciality.post('/:speciality_name/:military_kind/question', ctrl_speciality_question.post.speciality_question);
 router_speciality.post('/:speciality_name/:military_kind/answer/:question_code', ctrl_speciality_question.post.speciality_answer);
 

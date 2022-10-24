@@ -1,4 +1,13 @@
 .my-question-item-container {
+    display: flex;
     padding: 10px 20px;
     margin: 10px;
+}
+
+.my-question-item-answer-count {
+    background-color: lightgrey;
+    padding: 6px;
+    border-radius: 8px;
+    margin-left: auto;
+    
 }

@@ -16,34 +16,31 @@ const register = async (req, res) => {
         result.success = true;
         await setDoc(doc(db, "user", email), {
             school: {
-                work_school: "",
-                type: "",
-                is_register: "",
-                grade: "",
-                is_major: ""
+                work_school: null,
+                type: null,
+                is_register: null,
+                grade: null,
+                is_major: null
             },
             extra_point: {
                 blood_donation: 0,
                 volunteer: 0,
-                korean_cert: "",
-                history_cert: "",
-                other: {
-                    "국가유공자_독립운동가": false,
-                    "국외이주자": false,
-                    "경제적약자": false
-                },
-                child_count: ""
+                korean_cert: null,
+                history_cert: null,
+                child_count: null
             },
             certificate: {
-                "national": "",
-                "general": "",
-                "drive_license": "",
-                "work_learn": ""
+                national: null,
+                general: null,
+                drive_license: null,
+                work_learn: null
             },
             name: "user",
             nickname: "nick",
             favorite_speciality: [],
-            absent_days: "0일"
+            absent_days: {
+                absent_days: "0일"
+            }
         });
     } catch (error) {
         result.error_code = error.code;

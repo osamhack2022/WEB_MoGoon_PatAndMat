@@ -54,10 +54,10 @@ const MyEnInfoItem = (props) => {
         let contents = '';
 
         Object.entries(selectionObj).forEach(([key, value]) => {
-            contents += key
-            contents += ': '
-            contents += value;
-            contents += '\n';   
+            if (!!value) {
+                contents += value;
+                contents += ', '; 
+            }  
         });
 
         return contents;
