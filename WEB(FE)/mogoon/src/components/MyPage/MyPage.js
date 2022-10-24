@@ -83,9 +83,9 @@ const MyPage = () => {
             </div>
             <h3>내 질문</h3>
             <div>
-                <MyQuestionItem /> {/* 일단 커뮤 페이지가 없으니까 클릭하면 특기 상세 페이지의 질문 보기 페이지로 이동시키기 */}
-                <MyQuestionItem />
-                <MyQuestionItem />
+                <MyQuestionItem answer_count={2}/> {/* 일단 커뮤 페이지가 없으니까 클릭하면 특기 상세 페이지의 질문 보기 페이지로 이동시키기 */}
+                <MyQuestionItem answer_count={3}/>
+                <MyQuestionItem answer_count={1}/>
             </div>
         </div>
 
