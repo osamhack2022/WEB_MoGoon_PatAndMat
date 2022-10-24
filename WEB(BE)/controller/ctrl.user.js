@@ -50,7 +50,6 @@ const update_user_en_info = async (req, res) => {
 
     try {
         if (!req.headers.authorization) {
-            console.log(req.headers.authorization);
             result.success = false;
             result.err_code = 'user/en-info/no-token';
             result.err_msg = 'no id_token, check id_token in authorization header';
