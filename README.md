@@ -38,10 +38,10 @@
  
 ### Front-End
 - <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
-  - <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
-  
-### UI
+- <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
 - <img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white">
+### UI
+- 
 
 ## 설치 안내 (Installation Process)
  - 프로젝트 진행하면서 수정할 예정입니다.
