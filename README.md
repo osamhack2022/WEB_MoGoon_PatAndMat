@@ -42,8 +42,11 @@
   - Firebase Admin SDK
  
 ### Front-End
+메인 프레임워크
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
+데이터 상태관리
 <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+리액트 UI 라이브러리
 <img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white">
 
 ## 설치 안내 (Installation Process)
