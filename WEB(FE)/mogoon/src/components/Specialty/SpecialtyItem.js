@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
 import Checkbox from '@mui/material/Checkbox';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -6,17 +7,62 @@ import Badge from '@mui/material/Badge';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 let SpecialtyItem = (props) => {
-    // 나중에 체크 유뮤 받아오기
+    let user = localStorage.getItem("IdToken");
     let [chkBool, setChkBool] = useState(false);
 
-    let chkClick = (e) => {
+    const Dibs = () =>{
+        let dibsList = localStorage.getItem("dibsList");
+
+        if(dibsList==undefined){
+            localStorage.setItem("dibsList",[]);
+        }
+    }
+    
+    useEffect(()=>{
+    },[chkBool]);
+
+    async function chkClick(e){
+        e.preventDefault();
+        // console.log(e.target.attributes.name.value);
         if (chkBool == false) {
             setChkBool(true);
+            if(user==undefined){
+
+                Dibs();
+            }else{
+
+                await axios.post(`http://localhost:5000/api/speciality/${props.name}/${props.military_kind}/like/increase`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("IdToken")}`,
+                    },
+                })
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            }
         } else {
             setChkBool(false);
+            if(user==undefined){
+                
+                Dibs();
+            }else{
+                await axios.post(`http://localhost:5000/api/speciality/${props.name}/${props.military_kind}/like/decrease`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("IdToken")}`,
+                    },
+                })
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            }
         }
 
-        e.preventDefault();
     }
 
     return (
@@ -43,7 +89,7 @@ let SpecialtyItem = (props) => {
                                 fontSize: "10px"
                             }
                         }}>
-                            <Checkbox sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
+                            <Checkbox name={`${props.military_kind}${props.name}`} sx={{ marginRight: "0", marginLeft: "auto", padding: "0" }} checked={chkBool} onClick={chkClick} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon sx={{ color: "#ffd731" }} />} />
                         </Badge>
                     </div>
                 </div>

@@ -31,7 +31,6 @@ let SpDetail = (props) => {
     const [Spopinions, setSpopinions] = useState();
     const user = JSON.parse(localStorage.getItem('userInfo'));
     const token = localStorage.getItem('IdToken');
-    const [userOpinput, setuserOpinput] = useState();
     const [onView,setonView] = useState(false);
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -59,7 +58,7 @@ let SpDetail = (props) => {
             .then((response) => {
                 // console.log(response);
                 let opData = [...response.data.data];
-                opData = opData.sort((a, b) => a.created_time.seconds - b.created_time.seconds);
+                opData = opData.sort((a, b) => b.created_time.seconds - a.created_time.seconds);
                 console.log(opData);
                 setSpopinions(opData);
             })
@@ -91,13 +90,7 @@ let SpDetail = (props) => {
     }
 
     useEffect(() => {
-        if (Spopinions != undefined) {
-            if (Spopinions.findIndex(data => data.editor_email == user.email) != -1) {
-                // console.log(Spopinions.find(data=>data.editor_email==user.email).opinion);
-                let myOpinion = Spopinions.find(data => data.editor_email == user.email).opinion;
-                setuserOpinput(myOpinion);
-            }
-        }
+
     }, [Spopinions]);
 
     const HandelOpinionAdd = () => {
@@ -127,10 +120,6 @@ let SpDetail = (props) => {
             })
         }
 
-        useEffect(() => {
-            opInputValue = userOpinput;
-        }, [userOpinput]);
-
         const handelopinionAdd_button = () => {
             if (!opInputValue == "") {
                 postDataopinions();
@@ -155,10 +144,9 @@ let SpDetail = (props) => {
                         fullWidth
                         rows={3}
                         sx={{ backgroundColor: "white", borderRadius: "5px", padding: "10px", boxSizing: "border-box", paddingBottom: "1px" }}
-                        placeholder={userOpinput == "undefined" ? "내 의견이 아직 없습니다 내 의견을 작성해주세요." : ""}
+                        placeholder="내 의견을 작성해주세요."
                         variant="standard"
                         onChange={(e) => { opInputValue = e.target.value }}
-                        defaultValue={userOpinput}
                     />
                     <div className='opinionAdd'>
                         <button className='opinionAdd_button' onClick={handelopinionAdd_button}>작성</button>
@@ -323,16 +311,6 @@ let SpDetail = (props) => {
                             )
                         })}
                     </BodyTitle>
-                </>
-            )
-        },
-        {
-            tabTitle: (
-                <div className={activeIndex === 2 ? "is-active" : ""} onClick={() => { tabClickHandler(2) }}>QnA (20)</div>
-            ),
-            tabCont: (
-                <>
-                    <div> QnA내용 </div>
                 </>
             )
         }
