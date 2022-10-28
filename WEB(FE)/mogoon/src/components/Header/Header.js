@@ -25,6 +25,7 @@ let Header = (props) => {
             dispatch(clearUser());
             localStorage.removeItem("userInfo");
             localStorage.removeItem("IdToken");
+            localStorage.removeItem("dibsList");
             window.location.reload();
         }
     }
