@@ -10,19 +10,33 @@ let SpecialtyItem = (props) => {
     let user = localStorage.getItem("IdToken");
     let [chkBool, setChkBool] = useState(false);
 
-    const Dibs = () =>{
-        let dibsList = localStorage.getItem("dibsList");
-
-        if(dibsList==undefined){
-            localStorage.setItem("dibsList",[]);
+    useEffect(()=>{
+        console.log(props.LikeLists);
+        if(props.LikeLists!=undefined){
+            if(props.LikeLists.indexOf(`${props.name}${props.military_kind}`)!=-1){
+                setChkBool(true);
+            }
         }
-    }
+    },[])
+
+    // const Dibs = () =>{
+    //     let dibsList = localStorage.getItem("dibsList");
+
+    //     if(dibsList==undefined){
+    //         localStorage.setItem("dibsList",[]);
+    //     }
+    // }
     
     useEffect(()=>{
+
     },[chkBool]);
 
     async function chkClick(e){
         e.preventDefault();
+        if(user==undefined){
+            alert("찜 기능은 로그인 후 이용가능합니다.");
+            return;
+        }
         // console.log(e.target.attributes.name.value);
         if (chkBool == false) {
             setChkBool(true);
@@ -30,8 +44,7 @@ let SpecialtyItem = (props) => {
 
                 Dibs();
             }else{
-
-                await axios.post(`http://localhost:5000/api/speciality/${props.name}/${props.military_kind}/like/increase`, {
+                await axios.post(`http://localhost:5000/api/speciality/${props.name}/${props.military_kind}/like/increase`,{}, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem("IdToken")}`,
                     },
@@ -49,7 +62,7 @@ let SpecialtyItem = (props) => {
                 
                 Dibs();
             }else{
-                await axios.post(`http://localhost:5000/api/speciality/${props.name}/${props.military_kind}/like/decrease`, {
+                await axios.post(`http://localhost:5000/api/speciality/${props.name}/${props.military_kind}/like/decrease`,{}, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem("IdToken")}`,
                     },
