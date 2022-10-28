@@ -75,6 +75,7 @@ const Login = () => {
                 dispatch(loginUser(values));
                 localStorage.setItem("userInfo",JSON.stringify(values));
                 localStorage.setItem("IdToken",response.data.data);
+                localStorage.removeItem("dibsList");
 
                 reSet();
 
@@ -82,7 +83,10 @@ const Login = () => {
             })
             .catch(function (error) {
                 console.log(error);
+                setLoad(true);
                 alert("로그인 실패!");
+                reSet();
+                return;
             });
     }
 
@@ -109,9 +113,9 @@ const Login = () => {
                         autoComplete="current-password"
                     />
 
-                    <span style={{ margin: "0", fontWeight: "400", fontSize: "14px", color: "gray", cursor: "pointer", width: "80px" }}>
+                    {/* <span style={{ margin: "0", fontWeight: "400", fontSize: "14px", color: "gray", cursor: "pointer", width: "80px" }}>
                         ID/PW 찾기
-                    </span>
+                    </span> */}
                     {load ? <button className="btnlogin" type="submit">로그인</button> : <button className="btnlogin" type="submit" disabled style={{ backgroundColor: "gray" }}>로딩중..</button>}
                 </form>
                 <div className="join" style={{ letterSpacing: "0.1px" }}>

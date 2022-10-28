@@ -36,8 +36,8 @@
 .en-info-edit-list-item {
     text-align: center;
     width: 120px;
-    background-color: lightgrey;
-    border: 3px solid lightgrey;
+    background-color: rgb(225, 225, 225);
+    border: 3px solid rgb(225, 225, 225);
     border-radius: 8px;
     padding: 10px;
     margin: 10px 8px;
@@ -48,7 +48,7 @@
 }
 
 .clicked {
-    border: 3px solid #183C8C;
+    border: 3px solid #3868ce;
 }
 
 .en-info-edit-button-section {
@@ -62,7 +62,7 @@
 
 #cancel-button {
     width: 120px;
-    background-color: #b2b2b2;
+    background-color: #808080;
 }
 
 #cancel-button:hover {

@@ -25,6 +25,7 @@ let Header = (props) => {
             dispatch(clearUser());
             localStorage.removeItem("userInfo");
             localStorage.removeItem("IdToken");
+            localStorage.removeItem("dibsList");
             window.location.reload();
         }
     }
@@ -41,9 +42,6 @@ let Header = (props) => {
                     </Link>
                     <Link to="/Enlist">
                         <HeaderItem title="군지원" />
-                    </Link>
-                    <Link to="/">
-                        <HeaderItem title="커뮤니티" />
                     </Link>
                     <Link to="/MyPage">
                         <HeaderItem title="마이페이지" />
