@@ -14,6 +14,7 @@ const MyPage = () => {
     const [myPageData, setMyPageData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [listList,setListLists] = useState();
 
     const token = localStorage.getItem('IdToken');
 
@@ -22,6 +23,30 @@ const MyPage = () => {
             <div className="info-area">앗, 여긴 로그인이 필요해요!</div>
         );
     }
+
+    
+    useEffect(()=>{
+    },[listList])
+
+    async function getUserLike(){
+        await axios.get('http://localhost:5000/api/user/info', {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("IdToken")}`,
+            },
+        })
+        .then((response) => {
+            let chkLikes = response.data.data.favorite_speciality.map((data)=>{
+                return `${data.speciality_name}${data.military_kind}`;
+            })
+
+            setListLists(chkLikes);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+    getUserLike();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,6 +71,8 @@ const MyPage = () => {
         };
 
         fetchData();
+
+        console.log(listList);
     },[]);
 
     if (loading)
@@ -53,6 +80,7 @@ const MyPage = () => {
 
     if (!myPageData) {
         return <div>데이터를 받지 못했어요! 개발자에게 문의해주세요😨</div>
+    
     }
 
     console.log(myPageData);
@@ -65,13 +93,13 @@ const MyPage = () => {
         <div className="my-page-content">
             <h2>안녕하세요, {myPageData.name}님!😎</h2>
             <h3>내가 찜해둔 특기</h3>
-            <div>
+            <div style={{display:"flex",width:"100%",flexWrap:"wrap"}}>
                 {myPageData.favorite_speciality.length === 0 
                 ? <div style={info_div_style}>찜한 특기가 없어요! 특기 소개 페이지에서 관심있는 특기를 찜해보세요.</div> 
                 : myPageData.favorite_speciality.map((data) => {
                     return <SpecialtyItem key={data.speciality_name} code={data.speciality_code} name={data.speciality_name} class={data.class}
                     desc={data.desc} military_kind={data.military_kind} tags={data.tags}
-                    imageSrc={data.imageSrc} kind={data.kind} like={data.like} />
+                    imageSrc={data.imageSrc} kind={data.kind} like={data.like} LikeLists={listList}/>
                 })}
             </div>
             <h3>내 지원 정보</h3>

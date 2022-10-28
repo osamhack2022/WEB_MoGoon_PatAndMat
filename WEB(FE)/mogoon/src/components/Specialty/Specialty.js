@@ -14,8 +14,10 @@ const Specialty = (props) => {
     const [MASTER_DATA, setMASTER_DATA] = useState();
     const [SpData, setSpData] = useState();
     const [search, setSearch] = useState("");
+    const [listList,setListLists] = useState();
 
     const [loading, setLoading] = useState("로딩중..");
+    let user = localStorage.getItem("IdToken");
 
     let searchData = null;
 
@@ -32,8 +34,33 @@ const Specialty = (props) => {
             })
     }
 
+    useEffect(()=>{
+    },[listList])
+
+    async function getUserLike(){
+        await axios.get('http://localhost:5000/api/user/info', {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("IdToken")}`,
+            },
+        })
+        .then((response) => {
+            let chkLikes = response.data.data.favorite_speciality.map((data)=>{
+                return `${data.speciality_name}${data.military_kind}`;
+            })
+
+            console.log(response.data.data.favorite_speciality);
+            setListLists(chkLikes);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
     useEffect(() => {
         getData();
+        if(user!=undefined){
+            getUserLike();
+        }
     }, []);
 
     if (loading == "오류") {
@@ -41,7 +68,6 @@ const Specialty = (props) => {
             <div className="state">데이터를 가져오는 도중 오류가 발생하였습니다.</div>
         );
     }
-
 
     if (loading == "로딩중..") {
         const skCnt = [0, 1, 3, 4, 5, 6, 7,8];
@@ -105,7 +131,7 @@ const Specialty = (props) => {
             SpData.map(data => (
                 <SpecialtyItem key={data.speciality_name} code={data.speciality_code} name={data.speciality_name} class={data.class}
                     desc={data.desc} military_kind={data.military_kind} tags={data.tags}
-                    imageSrc={data.imageSrc} kind={data.kind} like={data.like} />
+                    imageSrc={data.imageSrc} kind={data.kind} like={data.like} LikeLists={listList}/>
             ))
         );
     }
