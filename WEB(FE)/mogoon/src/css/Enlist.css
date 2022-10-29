@@ -263,7 +263,17 @@ hr{
     cursor: pointer;
 }
 
-.content2-item > span{
+.content2-item > span:nth-child(1){
+    font-size: 12px;
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    color: gray;
+
+    display: none;
+}
+
+.content2-item > span:nth-child(2){
     font-size: 16px;
     position: absolute;
     right: 5px;
@@ -438,15 +448,38 @@ hr{
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    background-color: antiquewhite;
 }
 
 .content4-article{
     width: 95%;
-    height: 100%;
-    /* display: flex;
-    justify-content: center;
+    height: 108%;
+    display: flex;
+    justify-content: space-evenly;
     align-items: center;
-    flex-wrap: wrap; */
-    background-color: white;
+    flex-direction: column;
+}
+
+.content4-section{
+    width: 80%;
+    height: 30%;
+    margin-top: 30px;
+    /* background-color: white; */
+}
+
+.table-spname{
+    font-size: 1.2em;
+    font-weight: 600;
+    /* display: inline-block; */
+}
+
+.table-points{
+    margin: 2.5px 0px 5px 0px;
+    color: rgb(59, 59, 59);
+    /* display: inline-block; */
+}
+
+.table-points > span{
+    color: black;
+    font-size: 1em;
+    font-weight: 500;
 }
