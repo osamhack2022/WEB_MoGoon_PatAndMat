@@ -11,12 +11,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import axios from 'axios';
 
 import "../../css/Enlist.css"
 
 // test
 import "../../css/SpDetail.css"
 import { fontWeight } from '@mui/system';
+import { useInsertionEffect } from 'react';
 
 let Enlist = (props) => {
   const slideRef = useRef();
@@ -34,6 +36,7 @@ let Enlist = (props) => {
   const handleClose = () => setOpen(false);
   const [handelTargetText, sethandelTargetText] = useState(null);
   const [handelTargetindex, sethandelTargetindex] = useState(null);
+  const [cont2SpKind,setcont2SpKind] = useState();
   // content3
   const [openModal, setOpenModal] = React.useState(false);
   const [modalKind, setmodalKind] = useState();
@@ -47,7 +50,58 @@ let Enlist = (props) => {
   const [cont3Attendance, setcont3Attendance] = useState(null);
   const [cont3Extra, setcont3Extra] = useState([]);
   const sp3Ref = useRef();
+  const [cont3User,setcont3User] = useState();
   // content4
+  const [cont4TotalPoint, setcont4TotalPoint] = useState([]);
+
+  useEffect(()=>{
+    if(cont3User!=undefined){
+      let test = [];
+      test[0] =  cont3User.certificate;
+      test[1] =  cont3User.school;
+      test[2] =  cont3User.absent_days;
+      test[3] =  cont3User.extra_point;
+
+      for (let i = 0; i < 4; i++) {
+        Object.keys(test[i]).forEach(key=>{
+          if(test[i][key]!=null && test[i][key]!=""){
+            switch (i) {
+              case 0:
+                console.log("정상적인 데이터 있다요",test[i][key]);
+//여기서부터
+                break;
+              case 1:
+                console.log("정상적인 데이터 있다요",test[i][key]);
+                break;
+              case 2:
+                console.log("정상적인 데이터 있다요",test[i][key]);
+                break;
+              case 3:
+                console.log("정상적인 데이터 있다요",test[i][key]);
+                break;
+              default:
+                break;
+            }
+          }
+        })
+      }
+    }
+  },[cont3User]);
+
+  async function getUser(){
+    await axios.get('http://localhost:5000/api/user/info', {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem("IdToken")}`,
+        },
+    })
+    .then((response) => {
+        setcont3User(response.data.data);
+        console.log(response);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+}
 
   const handelpre = () => {
     let t1 = slideindex - 1
@@ -55,15 +109,42 @@ let Enlist = (props) => {
     slideRef.current.style.transform = `translateX(-${slideRef.current.offsetWidth / 4 * (t1 - 1)}px)`;
   }
 
+  useEffect(()=>{
+    if(cont2item.length==0){
+      setcont2SpKind(undefined);
+    }
+  },[cont2item]);
+
   const handelnext = () => {
     if (slideindex == 2 && cont2item.length == 0) {
       sp2Ref.current.innerText = "특기를 선택해주세요.";
       return null;
     }
 
-    if (slideindex == 3 && (cont3CertList.length == 0 || cont3Major == null || cont3Attendance == null)) {
-      sp3Ref.current.innerText = "항목을 선택해주세요.";
-      return null;
+    if(cont2SpKind=="일반"){
+      if (slideindex == 3 && (cont3CertList.length == 0 || cont3Attendance == null)) {
+        sp3Ref.current.innerText = "항목을 선택해주세요.";
+        return null;
+      }
+    }else{
+      if (slideindex == 3 && (cont3CertList.length == 0 || cont3Major == null || cont3Major.name=="" || cont3Attendance == null)) {
+        sp3Ref.current.innerText = "항목을 선택해주세요.";
+        return null;
+      }
+    }
+
+    if(slideindex==2){
+      getUser();
+
+      // let setUserData = confirm("저장되어있는 개인정보를 불러올까요?");
+    }
+
+    if(cont2SpKind=="일반"){
+      setcont3Major({name:'',score:0});
+    }
+
+    if(cont3CertList.length!=0 || cont3Attendance!=null || cont3Extra.length!=0){
+      setcont4TotalPoint(Math.max.apply(Math,cont3CertList.map((value) => {return value.score}))+cont3Major.score+cont3Attendance.score + cont3Extra.reduce((accumulator, current) => accumulator + current.score,0));
     }
 
     let t2 = slideindex + 1;
@@ -93,6 +174,7 @@ let Enlist = (props) => {
           if (i == j) {
             setbannerstyle(stBanners[j]);
             setSlideindex(2);
+            setcont2item([]);
             slideRef.current.style.transform = `translateX(-${slideRef.current.offsetWidth / 4 * slideindex}px)`;
           }
         }
@@ -102,7 +184,6 @@ let Enlist = (props) => {
   }, [bannerstyle, slideindex]);
 
   const handelBanner = (e) => {
-    console.log(e.target.attributes.name.value);
     setbannerstyle(e.target.attributes.name.value);
   }
 
@@ -134,15 +215,18 @@ let Enlist = (props) => {
       return;
     }
 
-
-
   }, [handelTargetText, handelTargetindex]);
+
+  useEffect(()=>{
+
+  },[cont2SpKind]);
 
   const handelModal = (e) => {
     sethandelTargetindex(e.target.id);
     sethandelTargetText(e.target.attributes.name.value);
 
     if (e.target.className == "content2-item") {
+      //특기 있는거 지우는코드
       if (cont2item.find(item => item.spindex == e.target.id) != undefined) {
         let spalready = cont2item.filter(data => data.spindex != e.target.id);
         setcont2item(spalready);
@@ -154,6 +238,15 @@ let Enlist = (props) => {
         return;
       }
 
+      //특기 추가 코드
+      if(cont2SpKind==undefined){
+        setcont2SpKind(e.target.children[0].innerText);
+      }else{
+        if(cont2SpKind!=e.target.children[0].innerText){
+          alert("같은 계열의 특기만 선택하실 수 있습니다.");
+          return;
+        }
+      }
       let spdata = [...cont2item];
       spdata.push({ spname: e.target.attributes.name.value, spindex: e.target.id });
       setcont2item(spdata);
@@ -171,9 +264,23 @@ let Enlist = (props) => {
   //특기 선택하면 스크롤 초기화되는거 수정해야함
 
   const handelcontItem = (e) => {
+    if (cont2item.find(item => item.spindex == handelTargetindex) != undefined) {
+      alert("이미 추가한 특기입니다");
+      return;
+    }
+
     if (cont2item.length == 3) {
       alert("특기는 최대 3개까지 선택가능합니다.");
       return;
+    }
+
+    if(cont2SpKind==undefined){
+      setcont2SpKind(handelTargetindex%2==0?"일반":"전문");
+    }else{
+      if(cont2SpKind!=(handelTargetindex%2==0?"일반":"전문")){
+        alert("같은 계열의 특기만 선택하실 수 있습니다.");
+        return;
+      }
     }
 
     let spdata = [...cont2item];
@@ -186,7 +293,9 @@ let Enlist = (props) => {
   }
 
   const Content2 = () => {
-    const sp = ["CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐", "CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐"];
+    const sp = ["CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐","정보체계관리병"
+  ,"조타병","SSU","UDT","화생방병","어학병","군악병","콘텐츠 제작병","군견관리병","의장병","정훈병","비파괴검사병","카투사","야전공병","보급병","CBT병", "추기병", "전기병", "보수병", "전산병", "정보보호병", "조리", "수송", "전탐","정보체계관리병"
+  ,"조타병","SSU","UDT","화생방병","어학병","군악병","콘텐츠 제작병","군견관리병","의장병","정훈병","비파괴검사병","카투사","야전공병","보급병"];
 
     const style = {
       position: 'absolute',
@@ -211,7 +320,9 @@ let Enlist = (props) => {
                 color: cont2item.find(item => item.spindex == index) != undefined ? 'white' : 'black',
                 backgroundColor: cont2item.find(item => item.spindex == index) != undefined ? '#183C8C' : 'white'
               }}
-              key={index} name={item} id={index} onClick={handelModal}>{item}
+              key={index} name={item} id={index} onClick={handelModal}>
+              <span>{index%2==0?"일반":"전문"}</span>
+              {item}
               <span id={index} name={item} onClick={handelDetail}>🔍</span>
             </div>
           ))}
@@ -240,15 +351,15 @@ let Enlist = (props) => {
     const spTitles = ["자격/면허", "전공", "출결", "가산점"];
 
     const certOption = [
-      { name: "정보처리기사", score: 70 },
-      { name: "정보처리산업기사", score: 68 },
-      { name: "정보처리기능사", score: 66 },
-      { name: "전기기사", score: 70 },
-      { name: "전기산업기사", score: 68 },
-      { name: "전기기능사", score: 66 },
-      { name: "제품디자인기사", score: 70 },
-      { name: "제품디자인산업기사", score: 68 },
-      { name: "제품디자인기능사", score: 66 },
+      { name: "국가기술자격증 - 기사 이상", score: cont2SpKind=="일반"? 70:50 },
+      { name: "국가기술자격증 - 산업기사", score: cont2SpKind=="일반"? 68:45 },
+      { name: "국가기술자격증 - 기능사", score: cont2SpKind=="일반"? 66:40 },
+      { name: "민간자격증 - 공인", score: cont2SpKind=="일반"? 64:30 },
+      { name: "민간자격증 - 비공인", score: cont2SpKind=="일반"? 62:26 },
+      { name: "일학습 병행자격증 - L6/L5", score: cont2SpKind=="일반"? 70:50 },
+      { name: "일학습 병행자격증 - L4/L3", score: cont2SpKind=="일반"? 68:45 },
+      { name: "일학습 병행자격증 - L2", score: cont2SpKind=="일반"? 66:40 },
+      { name: "미소지", score: cont2SpKind=="일반"? 68:20 },
     ];
 
     certOption.unshift({ name: "자격증을 선택해주세요", scroe: 0 });
@@ -284,7 +395,8 @@ let Enlist = (props) => {
               key={option.value}
               value={option.name}
             >
-              {index == 0 ? option.name : `${option.name} - ${option.score}점`}
+              {/* {index == 0 ? option.name : `${option.name} - ${option.score}점`} */}
+              {option.name}
             </option>
           ))}
         </select>
@@ -334,7 +446,7 @@ let Enlist = (props) => {
               key={option.value}
               value={option.name}
             >
-              {index == 0 ? option.name : `${option.name} - ${option.score}점`}
+              {option.name}
             </option>
           ))}
         </select>
@@ -345,11 +457,11 @@ let Enlist = (props) => {
     }, [cont3Attendance]);
 
     const AttendanceOptions = [
-      { name: "0일", score: 10 },
-      { name: "1~2일", score: 9 },
-      { name: "3~4일", score: 8 },
-      { name: "5~6일", score: 7 },
-      { name: "7일 이상   ", score: 6 },
+      { name: "0일", score: cont2SpKind=="일반"?20:10 },
+      { name: "1~2일", score: cont2SpKind=="일반"?19:9 },
+      { name: "3~4일", score: cont2SpKind=="일반"?18:8 },
+      { name: "5~6일", score: cont2SpKind=="일반"?17:7 },
+      { name: "7일 이상   ", score: cont2SpKind=="일반"?16:6 },
     ];
 
     AttendanceOptions.unshift({ name: "출결을 선택해주세요.", scroe: 0 });
@@ -371,7 +483,8 @@ let Enlist = (props) => {
               key={option.value}
               value={option.name}
             >
-              {index == 0 ? option.name : `${option.name} - ${option.score}점`}
+              {/* {index == 0 ? option.name : `${option.name} - ${option.score}점`} */}
+              {option.name}
             </option>
           ))}
         </select>
@@ -443,7 +556,8 @@ let Enlist = (props) => {
               key={option.value}
               value={option.name}
             >
-              {index == 0 ? option.name : `${option.name} - ${option.score}점`}
+              {/* {index == 0 ? option.name : `${option.name} - ${option.score}점`} */}
+              {option.name}
             </option>
           ))}
         </select>
@@ -565,7 +679,7 @@ let Enlist = (props) => {
                 <TableCell sx={table_cell_point__detail} align='center'>18</TableCell>
                 <TableCell sx={table_cell_point__detail} align='center'>17</TableCell>
                 <TableCell sx={table_cell_point__detail} align='center'>16</TableCell>
-                <TableCell sx={table_cell_point__detail} align='center'>고교3년간 누계적용</TableCell>
+                <TableCell sx={table_cell_point__detail} align='center'>고교 3년간 누계적용</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -683,7 +797,7 @@ let Enlist = (props) => {
                 <TableCell sx={table_cell_point__detail} align='center'>8</TableCell>
                 <TableCell sx={table_cell_point__detail} align='center'>7</TableCell>
                 <TableCell sx={table_cell_point__detail} align='center'>6</TableCell>
-                <TableCell sx={table_cell_point__detail} align='center'>고교3년간 누계적용</TableCell>
+                <TableCell sx={table_cell_point__detail} align='center'>고교 3년간 누계적용</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -750,7 +864,7 @@ let Enlist = (props) => {
       <div className="content3-wrap">
         {/* <img src='img/etc/배점표.png' className='pointTable' /> */}
         <div className="table-wrap">
-          <div className="table">
+          {cont2SpKind == "일반"? <div className="table">
             <div style={{ fontSize: "16px", fontWeight: 500 }}>
               일반기술병
             </div>
@@ -837,8 +951,7 @@ let Enlist = (props) => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </div>
-          <div className="table">
+          </div>: <div className="table">
             <div style={{ fontSize: "16px", fontWeight: 500 }}>
               전문기술병
             </div>
@@ -911,7 +1024,9 @@ let Enlist = (props) => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </div>
+          </div>}
+         
+         
           <Modal
             open={openModal}
             onClose={handleModalClose}
@@ -923,10 +1038,17 @@ let Enlist = (props) => {
 
         <div className="content3-article">
           <div className="content3-title">
-            <div style={{ fontSize: "18px", fontWeight: "500" }}>
+            <div style={{
+                fontSize: "18px",
+                fontWeight: "500",
+                display: "inline-block",
+                marginRight: "5px",
+              }}>
               {spTitles[0]}
             </div>
-
+            <span style={{ color: "gray", fontSize: "12px" }}>
+              ※가장 높은 점수의 자격증 기준
+            </span>
             <Certificate options={certOption}></Certificate>
             <div className="content3-certLists">
               {cont3CertList.map((data, index) => {
@@ -958,7 +1080,7 @@ let Enlist = (props) => {
               : 점
             </div>
           </div>
-
+          {cont2SpKind=="전문"?
           <div className="content3-title">
             <div style={{ fontSize: "18px", fontWeight: "500" }}>
               {spTitles[1]}
@@ -973,7 +1095,7 @@ let Enlist = (props) => {
             <div className="total">
               {cont3Major == null ? "" : cont3Major.score} : 점
             </div>
-          </div>
+          </div>:""}
 
           <div className="content3-title">
             <div
@@ -1034,18 +1156,89 @@ let Enlist = (props) => {
     );
   }
 
+  useEffect(()=>{
+  },[cont4TotalPoint]);
+
   const Content4 = () => {
+    const POINTS1 = "ㅇ 배점 : 자격증(70점) + 출결(15점) + 가산점(15점) ";
+    const POINTS2 = "ㅇ 배점 : 자격증(50점) + 전공(40점) + 출결(10점) + 가산점(15점) ";
+
+    const table_cell_detail = {
+      width: "auto",
+      fontFamily: "Noto Sans KR",
+      fontSize: "1.1em",
+      fontWeight: "600",
+      backgroundColor: "rgb(240, 240, 240)",
+    }
+
+    const table_cell_point__detail = {
+      wordBreak: "nomal",
+      width: "auto",
+      fontFamily: "Noto Sans KR",
+      fontSize: "1em",
+      fontWeight: "400"
+    }
+
+    const table_cell_point__total = {
+      wordBreak: "nomal",
+      width: "auto",
+      fontFamily: "Noto Sans KR",
+      fontSize: "1.1em",
+      fontWeight: "600"
+    }
 
     return (
       <div className='content4-wrap'>
         <div className='content4-article'>
           {cont2item.map((data, index) => {
             return (
-              <div>{data.spname}</div>
+              <div className='content4-section' key={index}>
+                <div className='table-spname'>{data.spname}</div>
+                <div className='table-points'>{cont2SpKind=="일반"?POINTS1:POINTS2}<span>{cont2SpKind=="일반"?" 계(105점)":" 계(115점)"}</span></div>
+                <TableContainer sx={{ width: "100%", height: "auto", backgroundColor: "white", borderRadius: "10px", border: "1px solid gray", boxShadow: "0px 1px 3px gray" }}>
+                  <Table>
+                    <TableRow sx={{ height: 30 }}>
+                    <TableCell sx={{backgroundColor:"rgb(240, 240, 240)",borderRight:"1px solid rgba(0,0,0,0.13)"}} align='center' rowSpan={1}></TableCell>
+                      <TableCell sx={table_cell_detail} align='center' rowSpan={1}>자격증</TableCell>
+                      {cont2SpKind=="일반"?"":<TableCell sx={table_cell_detail} align='center' rowSpan={1}>전공</TableCell>} 
+                      <TableCell sx={table_cell_detail} align='center' rowSpan={1}>출결</TableCell>
+                      <TableCell sx={table_cell_detail} align='center' rowSpan={1}>가산점</TableCell>
+                      <TableCell sx={Object.assign(table_cell_detail, {borderLeft:"1px solid rgba(0,0,0,0.13)"})} align='center' rowSpan={1}>계</TableCell>
+                    </TableRow>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell sx={{ width: 180, height: 25, borderRight: "1px solid rgba(0,0,0,0.13)" }} align='center'>지원자</TableCell>
+                        <TableCell sx={table_cell_point__detail} colSpan={1} align='center'>{cont3CertList.length == 0
+                          ? ""
+                          : Math.max.apply(
+                            Math,
+                            cont3CertList.map((value) => {
+                              return value.score;
+                            })
+                          )}</TableCell>
+                        {cont2SpKind=="일반"?"":<TableCell sx={table_cell_point__detail} colSpan={1} align='center'>{cont3Major != null ? cont3Major.score : ""}</TableCell>}
+                        <TableCell sx={table_cell_point__detail} colSpan={1} align='center'>{cont3Attendance != null ? cont3Attendance.score : ""}</TableCell>
+                        <TableCell sx={table_cell_point__detail} colSpan={1} align='center'> {cont3Extra.length == 0
+                          ? "0"
+                          : cont3Extra.reduce(
+                            (accumulator, current) => accumulator + current.score,
+                            0
+                          )}</TableCell>
+                        <TableCell sx={Object.assign(table_cell_point__detail, { borderLeft: "1px solid rgba(0,0,0,0.13)" })} colSpan={1} align='center'>
+                        {cont4TotalPoint} 점
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell sx={{ width: "auto", height: 25, borderRight:"1px solid rgba(0,0,0,0.13)"}} align='center'>2022년 기준</TableCell>
+                        <TableCell sx={table_cell_point__total} colSpan={cont2SpKind=="일반"?4:5} align='center'>{cont2SpKind=="일반"?"76점":"70점"}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
             )
           })
           }
-          {bannerstyle}
         </div>
       </div>
     )
@@ -1055,36 +1248,29 @@ let Enlist = (props) => {
     <div className='Enlist-wrap'>
       <button className={slideindex === 1 ? "btnblock" : "btnpre"} onClick={handelpre}>이전</button>
       <button className={(slideindex === 1 || slideindex === 4) ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button>
-      {/* <button className={(slideindex === 4) ? "btnblock" : "btnnext"} onClick={handelnext}>다음</button> */}
       <div className='stepper-wrap'>
         <StepItem />
       </div>
       <div className='stepper-content' ref={slideRef}>
         <div className='stepper-content-inner'>
           <Content1 />
-          {/* <span className='content1-selector'>
-                        <span className='selector-box' style={{ fontSize: "20px", fontWeight: 500 }}>
-                            {bannerstyle}
-                        </span>
-                        <span ref={spRef}>
-                            {bannerstyle == null ? "" : "을(를) 선택하셨습니다."}
-                        </span>
-                    </span> */}
         </div>
         <div className='stepper-content-inner'>
           <Content2 />
           <span className='content2-selector'>
+            <span style={{color:"rgb(66, 66, 66)",fontSize:"1.1em",fontWeight:500}}>
+              {cont2item.length==0?"":cont2SpKind + " 계열 : "}
+            </span>
             <span style={{ fontSize: "20px", fontWeight: 500 }}>
-              {/* {cont2item.length == 1 ? cont2item.spname : cont2item.join(",")} */}
               {cont2item.map((data, index) => {
                 return (
-                  <span key={index}>{cont2item.length == index + 1 ? data.spname : data.spname + ","}</span>
+                  <span key={index}>{cont2item.length == index + 1 ? data.spname : data.spname + ", "}</span>
                 )
               })
               }
             </span>
             <span ref={sp2Ref}>
-              {cont2item.length == 0 ? "" : "을(를) 선택하셨습니다."}
+              {cont2item.length == 0 ? "" : " 을(를) 선택하셨습니다."}
             </span>
           </span>
         </div>
