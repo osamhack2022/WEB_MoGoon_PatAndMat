@@ -31,7 +31,7 @@
   * 마이페이지에는 내가 즐겨찾기한 특기를 확인하거나, 미리 등록한 내 군 지원 정보를 관리할 수 있습니다.
   * 군 지원 탭에서 모의 지원해볼 때 매번 정보를 입력하지 않고 미리 등록한 정보를 토대로 지원해볼 수 있습니다.
 
-## 🖥 플랫폼 구성
+## 💻 플랫폼 구성
 
 <table align="center">
 	<tr>
@@ -67,6 +67,80 @@
 		</td>
 	</tr>
 </table>
+
+## 🖥 화면 설명
+
+* ### 특기소개
+ 
+ 	* 사이트 접속시 맨 처음 나타나는 화면입니다 각군의 특기를 보여줍니다.
+ 	* 상단의 서치바와 왼쪽의 필터를 통해서 원하는 특기를 조회 할 수 있습니다.
+	* 각각의 특기아이템을 클릭하면 특기 상세페이지로 이동합니다.
+ <p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Specialty.png">
+ </p>
+ 
+* ### 특기상세
+ 
+ 	* 특기의 상세한 정보를 보여줍니다.
+	* 각 특기의 배점, 커트라인을 볼 수 있습니다. 
+	* 의견탭을 선택하여 해당 특기의 의견을 볼 수 있습니다.
+ <p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail.png">
+ </p>
+ <p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail3.png">
+ </p>
+ <p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail2.png">
+ </p>
+ 
+* ### 군지원
+ 
+ 	* 내가 원하는 특기를 모의 지원 할 수 있습니다.
+	* 군지원은 총 4가지 단계로 이루어져 있습니다.
+	
+1. 군종선택
+	* 각 군종을을 클릭하면 다음 단계로 넘어갑니다.
+	
+<p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist1.png">
+ </p>
+ 
+ 2. 특기선택
+	* 전 단계에서 선택한 군종의 특기가 나타납니다.
+	* 특기는 같은 계열만 선택 가능합니다.(일반특기, 전문특기)
+<p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2.png">
+ </p>
+ 
+ 	* 각 특기의 상세한 정보를 볼 수 있습니다.
+ 
+ <p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2_1.png">
+ </p>
+ 
+ 
+ 3. 정보입력
+	* 사용자의 정보를 입력하는 화면입니다.
+	* 전 단계에서 선택한 특기의 계열을 기준으로 배점이 유동적으로 변합니다.
+ 
+<p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3.png">
+ </p>
+ 
+ 	* 배점을 클릭하면 상세 배점을 볼 수 있습니다.
+ 
+ <p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3_1.png">
+ </p>
+ 
+ 4. 점수확인
+	* 선택한 특기, 개인정보를 바탕으로 점수를 계산해줍니다.
+	* 최대 3개의 특기의 점수를 확인할 수 있습니다.
+ 
+<p align="center">
+    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist4.png">
+ </p>
   
 ## 🔧기술 스택 (Technique Used) 
 ### Back-End
