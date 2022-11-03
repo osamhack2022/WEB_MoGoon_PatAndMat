@@ -1,5 +1,5 @@
 ![banner](WEB(FE)/mogoon/public/img/logo/banner2.png)
-🎇✨🎉📣📢🎙🎤💻🔍💡📝
+
 ## 📌프로잭트 소개
 건강한 남자라면 반드시 가야하는 군대.   
 * 군대에서도 나의 특기를 살리기 위해서
@@ -33,10 +33,11 @@
   
 ## 🔧기술 스택 (Technique Used) 
 ### Back-End
-- NodeJS
-  - express.js
-  - dotenv
-- Firebase
+- [![Badge](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white)](https://nodejs.org/)
+- [![Badge](https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white)](https://www.npmjs.com/package/nodemon)
+- [![Badge](https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=white)](https://www.npmjs.com/package/dotenv)
+- [<img src="https://github.com/MarioTerron/logo-images/blob/master/logos/expressjs.png" width="10%">](http://expressjs.com///)
+- [<img src="https://firebase.google.com/static/downloads/brand-guidelines/SVG/logo-built_white.svg" width="30%">](https://firebase.google.com/)
   - Firestore
   - Firebase Auth
   - Firebase Admin SDK
@@ -71,7 +72,8 @@
  4. http://127.0.0.1:5000 에서 결과물을 확인할 수 있습니다.
 
 ## 프로젝트 사용법 (Getting Started)
-- 프로젝트 개발하면서 수정할 예정입니다.
+- 로그인 없이도 특기 소개를 읽어볼 수 있습니다.
+- 로그인을 하면 마이페이지와 특기 상세 설명 페이지에서 의견을 남길 수 있습니다.
  
 ## 팀 정보 (Team Information)
 |이름|역할|이메일|깃허브|
