@@ -30,6 +30,43 @@
 * ### 마이페이지
   * 마이페이지에는 내가 즐겨찾기한 특기를 확인하거나, 미리 등록한 내 군 지원 정보를 관리할 수 있습니다.
   * 군 지원 탭에서 모의 지원해볼 때 매번 정보를 입력하지 않고 미리 등록한 정보를 토대로 지원해볼 수 있습니다.
+
+## 🖥 플랫폼 구성
+
+<table align="center">
+	<tr>
+		<td>
+			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/Specialty.png">
+		</td>
+		<td>
+			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/SpDetail.png">
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<b>특기소개 페이지</b>
+		</td>
+		<td align="center">
+			<b>특기상세 페이지</b>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/Enlist1.png">
+		</td>
+		<td>
+			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/MyPage.png">
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<b>군지원 페이지</b>
+		</td>
+		<td align="center">
+			<b>마이페이지</b>
+		</td>
+	</tr>
+</table>
   
 ## 🔧기술 스택 (Technique Used) 
 ### Back-End
