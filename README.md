@@ -100,10 +100,10 @@
  
 * ### 군지원
 
-  * 내가 원하는 특기를 모의 지원 할 수 있습니다.
-  * 군지원은 총 4가지 단계로 이루어져 있습니다.
-
-    1. 군종선택
+  내가 원하는 특기를 모의 지원 할 수 있습니다.<br>
+  군지원은 총 4가지 단계로 이루어져 있습니다.
+  
+  1. 군종선택
 	
         <p align="center">
           <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist1.png">
@@ -111,37 +111,36 @@
     
     * 각 군종을을 클릭하면 다음 단계로 넘어갑니다.
     
-    
-    2. 특기선택
-      * 전  단계에서 선택한 군종의 특기가 나타납니다.
-      * 특기는 같은 계열만 선택 가능합니다.(일반특기, 전문특기)
+  2. 특기선택
+    * 전  단계에서 선택한 군종의 특기가 나타납니다.
+    * 특기는 같은 계열만 선택 가능합니다.(일반특기, 전문특기)
         <p align="center">
           <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2.png">
         </p>
       
-      * 각 특기의 상세한 정보를 볼 수 있습니다.
+    * 각 특기의 상세한 정보를 볼 수 있습니다.
  
         <p align="center">
           <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2_1.png">
         </p>
       
-    3. 정보입력
-       * 사용자의 정보를 입력하는 화면입니다.
-       * 전 단계에서 선택한 특기의 계열을 기준으로 배점이 유동적으로 변합니다.
+  3. 정보입력
+    * 사용자의 정보를 입력하는 화면입니다.
+    * 전 단계에서 선택한 특기의 계열을 기준으로 배점이 유동적으로 변합니다.
        
          <p align="center">
            <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3.png">
          </p>
- 
- 	* 배점을 클릭하면 상세 배점을 볼 수 있습니다.
+
+    * 배점을 클릭하면 상세 배점을 볼 수 있습니다.
  
          <p align="center">
            <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3_1.png">
          </p>
        
-     4. 점수확인
-       * 선택한 특기, 개인정보를 바탕으로 점수를 계산해줍니다.
-       * 최대 3개의 특기의 점수를 확인할 수 있습니다.
+  4. 점수확인
+    * 선택한 특기, 개인정보를 바탕으로 점수를 계산해줍니다.
+    * 최대 3개의 특기의 점수를 확인할 수 있습니다.
        
          <p align="center">
            <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist4.png">
