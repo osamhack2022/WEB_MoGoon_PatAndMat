@@ -3,7 +3,7 @@
 <hr>
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=PZ7yQIpc1Jo">시연 영상</a> | <a href="/WEB(FE)/mogoon/public/img/etc/Mogoon.pdf">발표 자료</a> | <a href="">디스코드 회의록</a>
+  <a href="https://www.youtube.com/watch?v=PZ7yQIpc1Jo">시연 영상</a> | <a href="/WEB(FE)/mogoon/public/img/etc/Mogoon.pdf">발표 자료</a> | <a href="https://discord.gg/cAqKQ73N8p">디스코드 회의록</a>
 </p>
 
 <hr>
