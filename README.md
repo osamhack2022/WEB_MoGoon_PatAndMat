@@ -3,7 +3,7 @@
 <hr>
 
 <p align="center">
-  <a href="">시연 영상</a> | <a href="">발표 자료</a> | <a href="">디스코드 회의록</a>
+  <a href="https://www.youtube.com/watch?v=PZ7yQIpc1Jo">시연 영상</a> | <a href="/WEB(FE)/mogoon/public/img/etc/Mogoon.pdf">발표 자료</a> | <a href="https://discord.gg/cAqKQ73N8p">디스코드 회의록</a>
 </p>
 
 <hr>
@@ -239,14 +239,67 @@
           </td>
         </tr>
       </table>
+      
+* ### 마이페이지
+
+  <table>
+    <tr>
+      <td align="center">
+        <p align="center">
+          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/MyPage.png">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        내가 찜한 특기를 한눈에 볼 수 있습니다.<br>
+	나의 자격증, 개인 정보를 저장 할 수 있습니다.<br>
+        로그인시 이용할 수 있습니다.<br>
+      </td>
+    </tr>
+  </table>
+  
+* ### 로그인/회원가입
+
+  <table>
+    <tr>
+      <td align="center">
+        <p align="center">
+          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Login.png">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        모군에 로그인하여 찜, 마이페이지 등 더나은 서비스를 즐길수 있습니다.<br>
+      </td>
+    </tr>
+  </table>
+  
+    <table>
+    <tr>
+      <td align="center">
+        <p align="center">
+          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Join.png">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        모군에 회원가입 할 수 있습니다.<br>
+	아이디는 이메일 형식입니다.<br>
+	비밀번호는 최소 6자리 입니다.<br>
+      </td>
+    </tr>
+  </table>
   
 ## 🔧기술 스택 (Technique Used) 
 ### Back-End
 - [![Badge](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white)](https://nodejs.org/)
 - [![Badge](https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white)](https://www.npmjs.com/package/nodemon)
 - [![Badge](https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=white)](https://www.npmjs.com/package/dotenv)
-- [<img src="WEB(FE)/mogoon/public/img/etc/Expressjs.png" width="30%">](http://expressjs.com///)
-- [<img src="https://firebase.google.com/static/downloads/brand-guidelines/SVG/logo-built_white.svg" width="30%">](https://firebase.google.com/)
+- [<img src="WEB(FE)/mogoon/public/img/etc/Expressjs.png" width="20%">](http://expressjs.com///)
+- [<img src="https://firebase.google.com/static/downloads/brand-guidelines/SVG/logo-built_white.svg" width="20%">](https://firebase.google.com/)
   - [Firestore](https://firebase.google.com/products/firestore/?hl=ko&gclid=CjwKCAjwzY2bBhB6EiwAPpUpZizkG0R1NKfGAIX-UTFZhUkG0OWTFRIqYh9wqd9UxDvhhJYvGhdTaBoC0p0QAvD_BwE&gclsrc=aw.ds)
   - [Firebase Auth](https://firebase.google.com/docs/auth)
   - [Firebase Admin SDK](https://firebase.google.com/docs/auth/admin?hl=ko)
