@@ -1,5 +1,5 @@
 ![banner](WEB(FE)/mogoon/public/img/logo/banner2.png)
-🎇✨🎉📣📢🎙🎤💻🔍💡📝
+
 ## 📌프로잭트 소개
 건강한 남자라면 반드시 가야하는 군대.   
 * 군대에서도 나의 특기를 살리기 위해서
@@ -21,17 +21,222 @@
 
   * 특기를 클릭하면 특기에 대한 상세 설명을 볼 수 있습니다.   
 이곳에서 특기에 대한 자세한 정보 뿐만 아니라 다른 사람들의 의견이나 이 특기에 대한 질문들을 모아 볼 수 있습니다.
-* ### 모의 지원
-  * 대부분의 모집 특기는 서류전형과 면접을 통해 선발합니다.   
-모의 지원은 서류전형의 점수를 병무청에서보다 내가 지원하려는 특기에 꼭 필요한 정보를 간단히 입력하는 것만으로 계산할 수 있도록 도와줍니다.
+* ### 군 지원
+  * 병무청 홈페이지는 서류전형에 지원했을 때 몇 점 정도가 나오는지 미리 확인할 수 있는 "내 점수 미리보기" 기능이 있습니다.   
+  * 그러나 이 기능은 특기에 상관없이 실제 지원서를 쓰는 것처럼 불필요하게 입력해야하는 정보가 너무 많습니다.   
+  * 그래서 모군의 군 지원 기능에서는 구체적으로 정보를 입력하지 않더라도 간단하게 점수를 확인할 수 있는 기능을 제공합니다.   
 * ### 커뮤니티
   * 같은 입영 대상 기수인 사람들과 이미 입대한 사람들이 모여 다양한 주제로 이야기하는 커뮤니티입니다.
+* ### 마이페이지
+  * 마이페이지에는 내가 즐겨찾기한 특기를 확인하거나, 미리 등록한 내 군 지원 정보를 관리할 수 있습니다.
+  * 군 지원 탭에서 모의 지원해볼 때 매번 정보를 입력하지 않고 미리 등록한 정보를 토대로 지원해볼 수 있습니다.
+
+## 💻 플랫폼 구성
+
+<table align="center">
+	<tr>
+		<td>
+			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/Specialty.png">
+		</td>
+		<td>
+			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/SpDetail.png">
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<b>특기소개 페이지</b>
+		</td>
+		<td align="center">
+			<b>특기상세 페이지</b>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/Enlist1.png">
+		</td>
+		<td>
+			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/MyPage.png">
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<b>군지원 페이지</b>
+		</td>
+		<td align="center">
+			<b>마이페이지</b>
+		</td>
+	</tr>
+</table>
+
+## 🖥 화면 설명
+
+* ### 특기소개
+
+  <table>
+    <tr>
+      <td align="center">
+        <p align="center">
+          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Specialty.png">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        사이트 접속시 맨 처음 나타나는 화면입니다 각군의 특기를 보여줍니다.<br>
+        상단의 서치바와 왼쪽의 필터를 통해서 원하는 특기를 조회 할 수 있습니다.<br>
+        각각의 특기아이템을 클릭하면 특기 상세페이지로 이동합니다.<br>
+      </td>
+    </tr>
+  </table>
+ 
+* ### 특기상세
+
+  <table>
+    <tr>
+      <td align="center">
+        <p align="center">
+          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail.png">
+          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail3.png">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        특기의 상세한 정보를 보여줍니다.<br>
+        이 특기에서 하는 주요 업무를 소개하고, 관련 전공에 대한 정보를 제공합니다.<br>
+        또한 선택한 특기를 지원할 때 필요한 배점 정보도 한눈에 볼 수 있습니다. <br>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td align="center">
+        <p align="center">
+          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail2.png">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        의견탭을 선택하여 해당 특기의 의견을 볼 수 있습니다.<br>
+      </td>
+    </tr>
+  </table>
+ 
+* ### 군지원
+
+  내가 원하는 특기를 모의 지원 할 수 있습니다.<br>
+  군지원은 총 4가지 단계로 이루어져 있습니다.
+  
+  1. 군종선택
+  
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist1.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            각 군종을을 클릭하면 다음 단계로 넘어갑니다.
+          </td>
+        </tr>
+      </table>
+    
+  2. 특기선택
+
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            전  단계에서 선택한 군종의 특기가 나타납니다.<br>
+	    특기는 같은 계열만 선택 가능합니다.(일반특기, 전문특기)
+          </td>
+        </tr>
+      </table>
+      
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2_1.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            각 특기에 마우스를 가져가면 보이는 돋보기 버튼을 클릭하여, 해당 특기의 상세 정보를 볼 수 있습니다.
+          </td>
+        </tr>
+      </table>
+      
+  3. 정보입력
+  
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            사용자의 정보를 입력하는 화면입니다.<br>
+            전 단계에서 선택한 특기의 계열을 기준으로 배점이 유동적으로 변합니다.
+          </td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3_1.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            배점을 클릭하면 상세 배점을 볼 수 있습니다.
+          </td>
+        </tr>
+      </table>
+       
+  4. 점수확인
+  
+        <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist4.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            선택한 특기, 개인정보를 바탕으로 점수를 계산해줍니다.<br>
+	    최대 3개의 특기의 점수를 확인할 수 있습니다.
+          </td>
+        </tr>
+      </table>
+  
 ## 🔧기술 스택 (Technique Used) 
 ### Back-End
-- NodeJS
-  - express.js
-  - dotenv
-- Firebase
+- [![Badge](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white)](https://nodejs.org/)
+- [![Badge](https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white)](https://www.npmjs.com/package/nodemon)
+- [![Badge](https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=white)](https://www.npmjs.com/package/dotenv)
+- [<img src="https://github.com/MarioTerron/logo-images/blob/master/logos/expressjs.png" width="10%">](http://expressjs.com///)
+- [<img src="https://firebase.google.com/static/downloads/brand-guidelines/SVG/logo-built_white.svg" width="30%">](https://firebase.google.com/)
   - Firestore
   - Firebase Auth
   - Firebase Admin SDK
@@ -41,7 +246,7 @@
 - <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
 - <img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white">
 ### UI
-- 
+- Figma
 
 ## 설치 안내 (Installation Process)
  - 프로젝트 진행하면서 수정할 예정입니다.
@@ -66,13 +271,14 @@
  4. http://127.0.0.1:5000 에서 결과물을 확인할 수 있습니다.
 
 ## 프로젝트 사용법 (Getting Started)
-- 프로젝트 개발하면서 수정할 예정입니다.
+- 로그인 없이도 특기 소개를 읽어볼 수 있습니다.
+- 로그인을 하면 마이페이지 기능을 사용할 수 있고, 특기 상세 설명 페이지에서 의견을 남길 수 있습니다.
  
 ## 팀 정보 (Team Information)
-|이름|이메일|깃허브|
-|:---:|:---:|:---:|
-|권찬|kckc0608@naver.com|kckc0608|
-|김태환|vnddnjf1234@naver.com|WBCode3|
+|이름|역할|이메일|깃허브|
+|:---:|:---:|:---:|:---:|
+|권찬|팀장, 기획, 백엔드|kckc0608@naver.com|kckc0608|
+|김태환|기획, 프론트|vnddnjf1234@naver.com|WBCode3|
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
  * [MIT](https://github.com/osam2020-WEB/Sample-ProjectName-TeamName/blob/master/license.md)
