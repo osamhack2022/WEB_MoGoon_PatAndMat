@@ -1,5 +1,13 @@
 ![banner](WEB(FE)/mogoon/public/img/logo/banner2.png)
 
+<hr>
+
+<p align="center">
+  <a href="">시연 영상</a> | <a href="">발표 자료</a> | <a href="">디스코드 회의록</a>
+</p>
+
+<hr>
+
 ## 📌프로잭트 소개
 건강한 남자라면 반드시 가야하는 군대.   
 * 군대에서도 나의 특기를 살리기 위해서
@@ -9,9 +17,9 @@
 
 다양한 이유로 많은 사람들이 모집병으로 군대를 지원하여 갑니다.
 
-그런데 모집병 지원을 위해 병무청에 가보면, 너무 많은 메뉴와 정리되지 않고 그저 나열된 수많은 정보 속에서 내가 원하는 군과 특기에 대한 정보를 찾아 지원하기는 쉽지 않습니다.
+그런데 모집병 지원을 위해 병무청에 가보면, 너무 많은 메뉴와 정리되지 않고 그저 나열되기만 한 수많은 정보 속에서 내가 원하는 군과 특기에 대한 정보를 찾아 지원하기는 쉽지 않습니다.
 
-모군은 이렇게 처음 모집병에 지원하는 예비 장병들이 불편함없이 내가 원하는 특기에 지원할 수 있도록 군 입대 지원에 필요한 정보들을 보기 쉽게 정리해서 보여주는 서비스입니다.
+모군은 이렇게 처음 모집병에 지원하는 예비 장병들이 자신이 알고 싶은 특기에 대해 여러가지 정보를 쉽게 얻고 지원할 수 있도록, 군 입대 지원에 필요한 정보들을 보기 쉽게 정리해서 보여주는 서비스입니다.
 
 ## 🔔주요 기능
 * ### 특기 소개
@@ -22,7 +30,7 @@
   * 특기를 클릭하면 특기에 대한 상세 설명을 볼 수 있습니다.   
 이곳에서 특기에 대한 자세한 정보 뿐만 아니라 다른 사람들의 의견이나 이 특기에 대한 질문들을 모아 볼 수 있습니다.
 * ### 군 지원
-  * 병무청 홈페이지는 서류전형에 지원했을 때 몇 점 정도가 나오는지 미리 확인할 수 있는 "내 점수 미리보기" 기능이 있습니다.   
+  * 병무청 홈페이지에는 서류전형에 지원했을 때 몇 점 정도가 나오는지 미리 확인할 수 있는 "내 점수 미리보기" 기능이 있습니다.   
   * 그러나 이 기능은 특기에 상관없이 실제 지원서를 쓰는 것처럼 불필요하게 입력해야하는 정보가 너무 많습니다.   
   * 그래서 모군의 군 지원 기능에서는 구체적으로 정보를 입력하지 않더라도 간단하게 점수를 확인할 수 있는 기능을 제공합니다.   
 * ### 커뮤니티
@@ -36,10 +44,10 @@
 <table align="center">
 	<tr>
 		<td>
-			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/Specialty.png">
+			<img style="width:450px;" src="WEB(FE)/mogoon/public/img/etc/Specialty.png">
 		</td>
 		<td>
-			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/SpDetail.png">
+			<img style="width:450px;" src="WEB(FE)/mogoon/public/img/etc/SpDetail.png">
 		</td>
 	</tr>
 	<tr>
@@ -52,10 +60,10 @@
 	</tr>
 	<tr>
 		<td>
-			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/Enlist1.png">
+			<img style="width:450px;" src="WEB(FE)/mogoon/public/img/etc/Enlist1.png">
 		</td>
 		<td>
-			<img style="width:450px;" src="/WEB(FE)/mogoon/public/img/etc/MyPage.png">
+			<img style="width:450px;" src="WEB(FE)/mogoon/public/img/etc/MyPage.png">
 		</td>
 	</tr>
 	<tr>
@@ -76,13 +84,13 @@
     <tr>
       <td align="center">
         <p align="center">
-          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Specialty.png">
+          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Specialty.png">
         </p>
       </td>
     </tr>
     <tr>
       <td align="center">
-        사이트 접속시 맨 처음 나타나는 화면입니다 각군의 특기를 보여줍니다.<br>
+        사이트 접속하면 맨 처음 보이는 화면으로 각 군의 전체 특기를 보여줍니다.<br>
         상단의 서치바와 왼쪽의 필터를 통해서 원하는 특기를 조회 할 수 있습니다.<br>
         각각의 특기아이템을 클릭하면 특기 상세페이지로 이동합니다.<br>
       </td>
@@ -95,16 +103,17 @@
     <tr>
       <td align="center">
         <p align="center">
-          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail.png">
-          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail3.png">
+          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/SpDetail.png">
+          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/SpDetail3.png">
         </p>
       </td>
     </tr>
     <tr>
       <td align="center">
-        특기의 상세한 정보를 보여줍니다.<br>
+        선택한 특기의 상세 정보를 보여줍니다.<br>
         이 특기에서 하는 주요 업무를 소개하고, 관련 전공에 대한 정보를 제공합니다.<br>
-        또한 선택한 특기를 지원할 때 필요한 배점 정보도 한눈에 볼 수 있습니다. <br>
+        또한 선택한 특기를 지원할 때 필요한 배점 정보도 한눈에 볼 수 있습니다.<br>
+        그 밖에 해당 특기에 대한 여러 정보들을 모아볼 수 있습니다.
       </td>
     </tr>
   </table>
@@ -113,7 +122,7 @@
     <tr>
       <td align="center">
         <p align="center">
-          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail2.png">
+          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/SpDetail2.png">
         </p>
       </td>
     </tr>
@@ -126,8 +135,8 @@
  
 * ### 군지원
 
-  내가 원하는 특기를 모의 지원 할 수 있습니다.<br>
-  군지원은 총 4가지 단계로 이루어져 있습니다.
+  내가 지원해보고 싶은 특기에 모의 지원 하여 서류점수를 간단하게 확인해볼 수 있습니다.<br>
+  군지원은 아래와 같이 총 4가지 단계로 이루어져 있습니다.
   
   1. 군종선택
   
@@ -135,13 +144,13 @@
         <tr>
           <td align="center">
             <p align="center">
-              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist1.png">
+              <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Enlist1.png">
             </p>
           </td>
         </tr>
         <tr>
           <td align="center">
-            각 군종을을 클릭하면 다음 단계로 넘어갑니다.
+            내가 지원하려는 군종을 선택하면 다음 단계로 넘어갑니다.
           </td>
         </tr>
       </table>
@@ -152,7 +161,7 @@
         <tr>
           <td align="center">
             <p align="center">
-              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2.png">
+              <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Enlist2.png">
             </p>
           </td>
         </tr>
@@ -168,13 +177,14 @@
         <tr>
           <td align="center">
             <p align="center">
-              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2_1.png">
+              <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Enlist2_1.png">
             </p>
           </td>
         </tr>
         <tr>
           <td align="center">
-            각 특기에 마우스를 가져가면 보이는 돋보기 버튼을 클릭하여, 해당 특기의 상세 정보를 볼 수 있습니다.
+            각 특기에 마우스를 가져가면 보이는 돋보기 버튼을 클릭하여,<br>
+            해당 특기의 상세 정보를 볼 수 있습니다.
           </td>
         </tr>
       </table>
@@ -185,14 +195,14 @@
         <tr>
           <td align="center">
             <p align="center">
-              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3.png">
+              <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Enlist3.png">
             </p>
           </td>
         </tr>
         <tr>
           <td align="center">
-            사용자의 정보를 입력하는 화면입니다.<br>
-            전 단계에서 선택한 특기의 계열을 기준으로 배점이 유동적으로 변합니다.
+            사용자의 지원 정보를 입력하는 화면입니다.<br>
+            전 단계에서 선택한 특기의 계열에 맞는 배점을 보여줍니다.<br>
           </td>
         </tr>
       </table>
@@ -201,13 +211,13 @@
         <tr>
           <td align="center">
             <p align="center">
-              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3_1.png">
+              <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Enlist3_1.png">
             </p>
           </td>
         </tr>
         <tr>
           <td align="center">
-            배점을 클릭하면 상세 배점을 볼 수 있습니다.
+            배점표에서 각 배점 항목을 클릭하면 항목별 상세 배점을 볼 수 있습니다.
           </td>
         </tr>
       </table>
@@ -218,14 +228,14 @@
         <tr>
           <td align="center">
             <p align="center">
-              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist4.png">
+              <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Enlist4.png">
             </p>
           </td>
         </tr>
         <tr>
           <td align="center">
             선택한 특기, 개인정보를 바탕으로 점수를 계산해줍니다.<br>
-	    최대 3개의 특기의 점수를 확인할 수 있습니다.
+            최대 3개의 특기의 점수를 확인할 수 있습니다.
           </td>
         </tr>
       </table>
@@ -235,18 +245,18 @@
 - [![Badge](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white)](https://nodejs.org/)
 - [![Badge](https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white)](https://www.npmjs.com/package/nodemon)
 - [![Badge](https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=white)](https://www.npmjs.com/package/dotenv)
-- [<img src="https://github.com/MarioTerron/logo-images/blob/master/logos/expressjs.png" width="10%">](http://expressjs.com///)
+- [<img src="WEB(FE)/mogoon/public/img/etc/Expressjs.png" width="30%">](http://expressjs.com///)
 - [<img src="https://firebase.google.com/static/downloads/brand-guidelines/SVG/logo-built_white.svg" width="30%">](https://firebase.google.com/)
-  - Firestore
-  - Firebase Auth
-  - Firebase Admin SDK
+  - [Firestore](https://firebase.google.com/products/firestore/?hl=ko&gclid=CjwKCAjwzY2bBhB6EiwAPpUpZizkG0R1NKfGAIX-UTFZhUkG0OWTFRIqYh9wqd9UxDvhhJYvGhdTaBoC0p0QAvD_BwE&gclsrc=aw.ds)
+  - [Firebase Auth](https://firebase.google.com/docs/auth)
+  - [Firebase Admin SDK](https://firebase.google.com/docs/auth/admin?hl=ko)
  
 ### Front-End
-- <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
-- <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
-- <img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white">
-### UI
-- Figma
+- [<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">](https://ko.reactjs.org/)
+- [<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">](https://ko.redux.js.org/introduction/getting-started/)
+- [<img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white">](https://mui.com/)
+### UI & Design
+- [Figma](https://www.figma.com/)
 
 ## 설치 안내 (Installation Process)
  - 프로젝트 진행하면서 수정할 예정입니다.
