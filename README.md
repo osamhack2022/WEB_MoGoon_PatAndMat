@@ -72,31 +72,57 @@
 
 * ### 특기소개
 
-  <p align="center">
-     <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Specialty.png">
-  </p>
- 
-   사이트 접속시 맨 처음 나타나는 화면입니다 각군의 특기를 보여줍니다.<br>
-   상단의 서치바와 왼쪽의 필터를 통해서 원하는 특기를 조회 할 수 있습니다.<br>
-   각각의 특기아이템을 클릭하면 특기 상세페이지로 이동합니다.<br>
+  <table>
+    <tr>
+      <td align="center">
+        <p align="center">
+          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Specialty.png">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        사이트 접속시 맨 처음 나타나는 화면입니다 각군의 특기를 보여줍니다.<br>
+        상단의 서치바와 왼쪽의 필터를 통해서 원하는 특기를 조회 할 수 있습니다.<br>
+        각각의 특기아이템을 클릭하면 특기 상세페이지로 이동합니다.<br>
+      </td>
+    </tr>
+  </table>
  
 * ### 특기상세
- 
-  <p align="center">
-     <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail.png">
-  </p>
-  <p align="center">
-     <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail3.png">
-  </p>
-  
-  특기의 상세한 정보를 보여줍니다.<br>
-  각 특기의 배점, 커트라인을 볼 수 있습니다. <br>
-  
-  <p align="center">
-    <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail2.png">
-  </p>
-  
-  의견탭을 선택하여 해당 특기의 의견을 볼 수 있습니다.<br>
+
+  <table>
+    <tr>
+      <td align="center">
+        <p align="center">
+          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail.png">
+          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail3.png">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        특기의 상세한 정보를 보여줍니다.<br>
+        이 특기에서 하는 주요 업무를 소개하고, 관련 전공에 대한 정보를 제공합니다.<br>
+        또한 선택한 특기를 지원할 때 필요한 배점 정보도 한눈에 볼 수 있습니다. <br>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td align="center">
+        <p align="center">
+          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/SpDetail2.png">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        의견탭을 선택하여 해당 특기의 의견을 볼 수 있습니다.<br>
+      </td>
+    </tr>
+  </table>
  
 * ### 군지원
 
@@ -104,47 +130,105 @@
   군지원은 총 4가지 단계로 이루어져 있습니다.
   
   1. 군종선택
-	
-        <p align="center">
-          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist1.png">
-        </p>
-    
-    * 각 군종을을 클릭하면 다음 단계로 넘어갑니다.
+  
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist1.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            각 군종을을 클릭하면 다음 단계로 넘어갑니다.
+          </td>
+        </tr>
+      </table>
     
   2. 특기선택
-    * 전  단계에서 선택한 군종의 특기가 나타납니다.
-    * 특기는 같은 계열만 선택 가능합니다.(일반특기, 전문특기)
-        <p align="center">
-          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2.png">
-        </p>
+
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            전  단계에서 선택한 군종의 특기가 나타납니다.<br>
+	    특기는 같은 계열만 선택 가능합니다.(일반특기, 전문특기)
+          </td>
+        </tr>
+      </table>
       
-    * 각 특기의 상세한 정보를 볼 수 있습니다.
- 
-        <p align="center">
-          <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2_1.png">
-        </p>
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist2_1.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            각 특기에 마우스를 가져가면 보이는 돋보기 버튼을 클릭하여, 해당 특기의 상세 정보를 볼 수 있습니다.
+          </td>
+        </tr>
+      </table>
       
   3. 정보입력
-    * 사용자의 정보를 입력하는 화면입니다.
-    * 전 단계에서 선택한 특기의 계열을 기준으로 배점이 유동적으로 변합니다.
-       
-         <p align="center">
-           <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3.png">
-         </p>
+  
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            사용자의 정보를 입력하는 화면입니다.<br>
+            전 단계에서 선택한 특기의 계열을 기준으로 배점이 유동적으로 변합니다.
+          </td>
+        </tr>
+      </table>
 
-    * 배점을 클릭하면 상세 배점을 볼 수 있습니다.
- 
-         <p align="center">
-           <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3_1.png">
-         </p>
+      <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist3_1.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            배점을 클릭하면 상세 배점을 볼 수 있습니다.
+          </td>
+        </tr>
+      </table>
        
   4. 점수확인
-    * 선택한 특기, 개인정보를 바탕으로 점수를 계산해줍니다.
-    * 최대 3개의 특기의 점수를 확인할 수 있습니다.
-       
-         <p align="center">
-           <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist4.png">
-         </p>
+  
+        <table>
+        <tr>
+          <td align="center">
+            <p align="center">
+              <img width="1000" src="/WEB(FE)/mogoon/public/img/etc/Enlist4.png">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            선택한 특기, 개인정보를 바탕으로 점수를 계산해줍니다.<br>
+	    최대 3개의 특기의 점수를 확인할 수 있습니다.
+          </td>
+        </tr>
+      </table>
   
 ## 🔧기술 스택 (Technique Used) 
 ### Back-End
@@ -162,7 +246,7 @@
 - <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
 - <img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white">
 ### UI
-- 
+- Figma
 
 ## 설치 안내 (Installation Process)
  - 프로젝트 진행하면서 수정할 예정입니다.
@@ -188,7 +272,7 @@
 
 ## 프로젝트 사용법 (Getting Started)
 - 로그인 없이도 특기 소개를 읽어볼 수 있습니다.
-- 로그인을 하면 마이페이지와 특기 상세 설명 페이지에서 의견을 남길 수 있습니다.
+- 로그인을 하면 마이페이지 기능을 사용할 수 있고, 특기 상세 설명 페이지에서 의견을 남길 수 있습니다.
  
 ## 팀 정보 (Team Information)
 |이름|역할|이메일|깃허브|
