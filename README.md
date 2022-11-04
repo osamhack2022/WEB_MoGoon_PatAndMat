@@ -2,13 +2,9 @@
 
 <hr>
 
-<div style="margin-left: auto;
-            margin-right: auto;
-            width: fit-content">
-
-  [시연 영상]() | [발표 자료]() | [디스코드 회의록]()
-
-</div>
+<p align="center">
+  <a href="">시연 영상</a> | <a href="">발표 자료</a> | <a href="">디스코드 회의록</a>
+</p>
 
 <hr>
 
