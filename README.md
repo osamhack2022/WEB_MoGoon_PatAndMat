@@ -3,7 +3,7 @@
 <hr>
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=PZ7yQIpc1Jo">시연 영상</a> | <a href="/WEB(FE)/mogoon/public/img/etc/Mogoon.pdf">발표 자료</a> | <a href="https://discord.gg/cAqKQ73N8p">디스코드 회의록</a>
+  <a href="https://www.youtube.com/watch?v=PZ7yQIpc1Jo">시연 영상</a> | <a href="/WEB(FE)/mogoon/public/img/etc/Mogoon.pdf">발표 자료</a> | <a href="https://discord.gg/cAqKQ73N8p">디스코드 회의록</a> | <a href="https://www.figma.com/file/lwndb4K2C2mbexyoPkhuY3/MoGoon-%ED%86%B5%ED%95%A9-%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%ED%8A%B8?node-id=5%3A8">디자인 설계</a>
 </p>
 
 <hr>
