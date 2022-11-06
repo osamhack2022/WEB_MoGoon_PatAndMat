@@ -3,7 +3,7 @@
 <hr>
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=PZ7yQIpc1Jo"><img src="WEB(FE)/mogoon/public/img/etc/button_video.png" width="25%"></img></a> <a href="/WEB(FE)/mogoon/public/img/etc/Mogoon.pdf"><img src="WEB(FE)/mogoon/public/img/etc/button_ppt.png" width="25%"></img></a> <a href="https://discord.gg/cAqKQ73N8p"><img src="WEB(FE)/mogoon/public/img/etc/button_discord.png" width="25%"></img></a> <a href="https://www.figma.com/file/lwndb4K2C2mbexyoPkhuY3/MoGoon-%ED%86%B5%ED%95%A9-%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%ED%8A%B8?node-id=5%3A8"><img src="WEB(FE)/mogoon/public/img/etc/button_design.png" width="25%"></img></a>
+  <a href="https://www.youtube.com/watch?v=PZ7yQIpc1Jo"><img src="WEB(FE)/mogoon/public/img/etc/button_video.png" style="height:50px;"></img></a> <a href="/WEB(FE)/mogoon/public/img/etc/Mogoon.pdf"><img src="WEB(FE)/mogoon/public/img/etc/button_ppt.png" style="height:50px;"></img></a> <a href="https://discord.gg/cAqKQ73N8p"><img src="WEB(FE)/mogoon/public/img/etc/button_discord.png" style="height:50px;"></img></a> <a href="https://www.figma.com/file/lwndb4K2C2mbexyoPkhuY3/MoGoon-%ED%86%B5%ED%95%A9-%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%ED%8A%B8?node-id=5%3A8"><img src="WEB(FE)/mogoon/public/img/etc/button_design.png" style="height:50px;"></img></a>
 </p>
 
 <hr>
