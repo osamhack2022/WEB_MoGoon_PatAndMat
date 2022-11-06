@@ -83,7 +83,7 @@
     <tr>
       <td align="center">
         <p align="center">
-          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Specialty.png">
+          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/SpListImage.png">
         </p>
       </td>
     </tr>
