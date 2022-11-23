@@ -3,7 +3,7 @@
 <hr>
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=PZ7yQIpc1Jo">시연 영상</a> | <a href="/WEB(FE)/mogoon/public/img/etc/Mogoon.pdf">발표 자료</a> | <a href="https://discord.gg/cAqKQ73N8p">디스코드 회의록</a> | <a href="https://www.figma.com/file/lwndb4K2C2mbexyoPkhuY3/MoGoon-%ED%86%B5%ED%95%A9-%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%ED%8A%B8?node-id=5%3A8">디자인 설계</a>
+  <a href="https://www.youtube.com/watch?v=PZ7yQIpc1Jo"><img src="WEB(FE)/mogoon/public/img/etc/button_video.png" style="height:50px;"></img></a> <a href="/WEB(FE)/mogoon/public/img/etc/Mogoon.pdf"><img src="WEB(FE)/mogoon/public/img/etc/button_ppt.png" style="height:50px;"></img></a> <a href="https://discord.gg/cAqKQ73N8p"><img src="WEB(FE)/mogoon/public/img/etc/button_discord.png" style="height:50px;"></img></a> <a href="https://www.figma.com/file/lwndb4K2C2mbexyoPkhuY3/MoGoon-%ED%86%B5%ED%95%A9-%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%ED%8A%B8?node-id=5%3A8"><img src="WEB(FE)/mogoon/public/img/etc/button_design.png" style="height:50px;"></img></a>
 </p>
 
 <hr>
@@ -33,8 +33,7 @@
   * 병무청 홈페이지에는 서류전형에 지원했을 때 몇 점 정도가 나오는지 미리 확인할 수 있는 "내 점수 미리보기" 기능이 있습니다.   
   * 그러나 이 기능은 특기에 상관없이 실제 지원서를 쓰는 것처럼 불필요하게 입력해야하는 정보가 너무 많습니다.   
   * 그래서 모군의 군 지원 기능에서는 구체적으로 정보를 입력하지 않더라도 간단하게 점수를 확인할 수 있는 기능을 제공합니다.   
-* ### 커뮤니티
-  * 같은 입영 대상 기수인 사람들과 이미 입대한 사람들이 모여 다양한 주제로 이야기하는 커뮤니티입니다.
+
 * ### 마이페이지
   * 마이페이지에는 내가 즐겨찾기한 특기를 확인하거나, 미리 등록한 내 군 지원 정보를 관리할 수 있습니다.
   * 군 지원 탭에서 모의 지원해볼 때 매번 정보를 입력하지 않고 미리 등록한 정보를 토대로 지원해볼 수 있습니다.
@@ -44,7 +43,7 @@
 <table align="center">
 	<tr>
 		<td>
-			<img style="width:450px;" src="WEB(FE)/mogoon/public/img/etc/Specialty.png">
+			<img style="width:450px;" src="WEB(FE)/mogoon/public/img/etc/SpListImage.png">
 		</td>
 		<td>
 			<img style="width:450px;" src="WEB(FE)/mogoon/public/img/etc/SpDetail.png">
@@ -84,7 +83,7 @@
     <tr>
       <td align="center">
         <p align="center">
-          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/Specialty.png">
+          <img width="1000" src="WEB(FE)/mogoon/public/img/etc/SpListImage.png">
         </p>
       </td>
     </tr>
